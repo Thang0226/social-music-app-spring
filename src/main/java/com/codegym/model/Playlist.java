@@ -18,7 +18,7 @@ public class Playlist {
     @Column(name = "like_count")
     private int likeCount;
 
-    @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "playlist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Song> songs;
 
     @Column(name = "create_time")
