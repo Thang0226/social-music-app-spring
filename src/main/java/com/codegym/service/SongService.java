@@ -23,13 +23,12 @@ public class SongService implements ISongService {
     }
 
     @Override
-    public Song save(Song song) {
-
-        return iSongRepository.save(song);
+    public void save(Song song) {
+        iSongRepository.save(song);
     }
 
     @Override
-    public void remove(Long id) {
+    public void deleteById(Long id) {
         iSongRepository.deleteById(id);
     }
 }

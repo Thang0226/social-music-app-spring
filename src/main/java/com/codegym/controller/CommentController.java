@@ -1,6 +1,8 @@
 package com.codegym.controller;
 
 import com.codegym.model.Comment;
+import com.codegym.model.DTO.comment.PlaylistCommentDTO;
+import com.codegym.model.DTO.comment.SingerCommentDTO;
 import com.codegym.model.DTO.comment.SongCommentDTO;
 import com.codegym.service.comment.ICommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +29,17 @@ public class CommentController {
     public ResponseEntity<Page<SongCommentDTO>> getSongComment(
             @PathVariable Long id, Pageable pageable) {
         return new ResponseEntity<>(commentService.findCommentsBySongId(id, pageable), HttpStatus.OK);
+    }
+
+    @GetMapping("/playlist-comment/{id}")
+    public ResponseEntity<Page<PlaylistCommentDTO>> getPlaylistComment(
+            @PathVariable Long id, Pageable pageable) {
+        return new ResponseEntity<>(commentService.findCommentsByPlaylistId(id, pageable), HttpStatus.OK);
+    }
+
+    @GetMapping("/singer-comment/{id}")
+    public ResponseEntity<Page<SingerCommentDTO>> getSingerComment(
+            @PathVariable Long id, Pageable pageable) {
+        return new ResponseEntity<>(commentService.findCommentsBySingerId(id, pageable), HttpStatus.OK);
     }
 }
