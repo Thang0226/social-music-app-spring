@@ -31,7 +31,7 @@ public class PlaylistService implements IPlaylistService {
     }
 
     @Override
-    public void delete(Long id) {
+    public void deleteById(Long id) {
         playlistRepository.deleteById(id);
     }
 
