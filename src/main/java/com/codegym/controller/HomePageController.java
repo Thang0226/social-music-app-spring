@@ -2,9 +2,8 @@ package com.codegym.controller;
 
 import com.codegym.model.Playlist;
 import com.codegym.model.Song;
-import com.codegym.service.IPlaylistService;
 import com.codegym.service.ISongService;
-import com.codegym.service.SongService;
+import com.codegym.service.playlist.IPlaylistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

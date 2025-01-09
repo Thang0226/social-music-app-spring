@@ -7,7 +7,6 @@ build/
 **/src/main/resources/application.properties
 build.gradle
 
-=======
 ### STS ###
 .apt_generated
 .classpath
@@ -38,4 +37,3 @@ out/
 
 ### VS Code ###
 .vscode/
-
