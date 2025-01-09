@@ -1,5 +1,6 @@
 package com.codegym.controller;
 
+import com.codegym.model.Comment;
 import com.codegym.model.DTO.comment.SongCommentDTO;
 import com.codegym.service.comment.ICommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,11 @@ public class CommentController {
     @Autowired
     private ICommentService commentService;
 
-
+    @PostMapping("/comments")
+    public ResponseEntity<String> createComment(@RequestBody Comment comment) {
+        commentService.save(comment);
+        return new ResponseEntity<>("Comment saved", HttpStatus.CREATED);
+    }
 
     @GetMapping("/song-comment/{id}")
     public ResponseEntity<Page<SongCommentDTO>> getSongComment(

@@ -19,15 +19,12 @@ public class Playlist {
     private int likeCount;
 
 
-    @ManyToMany(mappedBy = "playlist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-
-
+    @ManyToMany
     @JoinTable(
             name = "playlist_song",
             joinColumns = @JoinColumn(name = "playlist_id"),
             inverseJoinColumns = @JoinColumn(name = "song_id")
     )
-
     private Set<Song> songs;
 
     @Column(name = "create_time")
