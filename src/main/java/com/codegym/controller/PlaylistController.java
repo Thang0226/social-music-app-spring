@@ -15,25 +15,25 @@ import java.util.Optional;
 @RequestMapping("/api/playlist")
 public class PlaylistController {
     @Autowired
-    private IPlaylistService playListService;
+    private IPlaylistService playlistService;
 
     @GetMapping
-    public ResponseEntity<Iterable<Playlist>> listPlayList() {
-        return new ResponseEntity<>(playListService.findAll(), HttpStatus.OK);
+    public ResponseEntity<Iterable<Playlist>> listPlaylist() {
+        return new ResponseEntity<>(playlistService.findAll(), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<Playlist> createPlaylist(@RequestBody Playlist playList) {
-        return new ResponseEntity<>(playListService.save(playList), HttpStatus.CREATED);
+        return new ResponseEntity<>(playlistService.save(playList), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Playlist> deletePlaylist(@PathVariable Long id) {
-        Optional<Playlist> playListOptional = playListService.findById(id);
-        if (!playListOptional.isPresent()) {
+        Optional<Playlist> playlistOptional = playlistService.findById(id);
+        if (!playlistOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        playListService.delete(id);
-        return new ResponseEntity<>(playListOptional.get(), HttpStatus.NO_CONTENT);
+        playlistService.deleteById(id);
+        return new ResponseEntity<>(playlistOptional.get(), HttpStatus.NO_CONTENT);
     }
 }

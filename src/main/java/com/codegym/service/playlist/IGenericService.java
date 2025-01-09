@@ -9,5 +9,5 @@ public interface IGenericService<T> {
     List<T> findAll();
     Optional<Playlist> findById(Long id);
     T save(T t);
-    void delete(Long id);
+    void deleteById(Long id);
 }
