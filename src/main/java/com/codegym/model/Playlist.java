@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "playlist")
-public class PlayList {
+public class Playlist {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

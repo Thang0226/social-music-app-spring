@@ -1,8 +1,8 @@
 package com.codegym.controller;
 
 
-import com.codegym.model.PlayList;
-import com.codegym.service.playList.IPlayListService;
+import com.codegym.model.Playlist;
+import com.codegym.service.playlist.IPlaylistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,23 +13,23 @@ import java.util.Optional;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/api/playlist")
-public class PlayListController {
+public class PlaylistController {
     @Autowired
-    private IPlayListService playListService;
+    private IPlaylistService playListService;
 
     @GetMapping
-    public ResponseEntity<Iterable<PlayList>> listPlayList() {
+    public ResponseEntity<Iterable<Playlist>> listPlayList() {
         return new ResponseEntity<>(playListService.findAll(), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<PlayList> createPlaylist(@RequestBody PlayList playList) {
+    public ResponseEntity<Playlist> createPlaylist(@RequestBody Playlist playList) {
         return new ResponseEntity<>(playListService.save(playList), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<PlayList> deletePlaylist(@PathVariable Long id) {
-        Optional<PlayList> playListOptional = playListService.findById(id);
+    public ResponseEntity<Playlist> deletePlaylist(@PathVariable Long id) {
+        Optional<Playlist> playListOptional = playListService.findById(id);
         if (!playListOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
