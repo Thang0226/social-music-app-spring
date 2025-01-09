@@ -54,6 +54,7 @@ public class UserController {
             userInfor.setFullName(userDTO.getFullName());
             userInfor.setEmail(userDTO.getEmail());
             userInfor.setPhoneNumber(userDTO.getPhoneNumber());
+            userInfor.setUser(user);
             userInforService.save(userInfor);
             return ResponseEntity.ok().body("Sign up successful");
         } else {
