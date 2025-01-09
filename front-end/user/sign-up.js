@@ -18,7 +18,6 @@ $(document).ready(function() {
             data: JSON.stringify(signupData),
             success: function(response) {
                 alert('Signup successful!');
-                // Redirect or handle success
             },
             error: function(xhr) {
                 alert('Signup failed: ' + xhr.responseText);
@@ -27,3 +26,7 @@ $(document).ready(function() {
         });
     });
 });
+
+function login() {
+    window.location.href = './login.html';
+}
