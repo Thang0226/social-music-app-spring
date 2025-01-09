@@ -14,7 +14,6 @@ public class SingerService implements ISingerService {
     @Autowired
     private ISingerRepository iSingerRepository;
 
-
     @Override
     public Iterable<Singer> findAll() {
         return null;
@@ -31,7 +30,8 @@ public class SingerService implements ISingerService {
     }
 
     @Override
-    public void remove(Long id) {
+    public void deleteById(Long id) {
         iSingerRepository.deleteById(id);
     }
+
 }
