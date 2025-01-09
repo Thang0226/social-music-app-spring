@@ -1,4 +1,4 @@
-package com.codegym.service;
+package com.codegym.service.singer;
 
 
 import com.codegym.model.Singer;
@@ -17,17 +17,22 @@ public class SingerService implements ISingerService {
 
     @Override
     public Iterable<Singer> findAll() {
-        return null;
+        return iSingerRepository.findAll();
     }
 
     @Override
     public Optional<Singer> findById(Long id) {
-        return null;
+        return iSingerRepository.findById(id);
     }
+
 
     @Override
-    public void save(Singer singer) {
+    public Singer save(Singer singer) {
 
+        iSingerRepository.save(singer);
+        return singer;
     }
+
+
 
 }

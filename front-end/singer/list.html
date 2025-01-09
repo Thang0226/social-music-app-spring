@@ -9,11 +9,12 @@
 <h1>Singers</h1>
 <table border="1">
     <tr>
-        <th>Singer name</th>
-
+        <th>Singer Id</th>
+        <th>Singer Name</th>
     </tr>
     <th:block th:each="singer : ${singers}">
         <tr>
+            <td th:text="${singer.Id}"></td>
             <td th:text="${singer.singerName}"></td>
         </tr>
     </th:block>

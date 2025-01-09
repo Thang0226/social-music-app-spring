@@ -2,42 +2,33 @@ package com.codegym.controller;
 
 
 import com.codegym.model.Singer;
-import com.codegym.service.ISingerService;
+import com.codegym.service.singer.ISingerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/singers")
+@RestController
+@CrossOrigin("*")
+@RequestMapping("/api/singer")
 public class SingerController {
     @Autowired
     private ISingerService singerService;
 
-
-    @GetMapping("/create")
-    public ModelAndView ShowCreateForm() {
-        ModelAndView modelAndView = new ModelAndView("/singer/create");
-        modelAndView.addObject("singer", new Singer());
-        return modelAndView;
+    @GetMapping
+    public ResponseEntity<Iterable<Singer>> listSinger() {
+        return new ResponseEntity<>(singerService.findAll(), HttpStatus.OK);
     }
 
-    @PostMapping("/create")
-    public ModelAndView saveSinger(@ModelAttribute("singer") Singer singer) {
-        singerService.save(singer);
-        ModelAndView modelAndView = new ModelAndView("/singer/create");
-        modelAndView.addObject("singer", new Singer());
-        modelAndView.addObject("message", "Singer saved successfully!");
-        return modelAndView;
+    @PostMapping
+    public ResponseEntity<Singer> createSinger(@RequestBody Singer singer) {
+        return new ResponseEntity<>(singerService.save(singer), HttpStatus.CREATED);
     }
 
-    @GetMapping("/singers")
-    public ModelAndView listSingers() {
-        ModelAndView modelAndView = new ModelAndView("/singer/list");
-        modelAndView.addObject("singers", singerService.findAll());
-        return modelAndView;
+    @GetMapping("/{id}")
+    public ResponseEntity<Singer> findById(@PathVariable Long id) {
+        return singerService.findById(id)
+               .map(ResponseEntity::ok)
+               .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }
