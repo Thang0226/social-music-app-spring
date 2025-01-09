@@ -1,12 +1,17 @@
 package com.codegym.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
+
 import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
 @Table(name = "playlist")
-public class PlayList {
+public class Playlist {
+
+@Data
+public class Playlist {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +36,7 @@ public class PlayList {
 
     @Column(name = "user_id")
     private Long userId;
+
 
     // Getters và Setters
     public Long getId() {
@@ -81,3 +87,7 @@ public class PlayList {
         this.userId = userId;
     }
 }
+
+    private int listeningCount;
+}
+

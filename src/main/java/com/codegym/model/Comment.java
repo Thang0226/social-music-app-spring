@@ -27,6 +27,10 @@ public class Comment {
     @JoinColumn(name = "playlist_id")
     private PlayList playlist;
 
+    @ManyToOne
+    @JoinColumn(name = "singer_id")
+    private Singer singer;
+
     private LocalDateTime commentTime;
 
     @Column(columnDefinition = "TEXT")

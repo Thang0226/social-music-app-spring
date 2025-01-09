@@ -14,7 +14,6 @@ public class SingerService implements ISingerService {
     @Autowired
     private ISingerRepository iSingerRepository;
 
-
     @Override
     public Iterable<Singer> findAll() {
         return iSingerRepository.findAll();
@@ -33,6 +32,13 @@ public class SingerService implements ISingerService {
         return singer;
     }
 
+<<<<<<< HEAD:src/main/java/com/codegym/service/singer/SingerService.java
 
+=======
+    @Override
+    public void deleteById(Long id) {
+        iSingerRepository.deleteById(id);
+    }
+>>>>>>> d6ecf3d210634dc8585e7f7acbdc86a958936bd0:src/main/java/com/codegym/service/SingerService.java
 
 }
