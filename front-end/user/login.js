@@ -27,3 +27,8 @@ function signUp() {
     event.preventDefault();
     window.location.href = "./sign-up.html";
 }
+
+function update() {
+    event.preventDefault();
+    window.location.href = "./username.html";
+}

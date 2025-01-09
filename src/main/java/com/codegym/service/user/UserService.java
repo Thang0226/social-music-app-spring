@@ -1,9 +1,8 @@
-package com.codegym.service.impl;
+package com.codegym.service.user;
 
 import com.codegym.model.User;
 import com.codegym.model.UserPrincipal;
 import com.codegym.repository.IUserRepository;
-import com.codegym.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

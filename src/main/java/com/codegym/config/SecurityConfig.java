@@ -1,7 +1,7 @@
 package com.codegym.config;
 
 import com.codegym.config.jwt.JwtAuthenticationTokenFilter;
-import com.codegym.service.impl.UserService;
+import com.codegym.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
