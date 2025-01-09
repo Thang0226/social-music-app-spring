@@ -9,18 +9,18 @@ INSERT INTO role (id, name) VALUES
 
 
 INSERT INTO user (username, password) VALUES
-                                              ('user1', 'password123'),
-                                              ('admin', 'adminpassword'),
-                                              ('moderator', 'modpassword');
+                                              ('user1', '$2a$12$9l9HjMirruHJlkY.nnWtVeuVJTB5/R32Hccc/Qw8JWHi9fTHdfy7K'),
+                                              ('admin', '$2a$12$9l9HjMirruHJlkY.nnWtVeuVJTB5/R32Hccc/Qw8JWHi9fTHdfy7K'),
+                                              ('moderator', '$2a$12$9l9HjMirruHJlkY.nnWtVeuVJTB5/R32Hccc/Qw8JWHi9fTHdfy7K');
 
 INSERT INTO user (username, password) VALUES
-                                              ('tungtran', 'password123'),
-                                              ('chuyenle', 'password123'),
-                                              ('hautruong', 'password123'),
-                                              ('locnguyen', 'password123'),
-                                              ('thangnguyen', 'password123'),
-                                              ('triminh', 'password123'),
-                                              ('dungle', 'password123');
+                                              ('tungtran', '$2a$12$9l9HjMirruHJlkY.nnWtVeuVJTB5/R32Hccc/Qw8JWHi9fTHdfy7K'),
+                                              ('chuyenle', '$2a$12$9l9HjMirruHJlkY.nnWtVeuVJTB5/R32Hccc/Qw8JWHi9fTHdfy7K'),
+                                              ('hautruong', '$2a$12$9l9HjMirruHJlkY.nnWtVeuVJTB5/R32Hccc/Qw8JWHi9fTHdfy7K'),
+                                              ('locnguyen', '$2a$12$9l9HjMirruHJlkY.nnWtVeuVJTB5/R32Hccc/Qw8JWHi9fTHdfy7K'),
+                                              ('thangnguyen', '$2a$12$9l9HjMirruHJlkY.nnWtVeuVJTB5/R32Hccc/Qw8JWHi9fTHdfy7K'),
+                                              ('triminh', '$2a$12$9l9HjMirruHJlkY.nnWtVeuVJTB5/R32Hccc/Qw8JWHi9fTHdfy7K'),
+                                              ('dungle', '$2a$12$9l9HjMirruHJlkY.nnWtVeuVJTB5/R32Hccc/Qw8JWHi9fTHdfy7K');
 
 
 INSERT INTO user_roles (user_id, roles_id) VALUES
