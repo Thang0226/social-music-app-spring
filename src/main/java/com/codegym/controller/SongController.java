@@ -18,12 +18,19 @@ public class SongController {
 
     @GetMapping
     public ResponseEntity<Iterable<Song>> listSongs() {
-//        ModelAndView mav = new ModelAndView("/songs/list");
-//        mav.addObject("songs", iSongService.findAll());
-//        System.out.println("Read all songs");
-//        return mav;
         return new ResponseEntity<>(iSongService.findAll(), HttpStatus.OK);
     }
 
+    @PostMapping
+    public ResponseEntity<String> createSong(@RequestBody Song song) {
+        iSongService.save(song);
+        return new ResponseEntity<>("Song saved", HttpStatus.CREATED);
+    }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Song> updateSong(@RequestBody Song song, @PathVariable Long id) {
+        song.setId(id);
+        iSongService.save(song);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
