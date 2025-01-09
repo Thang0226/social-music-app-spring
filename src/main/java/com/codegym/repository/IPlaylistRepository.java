@@ -1,4 +1,4 @@
-package com.codegym.repository_tamthoi;
+package com.codegym.repository;
 
 import com.codegym.model.Playlist;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PlaylistRepository extends JpaRepository<Playlist, Long> {
+public interface IPlaylistRepository extends JpaRepository<Playlist, Long> {
 
 
     @Query("SELECT p FROM Playlist p ORDER BY p.createTime DESC")
@@ -18,6 +18,8 @@ public interface PlaylistRepository extends JpaRepository<Playlist, Long> {
     @Query("SELECT p FROM Playlist p ORDER BY p.likeCount DESC")
     List<Playlist> findTopLikedPlaylists();
 
-//    @Query("SELECT lc FROM Playlist lc ORDER BY lc. DESC")
+    @Query("SELECT p FROM Playlist p ORDER BY p.listeningCount DESC")
     List<Playlist> findTopPlayedPlaylists();
+
+
 }
