@@ -1,6 +1,7 @@
 package com.codegym.service;
 
 
+import com.codegym.model.Playlist;
 import com.codegym.model.Singer;
 import com.codegym.repository.ISingerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,9 @@ public class SingerService implements ISingerService {
     }
 
     @Override
-    public void save(Singer singer) {
+    public Playlist save(Singer singer) {
 
+        return null;
     }
 
     @Override

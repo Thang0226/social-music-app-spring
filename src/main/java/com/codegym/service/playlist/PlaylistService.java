@@ -25,8 +25,9 @@ public class PlaylistService implements IPlaylistService {
     }
 
     @Override
-    public void save(Playlist playlist) {
+    public Playlist save(Playlist playlist) {
         playlistRepository.save(playlist);
+        return playlist;
     }
 
     @Override
