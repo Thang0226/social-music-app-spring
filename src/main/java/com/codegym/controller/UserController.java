@@ -5,8 +5,8 @@ import com.codegym.config.jwt.service.JwtService;
 import com.codegym.model.DTO.user.UserDTO;
 import com.codegym.model.User;
 import com.codegym.model.UserInfor;
-import com.codegym.service.IUserInforService;
-import com.codegym.service.impl.UserService;
+import com.codegym.service.user.IUserInforService;
+import com.codegym.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,6 +16,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
@@ -54,6 +56,7 @@ public class UserController {
             userInfor.setFullName(userDTO.getFullName());
             userInfor.setEmail(userDTO.getEmail());
             userInfor.setPhoneNumber(userDTO.getPhoneNumber());
+            userInfor.setUser(user);
             userInforService.save(userInfor);
             return ResponseEntity.ok().body("Sign up successful");
         } else {
@@ -70,5 +73,47 @@ public class UserController {
         }
         User user = userService.findByUsername(username);
         return user == null;
+    }
+
+    @PostMapping("/username")
+    public ResponseEntity<?> checkUsername(@RequestBody String username) {
+        User user = userService.findByUsername(username);
+        if (user == null) {
+            return ResponseEntity.badRequest().body("Invalid username");
+        } else {
+            return ResponseEntity.ok().body(username);
+        }
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<?> showUpdateForm(@RequestBody String username) {
+        User user = userService.findByUsername(username);
+        Optional<UserInfor> userInfor = userInforService.findByUser(user);
+        UserDTO userDTO = new UserDTO();
+        if (userInfor.isPresent()) {
+            userDTO.setFullName(userInfor.get().getFullName());
+            userDTO.setEmail(userInfor.get().getEmail());
+            userDTO.setPhoneNumber(userInfor.get().getPhoneNumber());
+            userDTO.setUsername(username);
+            return ResponseEntity.ok(userDTO);
+        } else {
+            return ResponseEntity.badRequest().body("Invalid username or password");
+        }
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<?> updateUser(@RequestBody UserDTO userDTO) {
+        User user = userService.findByUsername(userDTO.getUsername());
+        Optional<UserInfor> userInforOptional = userInforService.findByUser(user);
+        if (userInforOptional.isPresent()) {
+            UserInfor userInfor = userInforOptional.get();
+            userInfor.setFullName(userDTO.getFullName());
+            userInfor.setEmail(userDTO.getEmail());
+            userInfor.setPhoneNumber(userDTO.getPhoneNumber());
+            userInforService.save(userInfor);
+            return ResponseEntity.ok().body("Update successfully");
+        } else {
+            return ResponseEntity.badRequest().body("Invalid username or password");
+        }
     }
 }
