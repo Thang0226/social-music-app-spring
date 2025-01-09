@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify - Trang chủ</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1db954;
+            --primary-dark: #1aa34a;
+            --bg-dark: #121212;
+            --bg-darker: #000000;
+            --bg-light: #282828;
+            --bg-lighter: #383838;
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --animation-speed: 0.3s;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: 'Circular', -apple-system, BlinkMacSystemFont, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Gradient Background Animation */
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            padding-bottom: 100px;
+            background: linear-gradient(
+                    45deg,
+                    var(--bg-dark),
+                    var(--bg-darker),
+                    #1a1a1a,
+                    #242424
+            );
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50% }
+            50% { background-position: 100% 50% }
+            100% { background-position: 0% 50% }
+        }
+
+        /* Sidebar Enhancements */
+        .sidebar {
+            background-color: var(--bg-darker);
+            height: 100vh;
+            padding: 20px;
+            position: fixed;
+            width: 250px;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+            transition: transform var(--animation-speed) ease;
+        }
+
+        .sidebar:hover {
+            transform: translateX(5px);
+        }
+
+        /* Navigation Links Animation */
+        .nav-link {
+            color: var(--text-secondary);
+            transition: all var(--animation-speed);
+            position: relative;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background-color: var(--primary-color);
+            transform: scaleY(0);
+            transition: transform var(--animation-speed);
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+            background-color: var(--bg-light);
+            padding-left: 25px;
+        }
+
+        .nav-link:hover::before {
+            transform: scaleY(1);
+        }
+
+        .nav-link.active {
+            background-color: var(--bg-light);
+            color: var(--text-primary);
+        }
+
+        .nav-link.active::before {
+            transform: scaleY(1);
+        }
+
+        /* Search Bar Animation */
+        .search-bar {
+            background-color: var(--bg-light);
+            border: 2px solid transparent;
+            border-radius: 25px;
+            color: var(--text-primary);
+            padding: 12px 20px;
+            width: 100%;
+            max-width: 400px;
+            transition: all var(--animation-speed);
+        }
+
+        .search-bar:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 15px rgba(29, 185, 84, 0.3);
+            background-color: var(--bg-lighter);
+        }
+
+        /* Playlist Cards Animation */
+        .playlist-card {
+            background-color: var(--bg-light);
+            border-radius: 10px;
+            padding: 16px;
+            height: 100%;
+            transition: all var(--animation-speed);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .playlist-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-color) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity var(--animation-speed);
+        }
+
+        .playlist-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            background-color: var(--bg-lighter);
+        }
+
+        .playlist-card:hover::before {
+            opacity: 0.1;
+        }
+
+        /* Card Image Animation */
+        .card-img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            transition: all var(--animation-speed);
+        }
+
+        .playlist-card:hover .card-img {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Track Items Animation */
+        .track-item {
+            background-color: var(--bg-light);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            transition: all var(--animation-speed);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .track-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: translateX(-100%);
+        }
+
+        .track-item:hover {
+            transform: scale(1.01);
+            background-color: var(--bg-lighter);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .track-item:hover::after {
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes shimmer {
+            100% { transform: translateX(100%); }
+        }
+
+        /* Like Button Animation */
+        .like-btn {
+            color: var(--text-secondary);
+            background: none;
+            border: none;
+            padding: 8px;
+            transition: all var(--animation-speed);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .like-btn:hover {
+            color: var(--primary-color);
+            transform: scale(1.2);
+        }
+
+        .like-btn.active {
+            color: var(--primary-color);
+            animation: likeAnimation 0.5s ease;
+        }
+
+        @keyframes likeAnimation {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+
+        /* Now Playing Bar Enhancements */
+        .now-playing {
+            background-color: var(--bg-light);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 16px;
+            z-index: 1000;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Progress Bar Animation */
+        .progress-bar {
+            height: 4px;
+            background-color: var(--bg-lighter);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .progress {
+            width: 30%;
+            height: 100%;
+            background-color: var(--primary-color);
+            position: relative;
+            transition: width 0.1s linear;
+        }
+
+        .progress::after {
+            content: '';
+            position: absolute;
+            right: -4px;
+            top: 50%;
+            transform: translateY(-50%) scale(0);
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--text-primary);
+            transition: transform var(--animation-speed);
+        }
+
+        .progress-bar:hover .progress::after {
+            transform: translateY(-50%) scale(1);
+        }
+
+        /* Playback Controls Animation */
+        .btn-link {
+            color: var(--text-secondary);
+            transition: all var(--animation-speed);
+            position: relative;
+        }
+
+        .btn-link:hover {
+            color: var(--text-primary);
+            transform: scale(1.1);
+        }
+
+        .btn-link:active {
+            transform: scale(0.95);
+        }
+
+        /* Volume Control Animation */
+        .volume-control {
+            position: relative;
+            display: inline-block;
+            width: 100px;
+        }
+
+        .volume-control .progress-bar {
+            opacity: 0.7;
+            transition: opacity var(--animation-speed);
+        }
+
+        .volume-control:hover .progress-bar {
+            opacity: 1;
+        }
+
+        /* Loading Animation for Images */
+        .loading-animation {
+            animation: loadingPulse 1.5s infinite;
+        }
+
+        @keyframes loadingPulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        /* Scroll Animation */
+        .content-section {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hover Effect for Track Numbers */
+        .track-number {
+            width: 20px;
+            text-align: center;
+            margin-right: 10px;
+            transition: all var(--animation-speed);
+        }
+
+        .track-item:hover .track-number {
+            transform: scale(1.2);
+            color: var(--primary-color);
+        }
+
+        /* User Profile Animation */
+        .user-profile {
+            position: absolute;
+            bottom: 90px;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            transition: all var(--animation-speed);
+        }
+
+        .user-profile:hover {
+            background-color: var(--bg-light);
+            transform: translateX(5px);
+        }
+
+        .user-profile img {
+            transition: all var(--animation-speed);
+        }
+
+        .user-profile:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--bg-lighter);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-color);
+        }
+
+        /* Playlist Headers Animation */
+        h4 {
+            position: relative;
+            display: inline-block;
+        }
+
+        h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width var(--animation-speed);
+        }
+
+        h4:hover::after {
+            width: 100%;
+        }
+    </style>
+
+</head>
+<body>
+<!-- Sidebar -->
+<div class="sidebar">
+    <h3 class="mb-4">
+        <i class="fab fa-spotify me-2"></i>
+        GymC08
+    </h3>
+
+    <!-- Main Navigation -->
+    <ul class="nav flex-column mb-4">
+        <li class="nav-item">
+            <a class="nav-link active" href="#">
+                <i class="fas fa-home me-2"></i>
+                Trang chủ
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="fas fa-search me-2"></i>
+                Tìm kiếm
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="fas fa-book me-2"></i>
+                Thư viện
+            </a>
+        </li>
+    </ul>
+
+    <!-- Playlist Section -->
+    <div class="mb-4">
+        <button class="btn btn-secondary w-100 mb-3">
+            <i class="fas fa-plus me-2"></i>
+            Tạo playlist
+        </button>
+        <button class="btn btn-secondary w-100">
+            <i class="fas fa-heart me-2"></i>
+            Bài hát đã thích
+        </button>
+    </div>
+
+    <!-- User Playlists -->
+    <div class="playlist-list">
+        <div class="nav flex-column">
+            <a class="nav-link" href="#">Playlist của tôi #1</a>
+            <a class="nav-link" href="#">Nhạc yêu thích</a>
+            <a class="nav-link" href="#">Top hits 2024</a>
+        </div>
+    </div>
+
+    <!-- User Profile -->
+    <div class="user-profile">
+        <a class="nav-link d-flex align-items-center" href="#">
+            <img src="/api/placeholder/32/32" class="rounded-circle me-2" alt="Profile">
+            <span>Tên người dùng</span>
+        </a>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+    <!-- Search Bar -->
+    <div class="mb-4">
+        <input type="text" class="search-bar" placeholder="Tìm kiếm bài hát, playlist...">
+    </div>
+
+    <!-- Popular Playlists -->
+    <section class="content-section">
+        <h4 class="mb-4">Playlist được nghe nhiều</h4>
+        <div class="row g-4">
+            <div class="col-md-3">
+                <div class="playlist-card">
+                    <img src="/api/placeholder/200/200" class="card-img" alt="Playlist">
+                    <h5>Top 50 - Việt Nam</h5>
+                    <p class="stats">
+                        <i class="fas fa-headphones me-1"></i> 1.2M
+                        <i class="fas fa-heart ms-2 me-1"></i> 45K
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="playlist-card">
+                    <img src="/api/placeholder/200/200" class="card-img" alt="Playlist">
+                    <h5>Chill Hits</h5>
+                    <p class="stats">
+                        <i class="fas fa-headphones me-1"></i> 890K
+                        <i class="fas fa-heart ms-2 me-1"></i> 32K
+                    </p>
+                </div>
+            </div>
+            <!-- More playlist cards... -->
+        </div>
+    </section>
+
+    <!-- Popular Tracks -->
+    <section class="content-section">
+        <h4 class="mb-4">Bài hát thịnh hành</h4>
+        <div class="track-list">
+            <div class="track-item">
+                <img src="/api/placeholder/40/40" class="me-3" alt="Track">
+                <div class="flex-grow-1">
+                    <h6 class="mb-0">Tên bài hát #1</h6>
+                    <small class="text-muted">Nghệ sĩ</small>
+                </div>
+                <div class="stats me-3">
+                    <i class="fas fa-headphones me-1"></i> 500K
+                </div>
+                <button class="like-btn">
+                    <i class="fas fa-heart"></i>
+                </button>
+            </div>
+            <!-- More track items... -->
+        </div>
+    </section>
+
+    <!-- New Releases -->
+    <section class="content-section">
+        <h4 class="mb-4">Mới phát hành</h4>
+        <div class="row g-4">
+            <div class="col-md-3">
+                <div class="playlist-card">
+                    <img src="/api/placeholder/200/200" class="card-img" alt="New Release">
+                    <h5>Album mới</h5>
+                    <p class="stats">Phát hành 2 ngày trước</p>
+                </div>
+            </div>
+            <!-- More new releases... -->
+        </div>
+    </section>
+</div>
+
+<!-- Now Playing Bar -->
+<div class="now-playing">
+    <div class="row align-items-center">
+        <div class="col-md-3">
+            <div class="d-flex align-items-center">
+                <img src="/api/placeholder/50/50" alt="Now playing" class="me-3">
+                <div>
+                    <h6 class="mb-0">Tên bài hát</h6>
+                    <small class="text-muted">Nghệ sĩ</small>
+                </div>
+                <button class="like-btn ms-3">
+                    <i class="far fa-heart"></i>
+                </button>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="text-center mb-2">
+                <button class="btn btn-link text-white">
+                    <i class="fas fa-random"></i>
+                </button>
+                <button class="btn btn-link text-white">
+                    <i class="fas fa-step-backward"></i>
+                </button>
+                <button class="btn btn-link text-white">
+                    <i class="fas fa-play-circle fa-2x"></i>
+                </button>
+                <button class="btn btn-link text-white">
+                    <i class="fas fa-step-forward"></i>
+                </button>
+                <button class="btn btn-link text-white">
+                    <i class="fas fa-redo"></i>
+                </button>
+            </div>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+        </div>
+        <div class="col-md-3 text-end">
+            <button class="btn btn-link text-white">
+                <i class="fas fa-list"></i>
+            </button>
+            <button class="btn btn-link text-white">
+                <i class="fas fa-volume-up"></i>
+            </button>
+            <div class="progress-bar d-inline-block" style="width: 100px;">
+                <div class="progress"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
