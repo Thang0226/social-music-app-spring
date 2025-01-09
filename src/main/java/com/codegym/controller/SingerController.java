@@ -33,4 +33,11 @@ public class SingerController {
         modelAndView.addObject("message", "Singer saved successfully!");
         return modelAndView;
     }
+
+    @GetMapping("/singers")
+    public ModelAndView listSingers() {
+        ModelAndView modelAndView = new ModelAndView("/singer/list");
+        modelAndView.addObject("singers", singerService.findAll());
+        return modelAndView;
+    }
 }

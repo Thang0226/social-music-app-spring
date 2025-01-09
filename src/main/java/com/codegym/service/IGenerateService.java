@@ -11,5 +11,4 @@ public interface IGenerateService<S> {
 
     void save(Singer singer);
 
-    void remove(Long id);
 }

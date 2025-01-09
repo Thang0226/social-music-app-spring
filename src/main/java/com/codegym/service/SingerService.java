@@ -30,8 +30,4 @@ public class SingerService implements ISingerService {
 
     }
 
-    @Override
-    public void remove(Long id) {
-        iSingerRepository.deleteById(id);
-    }
 }

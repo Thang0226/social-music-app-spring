@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<a href="/singers/create">Create new singer</a>
+<h1>Singers</h1>
+<table border="1">
+    <tr>
+        <th>Singer name</th>
 
+    </tr>
+    <th:block th:each="singer : ${singers}">
+        <tr>
+            <td th:text="${singer.singerName}"></td>
+        </tr>
+    </th:block>
+</table>
 </body>
 </html>
