@@ -1,15 +1,13 @@
 package com.codegym.service;
 
-import com.codegym.model.Singer;
-
 import java.util.Optional;
 
-public interface IGenerateService<S> {
-    Iterable<Singer> findAll();
+public interface IGenerateService<T> {
+    Iterable<T> findAll();
 
-    Optional<Singer> findById(Long id);
+    Optional<T> findById(Long id);
 
-    void save(Singer singer);
+    void save(T object);
 
-    void remove(Long id);
+    void deleteById(Long id);
 }
