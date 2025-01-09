@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
-@Table(name = "playlists")
+@Table(name = "playlist")
 public class Playlist {
 
     @Id
@@ -18,7 +18,16 @@ public class Playlist {
     @Column(name = "like_count")
     private int likeCount;
 
+
     @ManyToMany(mappedBy = "playlist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+
+
+    @JoinTable(
+            name = "playlist_song",
+            joinColumns = @JoinColumn(name = "playlist_id"),
+            inverseJoinColumns = @JoinColumn(name = "song_id")
+    )
+
     private Set<Song> songs;
 
     @Column(name = "create_time")
