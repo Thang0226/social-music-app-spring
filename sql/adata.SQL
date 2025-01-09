@@ -252,3 +252,26 @@ VALUES
     (8, 19), -- Chillies - Vùng Ký Ức
     (8, 23); -- Đức Phúc - Hơn Cả Yêu
 
+insert into music.comment (comment_time, content, playlist_id, song_id, user_id, singer_id)
+values
+    ('2025-01-09 15:46:22.000000', 'Bài hát này tuyệt vời!', 4, 5, 1, 2),
+    ('2025-01-10 16:00:00.000000', 'Nhạc chill cực hay, rất thích!', 5, 6, 2, 3),
+    ('2025-01-11 17:20:30.000000', 'Giọng hát của Hoàng Thuỳ Linh thật ấn tượng!', 6, 7, 3, 4),
+    ('2025-01-12 18:45:10.000000', 'Ca khúc này nghe thật nhẹ nhàng và dễ chịu.', 7, 8, 4, 5),
+    ('2025-01-13 19:30:00.000000', 'Binz luôn biết cách tạo ra những bài hát cuốn hút!', 8, 9, 5, 1),
+    ('2025-01-14 10:10:00.000000', 'Hồng Nhan của Jack thực sự là một bản hit!', 4, 10, 6, 2),
+    ('2025-01-15 14:00:00.000000', 'Em Không Sai Chúng Ta Sai là một bài hát cảm động!', 5, 11, 7, 3),
+    ('2025-01-16 13:50:00.000000', 'Bao Giờ Lấy Chồng của Bích Phương rất hay!', 6, 12, 8, 4),
+    ('2025-01-17 16:30:00.000000', 'Một Đêm Say là bài hát rất chill, thích hợp nghe lúc thư giãn.', 7, 13, 9, 5),
+    ('2025-01-18 17:25:00.000000', 'Anh Đang Ở Đâu Đấy Anh của Hương Giang Idol thật cảm động!', 8, 14, 1, 2),
+    ('2025-01-19 14:35:00.000000', 'Nơi Mình Dừng Chân của Mỹ Tâm là một bản ballad tuyệt vời!', 4, 15, 2, 3),
+    ('2025-01-20 11:40:00.000000', 'Truyền Thái Y của Ngô Kiến Huy là bài hát vui tươi và dễ nghe!', 5, 16, 3, 4),
+    ('2025-01-21 18:00:00.000000', 'Ngẫu Hứng của Hoaprox rất sôi động, thích hợp để tập thể dục!', 6, 17, 4, 5),
+    ('2025-01-22 12:30:00.000000', 'Ngày Mai của Tóc Tiên có giai điệu rất bắt tai!', 7, 18, 5, 1),
+    ('2025-01-23 09:55:00.000000', 'Vùng Ký Ức của Chillies thực sự gây ấn tượng với tôi!', 8, 19, 6, 2),
+    ('2025-01-24 14:50:00.000000', 'Nước Ngoài của Phan Mạnh Quỳnh khiến tôi cảm thấy rất sâu lắng.', 4, 20, 7, 3),
+    ('2025-01-25 16:40:00.000000', 'Không Thể Cùng Nhau Suốt Kiếp của Hòa Minzy là một bài hát quá tuyệt vời!', 5, 21, 8, 4),
+    ('2025-01-26 13:15:00.000000', 'Có Em Chờ của Min thật sự lôi cuốn tôi ngay từ lần nghe đầu tiên!', 6, 22, 9, 5),
+    ('2025-01-27 10:25:00.000000', 'Hơn Cả Yêu của Đức Phúc là một bài hát rất tình cảm!', 7, 23, 1, 2),
+    ('2025-01-28 15:35:00.000000', 'Người Lạ Ơi của Karik rất ấn tượng, tôi nghe đi nghe lại suốt!', 8, 24, 2, 3),
+    ('2025-01-29 14:45:00.000000', 'Bad Boy của Đông Nhi là một bài hát rất mạnh mẽ và đầy năng lượng!', 4, 25, 3, 4);
