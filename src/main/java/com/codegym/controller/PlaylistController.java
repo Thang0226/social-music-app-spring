@@ -23,8 +23,9 @@ public class PlaylistController {
     }
 
     @PostMapping
-    public ResponseEntity<Playlist> createPlaylist(@RequestBody Playlist playList) {
-        return new ResponseEntity<>(playlistService.save(playList), HttpStatus.CREATED);
+    public ResponseEntity<String> createPlaylist(@RequestBody Playlist playList) {
+        playlistService.save(playList);
+        return new ResponseEntity<>("playlist created", HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
