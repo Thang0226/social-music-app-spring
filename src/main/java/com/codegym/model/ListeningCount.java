@@ -19,7 +19,7 @@ public class ListeningCount {
 
     @ManyToOne
     @JoinColumn(name = "playlist_id")
-    private Playlist playlist;
+    private PlayList playlist;
 
     private int count;
 
