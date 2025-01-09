@@ -5,6 +5,7 @@ import com.codegym.repository.ISongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,5 +31,19 @@ public class SongService implements ISongService {
     @Override
     public void deleteById(Long id) {
         iSongRepository.deleteById(id);
+    }
+
+
+
+    public List<Song> getTopPlayedSongs() {
+        return iSongRepository.findTopPlayedSongs();
+    }
+
+    public List<Song> getNewSongs() {
+        return iSongRepository.findNewSongs();
+    }
+
+    public List<Song> getTopLikedSongs() {
+        return iSongRepository.findTopLikedSongs();
     }
 }
