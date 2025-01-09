@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Layout System</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --sidebar-width: 250px;
+            --top-height: 60px;
+            --player-height: 90px;
+            --primary-color: #1db954;
+            --bg-dark: #121212;
+            --bg-darker: #000000;
+            --bg-light: #282828;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: white;
+            min-height: 100vh;
+        }
+
+        /* Layout Structure */
+        .main-layout {
+            display: grid;
+            grid-template-areas:
+                "sidebar top top"
+                "sidebar content right"
+                "player player player";
+            grid-template-columns: var(--sidebar-width) 1fr 300px;
+            grid-template-rows: var(--top-height) 1fr var(--player-height);
+            height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            grid-area: sidebar;
+            background-color: var(--bg-darker);
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            grid-area: top;
+            background-color: var(--bg-dark);
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        /* Main Content Area */
+        .content {
+            grid-area: content;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        /* Right Sidebar */
+        .right-sidebar {
+            grid-area: right;
+            background-color: var(--bg-dark);
+            padding: 1rem;
+            border-left: 1px solid var(--bg-light);
+        }
+
+        /* Player Bar */
+        .player {
+            grid-area: player;
+            background-color: var(--bg-darker);
+            padding: 1rem;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        /* Navigation */
+        .nav-link {
+            color: #b3b3b3;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: white;
+        }
+
+        .nav-link.active {
+            color: var(--primary-color);
+        }
+
+        /* Fragment Containers */
+        .fragment {
+            display: none;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .fragment.active {
+            display: block;
+        }
+
+        /* Common Components */
+        .card {
+            background-color: var(--bg-light);
+            border: none;
+            color: white;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border: none;
+        }
+
+        .form-control {
+            background-color: var(--bg-light);
+            border: 1px solid var(--bg-darker);
+            color: white;
+        }
+
+        .form-control:focus {
+            background-color: var(--bg-light);
+            color: white;
+            border-color: var(--primary-color);
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+<div class="main-layout">
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <h3 class="mb-4">
+            <i class="fab fa-spotify me-2"></i>
+            GymC08
+        </h3>
+
+        <div class="nav flex-column nav-pills">
+            <a class="nav-link active" href="#home" data-fragment="home">
+                <i class="fas fa-home me-2"></i>Trang chủ
+            </a>
+            <a class="nav-link" href="#user" data-fragment="user">
+                <i class="fas fa-users me-2"></i>Quản lý người dùng
+            </a>
+            <a class="nav-link" href="#songs" data-fragment="songs">
+                <i class="fas fa-music me-2"></i>Quản lý bài hát
+            </a>
+            <a class="nav-link" href="#playlists" data-fragment="playlists">
+                <i class="fas fa-list me-2"></i>Playlist
+            </a>
+            <a class="nav-link" href="#artists" data-fragment="artists">
+                <i class="fas fa-microphone me-2"></i>Ca sĩ
+            </a>
+            <a class="nav-link" href="#player" data-fragment="player">
+                <i class="fas fa-play-circle me-2"></i>Nghe nhạc
+            </a>
+        </div>
+    </nav>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="d-flex align-items-center">
+            <button class="btn btn-link text-white me-3">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="btn btn-link text-white">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <div class="search-bar flex-grow-1 mx-4">
+            <input type="text" class="form-control" placeholder="Tìm kiếm...">
+        </div>
+
+        <div class="user-menu">
+            <button class="btn btn-link text-white">
+                <img src="/api/placeholder/32/32" class="rounded-circle me-2" alt="User">
+                <span>Tên người dùng</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content Area - Fragments -->
+    <main class="content">
+        <!-- User Management Fragment -->
+        <div id="user" class="fragment">
+            <h4>Quản lý người dùng</h4>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5>Thêm người dùng mới</h5>
+                    <form>
+                        <div class="mb-3">
+                            <label>Username</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label>Email</label>
+                            <input type="email" class="form-control">
+                        </div>
+                        <button class="btn btn-primary">Thêm</button>
+                    </form>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5>Danh sách người dùng</h5>
+                    <table class="table table-dark">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Thao tác</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- User list items -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Song Management Fragment -->
+        <div id="songs" class="fragment">
+            <h4>Quản lý bài hát</h4>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5>Thêm bài hát mới</h5>
+                    <form>
+                        <div class="mb-3">
+                            <label>Tên bài hát</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label>Ca sĩ</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label>File nhạc</label>
+                            <input type="file" class="form-control">
+                        </div>
+                        <button class="btn btn-primary">Thêm</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Music Player Fragment -->
+        <div id="player" class="fragment">
+            <h4>Nghe nhạc</h4>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <img src="/api/placeholder/300/300" class="rounded mb-3" alt="Album art">
+                                <h5>Tên bài hát</h5>
+                                <p>Ca sĩ</p>
+                                <div class="controls">
+                                    <!-- Player controls -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5>Danh sách phát</h5>
+                            <!-- Queue list -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Playlist Fragment -->
+        <div id="playlists" class="fragment">
+            <h4>Playlist</h4>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5>Tạo playlist mới</h5>
+                            <form>
+                                <div class="mb-3">
+                                    <label>Tên playlist</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label>Mô tả</label>
+                                    <textarea class="form-control"></textarea>
+                                </div>
+                                <button class="btn btn-primary">Tạo</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5>Playlist của tôi</h5>
+                            <!-- Playlist list -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Artist Management Fragment -->
+        <div id="artists" class="fragment">
+            <h4>Quản lý ca sĩ</h4>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5>Thêm ca sĩ mới</h5>
+                    <form>
+                        <div class="mb-3">
+                            <label>Tên ca sĩ</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label>Mô tả</label>
+                            <textarea class="form-control"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label>Hình ảnh</label>
+                            <input type="file" class="form-control">
+                        </div>
+                        <button class="btn btn-primary">Thêm</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Right Sidebar - Comments -->
+    <aside class="right-sidebar">
+        <h5>Bình luận</h5>
+        <div class="comments-container">
+            <!-- Comment form -->
+            <form class="mb-3">
+                <div class="mb-2">
+                    <textarea class="form-control" placeholder="Viết bình luận..."></textarea>
+                </div>
+                <button class="btn btn-primary btn-sm">Gửi</button>
+            </form>
+
+            <!-- Comments list -->
+            <div class="comments-list">
+                <!-- Comment items will be here -->
+            </div>
+        </div>
+    </aside>
+
+    <!-- Player Bar -->
+    <div class="player">
+        <div class="row align-items-center">
+            <div class="col-md-3">
+                <div class="d-flex align-items-center">
+                    <img src="/api/placeholder/48/48" alt="Now playing" class="me-3">
+                    <div>
+                        <h6 class="mb-0">Tên bài hát</h6>
+                        <small class="text-muted">Ca sĩ</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <!-- Player controls -->
+            </div>
+            <div class="col-md-3">
+                <!-- Volume controls -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Simple fragment navigation
+    document.querySelectorAll('[data-fragment]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            // Update active nav
+            document.querySelectorAll('.nav-link').forEach(el => {
+                el.classList.remove('active');
+            });
+            e.target.classList.add('active');
+
+            // Show selected fragment
+            const fragmentId = e.target.getAttribute('data-fragment');
+            document.querySelectorAll('.fragment').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.getElementById(fragmentId)?.classList.add('active');
+        });
+    });
+</script>
+</body>
+</html>

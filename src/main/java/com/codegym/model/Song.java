@@ -52,5 +52,5 @@ public class Song {
     )
     private Set<Genre> genres;
 
-
+    private int listeningCount;
 }
