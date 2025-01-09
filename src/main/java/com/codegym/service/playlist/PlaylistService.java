@@ -1,7 +1,7 @@
 package com.codegym.service.playlist;
 
 import com.codegym.model.Playlist;
-import com.codegym.repository.PlaylistRepository;
+import com.codegym.repository.IPlaylistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.Optional;
 public class PlaylistService implements IPlaylistService {
 
     @Autowired
-    private PlaylistRepository playlistRepository;
+    private IPlaylistRepository playlistRepository;
 
     @Override
     public List<Playlist> findAll() {
@@ -25,9 +25,8 @@ public class PlaylistService implements IPlaylistService {
     }
 
     @Override
-    public Playlist save(Playlist playlist) {
+    public void save(Playlist playlist) {
         playlistRepository.save(playlist);
-        return playlist;
     }
 
     @Override
@@ -35,4 +34,19 @@ public class PlaylistService implements IPlaylistService {
         playlistRepository.deleteById(id);
     }
 
+    @Override
+    public List<Playlist> getNewPlaylists() {
+        return playlistRepository.findNewPlaylists(); // Truy vấn để lấy playlist mới nhất
+
+    }
+
+    @Override
+    public List<Playlist> getTopLikedPlaylists() {
+        return playlistRepository.findTopLikedPlaylists(); // Truy vấn để lấy playlist được like nhiều nhất
+    }
+
+    @Override
+    public List<Playlist> getTopPlayedPlaylists() {
+        return playlistRepository.findTopPlayedPlaylists();
+    }
 }
