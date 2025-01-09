@@ -34,4 +34,9 @@ public class UserController {
         User currentUser = userService.findByUsername(user.getUsername());
         return ResponseEntity.ok(new JwtResponse(currentUser.getId(), jwt, userDetails.getUsername(), userDetails.getAuthorities()));
     }
+
+    @PostMapping("/signup")
+    public ResponseEntity<?> signup(@RequestBody User user) {
+        return null;
+    }
 }

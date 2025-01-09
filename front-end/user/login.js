@@ -2,11 +2,11 @@ $(document).ready(function() {
     $('#loginForm').on('submit', function(e) {
         e.preventDefault();
 
-        const email = $('#email').val();
+        const email = $('#user').val();
         const password = $('#password').val();
 
         $.ajax({
-            url: '/login',
+            url: 'http://localhost:8080/api/music/login',
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({ email: email, password: password }),
@@ -21,3 +21,8 @@ $(document).ready(function() {
         });
     });
 });
+
+function signUp() {
+    event.preventDefault();
+    window.location.href = "./sign-up.html";
+}
