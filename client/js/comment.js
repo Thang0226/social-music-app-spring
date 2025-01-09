@@ -8,15 +8,18 @@ function getComment(songId) {
         type: 'GET',
         success: function (data) {
             console.log(data);
+            let comment = data.content;
             let content = "";
-            for (let i = 0; i < data.length; i++) {
+            for (let i = 0; i < comment.length; i++) {
+                let localTime = moment(comment[i].commentTime).tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY HH:mm");
                 content += `<div>
-                    <strong>${data[i].username}</strong><br>
-                    <span>${data[i].commentTime}</span><br>
-                    <p>${data[i].content}</p>
+                    <strong>${comment[i].username}</strong><br>
+                    <span>${localTime}</span><br>
+                    <p>${comment[i].content}</p>
                 </div>`
             }
             $("#comments").html(content);
         }
     })
 }
+getComment(localStorage.getItem("song-id"));
