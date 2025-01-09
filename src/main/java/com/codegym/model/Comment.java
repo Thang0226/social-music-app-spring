@@ -25,7 +25,7 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "playlist_id")
-    private PlayList playlist;
+    private Playlist playlist;
 
     private LocalDateTime commentTime;
 

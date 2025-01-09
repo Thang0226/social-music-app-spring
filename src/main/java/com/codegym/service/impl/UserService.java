@@ -23,8 +23,8 @@ public class UserService implements IUserService, UserDetailsService {
     }
 
     @Override
-    public User save(User user) {
-        return userRepository.save(user);
+    public void save(User user) {
+        userRepository.save(user);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class UserService implements IUserService, UserDetailsService {
     }
 
     @Override
-    public void remove(Long id) {
+    public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
 

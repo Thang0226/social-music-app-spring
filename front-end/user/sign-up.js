@@ -5,13 +5,14 @@ $(document).ready(function() {
         const signupData = {
             username: $('#username').val(),
             password: $('#password').val(),
+            re_password: $('#re-password').val(),
             fullName: $('#fullName').val(),
             email: $('#email').val(),
             phoneNumber: $('#phoneNumber').val()
         };
 
         $.ajax({
-            url: '/signup',
+            url: 'http://localhost:8080/api/music/signup',
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(signupData),
