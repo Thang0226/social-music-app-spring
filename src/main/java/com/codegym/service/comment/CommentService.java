@@ -1,6 +1,8 @@
 package com.codegym.service.comment;
 
 import com.codegym.model.Comment;
+import com.codegym.model.DTO.comment.PlaylistCommentDTO;
+import com.codegym.model.DTO.comment.SingerCommentDTO;
 import com.codegym.model.DTO.comment.SongCommentDTO;
 import com.codegym.repository.ICommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,22 @@ public class CommentService implements ICommentService {
     @Override
     public Page<SongCommentDTO> findCommentsBySongId(Long songId, Pageable pageable) {
         List<SongCommentDTO> comments = commentRepository.findCommentsBySongId(songId);
+        int start = (int) pageable.getOffset();
+        int end = Math.min((start + pageable.getPageSize()), comments.size());
+        return new PageImpl<>(comments.subList(start, end), pageable, comments.size());
+    }
+
+    @Override
+    public Page<PlaylistCommentDTO> findCommentsByPlaylistId(Long playlistId, Pageable pageable) {
+        List<PlaylistCommentDTO> comments = commentRepository.findCommentsByPlaylistId(playlistId);
+        int start = (int) pageable.getOffset();
+        int end = Math.min((start + pageable.getPageSize()), comments.size());
+        return new PageImpl<>(comments.subList(start, end), pageable, comments.size());
+    }
+
+    @Override
+    public Page<SingerCommentDTO> findCommentsBySingerId(Long singerId, Pageable pageable) {
+        List<SingerCommentDTO> comments = commentRepository.findCommentsBySingerId(singerId);
         int start = (int) pageable.getOffset();
         int end = Math.min((start + pageable.getPageSize()), comments.size());
         return new PageImpl<>(comments.subList(start, end), pageable, comments.size());
