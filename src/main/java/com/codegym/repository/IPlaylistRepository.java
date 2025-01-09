@@ -9,8 +9,6 @@ import java.util.List;
 
 @Repository
 public interface IPlaylistRepository extends JpaRepository<Playlist, Long> {
-
-
     @Query("SELECT p FROM Playlist p ORDER BY p.createTime DESC")
     List<Playlist> findNewPlaylists();
 
@@ -20,6 +18,4 @@ public interface IPlaylistRepository extends JpaRepository<Playlist, Long> {
 
     @Query("SELECT p FROM Playlist p ORDER BY p.listeningCount DESC")
     List<Playlist> findTopPlayedPlaylists();
-
-
 }
