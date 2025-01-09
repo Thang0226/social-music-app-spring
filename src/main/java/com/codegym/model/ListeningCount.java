@@ -4,20 +4,14 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Entity
-@Table(name = "comment")
+@Table(name = "listening_count")
 @Data
 @NoArgsConstructor
-public class Comment {
+public class ListeningCount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 
     @ManyToOne
     @JoinColumn(name = "song_id")
@@ -27,12 +21,6 @@ public class Comment {
     @JoinColumn(name = "playlist_id")
     private Playlist playlist;
 
-    @ManyToOne
-    @JoinColumn(name = "singer_id")
-    private Singer singer;
+    private int count;
 
-    private LocalDateTime commentTime;
-
-    @Column(columnDefinition = "TEXT")
-    private String content;
 }
