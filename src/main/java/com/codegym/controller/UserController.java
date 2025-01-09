@@ -2,6 +2,7 @@ package com.codegym.controller;
 
 import com.codegym.config.jwt.JwtResponse;
 import com.codegym.config.jwt.service.JwtService;
+import com.codegym.model.DTO.user.AccountDTO;
 import com.codegym.model.DTO.user.UserDTO;
 import com.codegym.model.User;
 import com.codegym.model.UserInfor;
@@ -60,7 +61,7 @@ public class UserController {
             userInforService.save(userInfor);
             return ResponseEntity.ok().body("Sign up successful");
         } else {
-            return ResponseEntity.badRequest().body("Invalid username or password");
+            return ResponseEntity.badRequest().body("Invalid username or passwords");
         }
     }
 
@@ -72,7 +73,10 @@ public class UserController {
             return false;
         }
         User user = userService.findByUsername(username);
-        return user == null;
+        if (user != null) {
+            return false;
+        }
+        return true;
     }
 
     @PostMapping("/username")
@@ -102,7 +106,7 @@ public class UserController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> updateUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<?> updateUserInfor(@RequestBody UserDTO userDTO) {
         User user = userService.findByUsername(userDTO.getUsername());
         Optional<UserInfor> userInforOptional = userInforService.findByUser(user);
         if (userInforOptional.isPresent()) {
@@ -115,5 +119,20 @@ public class UserController {
         } else {
             return ResponseEntity.badRequest().body("Invalid username or password");
         }
+    }
+
+    @PostMapping("/username4password")
+    public ResponseEntity<?> showChangeForm(@RequestBody String username) {
+        User user = userService.findByUsername(username);
+        if (user == null) {
+            return ResponseEntity.badRequest().body("Invalid username");
+        } else {
+            return ResponseEntity.ok().body(username);
+        }
+    }
+
+    @PutMapping("/update4password")
+    public ResponseEntity<?> changePassword(@RequestBody AccountDTO accountDTO) {
+        return null;
     }
 }
