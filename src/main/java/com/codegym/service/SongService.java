@@ -23,8 +23,9 @@ public class SongService implements ISongService {
     }
 
     @Override
-    public void save(Song song) {
-        iSongRepository.save(song);
+    public Song save(Song song) {
+
+        return iSongRepository.save(song);
     }
 
     @Override
