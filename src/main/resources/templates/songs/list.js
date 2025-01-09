@@ -1,3 +1,0 @@
-$(function (){
-    $("#update-smartphone").hide();
-})
