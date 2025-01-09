@@ -1,7 +1,5 @@
 package com.codegym.service;
 
-import com.codegym.model.Playlist;
-
 import java.util.Optional;
 
 public interface IGenerateService<T> {
@@ -9,7 +7,9 @@ public interface IGenerateService<T> {
 
     Optional<T> findById(Long id);
 
-    Playlist save(T object);
+
+    void save(T object);
 
     void deleteById(Long id);
+
 }
