@@ -10,24 +10,25 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/api/singer")
+@RequestMapping("/api/singers")
 public class SingerController {
     @Autowired
-    private ISingerService singerService;
+    private ISingerService iSingerService;
 
     @GetMapping
     public ResponseEntity<Iterable<Singer>> listSinger() {
-        return new ResponseEntity<>(singerService.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(iSingerService.findAll(), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Singer> createSinger(@RequestBody Singer singer) {
-        return new ResponseEntity<>(singerService.save(singer), HttpStatus.CREATED);
+    public ResponseEntity<String> createSinger(@RequestBody Singer singer) {
+        iSingerService.save(singer);
+        return new ResponseEntity<>("Singer saved", HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Singer> findById(@PathVariable Long id) {
-        return singerService.findById(id)
+        return iSingerService.findById(id)
                .map(ResponseEntity::ok)
                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
