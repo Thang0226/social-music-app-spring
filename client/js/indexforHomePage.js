@@ -22,74 +22,7 @@ function getTopPlayedSongs() {
     });
 }
 
-/* ---------------- NHIỆM VỤ 41: HIỂN THỊ BÀI HÁT MỚI NHẤT VỪA ĐƯỢC THÊM VÀO <da co>------------------------ */
-// function getNewSongs() {
-//     console.log("Bắt đầu chạy hàm getNewSongs...");
-//
-//     $.ajax({
-//         headers: {
-//             'accept': 'application/json',
-//             'content-type': 'application/json',
-//         },
-//         url: 'http://localhost:8080/api/homepage/new-songs',
-//         type: 'GET',
-//         success: function (data) {
-//             console.log("Yêu cầu AJAX thành công. Dữ liệu nhận được:", data);
-//
-//             // Kiểm tra dữ liệu có phải mảng không
-//             if (!Array.isArray(data)) {
-//                 console.error("Dữ liệu trả về không phải là mảng. Loại dữ liệu nhận được:", typeof data);
-//                 return;
-//             }
-//
-//             let content = "";
-//             data.forEach((song, index) => {
-//                 try {
-//                     console.log(`Đang xử lý bài hát tại vị trí ${index}:`, song);
-//                     content += `
-//                         <div class="song-card mb-4">
-//                             <div class="d-flex align-items-center">
-//                                 <img src="http://localhost:8080/api/images/${song.imageFile}"
-//                                      alt="${song.name}"
-//                                      class="mr-3"
-//                                      style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
-//                                 <div>
-//                                     <h3 class="mb-1">${song.name}</h3>
-//                                     <p class="mb-0">
-//                                         Ca sĩ: ${song.singers.map(s => s.singerName).join(', ')} •
-//                                         Ngày tải lên: ${moment(song.uploadTime).format("DD/MM/YYYY")} •
-//                                         Lượt nghe: ${song.listeningCount}
-//                                     </p>
-//                                 </div>
-//                                 <div class="ml-auto">
-//                                     <button class="btn btn-primary btn-sm" onclick="playSong('${song.musicFile}')">Phát</button>
-//                                 </div>
-//                             </div>
-//                         </div>`;
-//                 } catch (error) {
-//                     console.error(`Lỗi khi xử lý bài hát tại vị trí ${index}:`, error);
-//                 }
-//             });
-//
-//             console.log("Nội dung HTML được tạo thành công:", content);
-//             $("#new-songs-container").html(content);
-//         },
-//         error: function (xhr, status, error) {
-//             console.error("Yêu cầu AJAX thất bại.");
-//             console.error("Trạng thái:", status);
-//             console.error("Lỗi:", error);
-//             console.error("Phản hồi từ máy chủ:", xhr.responseText);
-//         }
-//     });
-//
-//     console.log("Hàm getNewSongs đã hoàn thành.");
-// }
-
-
-
-
-
-
+/* ---------------- NHIỆM VỤ 41: HIỂN THỊ BÀI HÁT MỚI NHẤT VỪA ĐƯỢC THÊM VÀO <da co> <done>------------------------ */
 function getNewSongs() {
     $.ajax({
         headers: {
@@ -100,18 +33,21 @@ function getNewSongs() {
         type: 'GET',
         success: function (data) {
             let content = "";
-            for(let i=0; i < 10; i++) {
+            for(let i=0; i < 6; i++) {
                 content += `
           <div class="song-card">
             <div class="card">
-              <img src="http://localhost:8080/api/images/${data[i].imageFile}" 
-                   alt="${data[i].name}" class="card-img-top">
+
+
+              <img src="${data[i].imageFile}" 
+                   alt="${data[i].name}" class="card-img-top">     
+
               <div class="card-body text-center">
                 <h5 class="card-title">${data[i].name}</h5>
                 <p class="card-text">
                   ${data[i].singers.map(s => s.singerName).join(', ')}
                 </p>
-                <button class="btn btn-primary btn-sm" onclick="playSong('${data[i].musicFile}')">Phát</button>
+                <button class="btn btn-primary btn-sm" onclick="playSong('${data[i].musicFile}')">Play</button>
               </div>
             </div>
           </div>`;
@@ -219,15 +155,21 @@ function getTopLikedPlaylists() {
             'accept': 'application/json',
             'content-type': 'application/json',
         },
-        url: 'http://localhost:8080/api/top-liked-playlists',
+        url: 'http://localhost:8080/api/homepage/top-liked-playlists',
         type: 'GET',
         success: function (data) {
             let content = "";
             data.forEach(playlist => {
                 content += `
-                    <div>
-                        <strong>${playlist.name}</strong><br>
-                        <span>Lượt thích: ${playlist.likes}</span>
+                    <div class="col-md-4">
+                        <div class="playlist-card">                                         
+                            <h3>${playlist.name}</h3>
+                            <p>${playlist.songs.length} songs • ${playlist.listeningCount} views</p>
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-primary btn-sm">Open</button>
+                                <button class="btn btn-outline-primary btn-sm">Edit</button>
+                            </div>
+                        </div>
                     </div>`;
             });
             $("#top-liked-playlists").html(content);
