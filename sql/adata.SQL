@@ -46,6 +46,7 @@ INSERT INTO user_info (full_name, email, phone_number, user_id) VALUES
 
 
 
+
 insert into music.song (id, description, image_file, like_count, listening_count, music_file, name, upload_time, user_id)
 values  (1, '人気曲 YOASOBI', 'https://i.ytimg.com/vi/aRC2FFypyFY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAIAoad8tSlqDdq2za0PRxuBvw7Cg', 150, 212, 'yorunikakeru.mp3', '夜に駆ける (よるにかける)', '2025-01-01 10:00:00.000000', 1),
         (2, 'King Gnuの名曲', 'https://nguoiduatin.mediacdn.vn/media/dinh-lac-thanh/2020/06/06/karik14.jpg', 120, 4, 'hakujitsu.mp3', '白日 (はくじつ)', '2025-01-02 11:30:00.000000', 2),
@@ -72,6 +73,7 @@ values  (1, '人気曲 YOASOBI', 'https://i.ytimg.com/vi/aRC2FFypyFY/hq720.jpg?s
         (23, 'Nhạc trẻ sôi động từ Đức Phúc', 'https://cdn-i.vtcnews.vn/files/sonha/2018/03/29/batch_img-0455-0814012.jpg', 270, 480, 'nguoinong.mp3', 'Hơn Cả Yêu', '2025-01-23 11:30:00.000000', 4),
         (24, 'Bản rap nhẹ nhàng từ Karik', 'https://upload.wikimedia.org/wikipedia/vi/3/33/Ng%C6%B0%E1%BB%9Di_l%E1%BA%A1_%C6%A1i.jpeg', 310, 520, 'quakho.mp3', 'Người Lạ Ơi', '2025-01-24 08:45:00.000000', 5),
         (25, 'Hit của Đông Nhi', 'https://avatar-ex-swe.nixcdn.com/song/2022/12/09/2/2/3/f/1670577102148_640.jpg', 295, 410, 'ongmat.mp3', 'Bad Boy', '2025-01-25 19:20:00.000000', 1);
+
 
 
 
