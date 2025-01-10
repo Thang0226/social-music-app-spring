@@ -46,38 +46,34 @@ INSERT INTO user_info (full_name, email, phone_number, user_id) VALUES
 
 
 
-insert into music.song (id, description, image_file, like_count, music_file, name, upload_time, user_id, listening_count)
-values  (1, '人気曲 YOASOBI', 'yorunikakeru.jpg', 150, 'yorunikakeru.mp3', '夜に駆ける (よるにかける)', '2025-01-01 10:00:00.000000', 1, 212),
-        (2, 'King Gnuの名曲', 'hakujitsu.jpg', 120, 'hakujitsu.mp3', '白日 (はくじつ)', '2025-01-02 11:30:00.000000', 2, 4),
-        (3, '鬼滅の刃主題歌', 'gurenge.jpg', 200, 'gurenge.mp3', '紅蓮華 (ぐれんげ)', '2025-01-03 15:45:00.000000', 3, 12),
-        (4, '星野源のヒット曲', 'koi.jpg', 180, 'koi.mp3', '恋 (こい)', '2025-01-04 09:20:00.000000', 4, 123);
+insert into music.song (id, description, image_file, like_count, listening_count, music_file, name, upload_time, user_id)
+values  (1, '人気曲 YOASOBI', 'https://i.ytimg.com/vi/aRC2FFypyFY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAIAoad8tSlqDdq2za0PRxuBvw7Cg', 150, 212, 'yorunikakeru.mp3', '夜に駆ける (よるにかける)', '2025-01-01 10:00:00.000000', 1),
+        (2, 'King Gnuの名曲', 'https://nguoiduatin.mediacdn.vn/media/dinh-lac-thanh/2020/06/06/karik14.jpg', 120, 4, 'hakujitsu.mp3', '白日 (はくじつ)', '2025-01-02 11:30:00.000000', 2),
+        (3, '鬼滅の刃主題歌', 'https://kenh14cdn.com/thumb_w/640/2018/11/29/mv-nguoilaoi-cover1-154351027364431583274-crop-1543510433222638941178.jpg', 200, 12, 'gurenge.mp3', '紅蓮華 (ぐれんげ)', '2025-01-03 15:45:00.000000', 3),
+        (4, '星野源のヒット曲', 'https://cdn-i.vtcnews.vn/files/sonha/2018/03/29/batch_img-0455-0814012.jpg', 180, 123, 'koi.mp3', '恋 (こい)', '2025-01-04 09:20:00.000000', 4),
+        (5, 'Bài hát nổi tiếng của Sơn Tùng M-TP', 'https://upload.wikimedia.org/wikipedia/vi/3/33/Ng%C6%B0%E1%BB%9Di_l%E1%BA%A1_%C6%A1i.jpeg', 320, 450, 'chayngaydi.mp3', 'Chạy Ngay Đi', '2025-01-05 08:00:00.000000', 1),
+        (6, 'Nhạc chill của Đen Vâu', 'https://avatar-ex-swe.nixcdn.com/song/2022/12/09/2/2/3/f/1670577102148_640.jpg', 240, 210, 'baonguoila.mp3', 'Bài Này Chill Phết', '2025-01-06 09:15:00.000000', 2),
+        (7, 'Bài hit của Hoàng Thuỳ Linh', 'https://i.ytimg.com/vi/aRC2FFypyFY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAIAoad8tSlqDdq2za0PRxuBvw7Cg', 290, 360, 'dee.mp3', 'Để Mị Nói Cho Mà Nghe', '2025-01-07 18:00:00.000000', 3),
+        (8, 'Ca khúc lãng mạn của Vũ.', 'https://nguoiduatin.mediacdn.vn/media/dinh-lac-thanh/2020/06/06/karik14.jpg', 180, 150, 'dunglango.mp3', 'Đừng Lặng Im', '2025-01-08 11:45:00.000000', 4),
+        (9, 'Nhạc hot từ Binz', 'https://kenh14cdn.com/thumb_w/640/2018/11/29/mv-nguoilaoi-cover1-154351027364431583274-crop-1543510433222638941178.jpg', 275, 380, 'saucung.mp3', 'Sao Cũng Được', '2025-01-09 14:30:00.000000', 5),
+        (10, 'Bài hát gây bão của Jack', 'https://cdn-i.vtcnews.vn/files/sonha/2018/03/29/batch_img-0455-0814012.jpg', 360, 520, 'honnaytoilon.mp3', 'Hồng Nhan', '2025-01-10 10:10:00.000000', 1),
+        (11, 'Nhạc trẻ đình đám từ Erik', 'https://upload.wikimedia.org/wikipedia/vi/3/33/Ng%C6%B0%E1%BB%9Di_l%E1%BA%A1_%C6%A1i.jpeg', 210, 315, 'emkhacgiotroi.mp3', 'Em Không Sai Chúng Ta Sai', '2025-01-11 16:40:00.000000', 2),
+        (12, 'Hit của Bích Phương', 'https://avatar-ex-swe.nixcdn.com/song/2022/12/09/2/2/3/f/1670577102148_640.jpg', 150, 200, 'matbao.mp3', 'Bao Giờ Lấy Chồng', '2025-01-12 09:00:00.000000', 3),
+        (13, 'Lofi gây nghiện của Thịnh Suy', 'https://i.ytimg.com/vi/aRC2FFypyFY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAIAoad8tSlqDdq2za0PRxuBvw7Cg', 120, 175, 'morning.mp3', 'Một Đêm Say', '2025-01-13 20:00:00.000000', 4),
+        (14, 'Bài tủ của Hương Giang Idol', 'https://nguoiduatin.mediacdn.vn/media/dinh-lac-thanh/2020/06/06/karik14.jpg', 340, 490, 'annhathangia.mp3', 'Anh Đang Ở Đâu Đấy Anh', '2025-01-14 12:15:00.000000', 5),
+        (15, 'Bản Ballad của Mỹ Tâm', 'https://kenh14cdn.com/thumb_w/640/2018/11/29/mv-nguoilaoi-cover1-154351027364431583274-crop-1543510433222638941178.jpg', 420, 580, 'mattrang.mp3', 'Nơi Mình Dừng Chân', '2025-01-15 08:50:00.000000', 1),
+        (16, 'Ca khúc nổi bật từ Ngô Kiến Huy', 'https://cdn-i.vtcnews.vn/files/sonha/2018/03/29/batch_img-0455-0814012.jpg', 275, 330, 'muonguoila.mp3', 'Truyền Thái Y', '2025-01-16 15:35:00.000000', 2),
+        (17, 'Nhạc EDM sôi động từ Hoaprox', 'https://upload.wikimedia.org/wikipedia/vi/3/33/Ng%C6%B0%E1%BB%9Di_l%E1%BA%A1_%C6%A1i.jpeg', 195, 270, 'nguoilayo.mp3', 'Ngẫu Hứng', '2025-01-17 11:45:00.000000', 3),
+        (18, 'Nhạc pop của Tóc Tiên', 'https://avatar-ex-swe.nixcdn.com/song/2022/12/09/2/2/3/f/1670577102148_640.jpg', 390, 450, 'nudoibat.mp3', 'Ngày Mai', '2025-01-18 19:10:00.000000', 4),
+        (19, 'Nhạc indie của Chillies', 'https://kenh14cdn.com/thumb_w/640/2018/11/29/mv-nguoilaoi-cover1-154351027364431583274-crop-1543510433222638941178.jpg', 310, 400, 'duongve.mp3', 'Vùng Ký Ức', '2025-01-19 10:20:00.000000', 5),
+        (20, 'Ca khúc sâu lắng của Phan Mạnh Quỳnh', 'https://i.ytimg.com/vi/aRC2FFypyFY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAIAoad8tSlqDdq2za0PRxuBvw7Cg', 150, 190, 'nhungoi.mp3', 'Nước Ngoài', '2025-01-20 14:00:00.000000', 1),
+        (21, 'Bản pop ballad đậm chất của Hòa Minzy', 'https://nguoiduatin.mediacdn.vn/media/dinh-lac-thanh/2020/06/06/karik14.jpg', 250, 340, 'khongthe.mp3', 'Không Thể Cùng Nhau Suốt Kiếp', '2025-01-21 16:50:00.000000', 2),
+        (22, 'Nhạc hot của Min', 'https://kenh14cdn.com/thumb_w/640/2018/11/29/mv-nguoilaoi-cover1-154351027364431583274-crop-1543510433222638941178.jpg', 320, 375, 'ngoailanh.mp3', 'Có Em Chờ', '2025-01-22 13:45:00.000000', 3),
+        (23, 'Nhạc trẻ sôi động từ Đức Phúc', 'https://cdn-i.vtcnews.vn/files/sonha/2018/03/29/batch_img-0455-0814012.jpg', 270, 480, 'nguoinong.mp3', 'Hơn Cả Yêu', '2025-01-23 11:30:00.000000', 4),
+        (24, 'Bản rap nhẹ nhàng từ Karik', 'https://upload.wikimedia.org/wikipedia/vi/3/33/Ng%C6%B0%E1%BB%9Di_l%E1%BA%A1_%C6%A1i.jpeg', 310, 520, 'quakho.mp3', 'Người Lạ Ơi', '2025-01-24 08:45:00.000000', 5),
+        (25, 'Hit của Đông Nhi', 'https://avatar-ex-swe.nixcdn.com/song/2022/12/09/2/2/3/f/1670577102148_640.jpg', 295, 410, 'ongmat.mp3', 'Bad Boy', '2025-01-25 19:20:00.000000', 1);
 
 
-
-INSERT INTO music.song (id, description, image_file, like_count, music_file, name, upload_time, user_id, listening_count)
-VALUES
--- Các bài hát bổ sung
-(5, 'Bài hát nổi tiếng của Sơn Tùng M-TP', 'chayngaydi.jpg', 320, 'chayngaydi.mp3', 'Chạy Ngay Đi', '2025-01-05 08:00:00.000000', 1, 450),
-(6, 'Nhạc chill của Đen Vâu', 'baonguoila.jpg', 240, 'baonguoila.mp3', 'Bài Này Chill Phết', '2025-01-06 09:15:00.000000', 2, 210),
-(7, 'Bài hit của Hoàng Thuỳ Linh', 'dee.jpg', 290, 'dee.mp3', 'Để Mị Nói Cho Mà Nghe', '2025-01-07 18:00:00.000000', 3, 360),
-(8, 'Ca khúc lãng mạn của Vũ.', 'dunglango.jpg', 180, 'dunglango.mp3', 'Đừng Lặng Im', '2025-01-08 11:45:00.000000', 4, 150),
-(9, 'Nhạc hot từ Binz', 'saucung.jpg', 275, 'saucung.mp3', 'Sao Cũng Được', '2025-01-09 14:30:00.000000', 5, 380),
-(10, 'Bài hát gây bão của Jack', 'honnaytoilon.jpg', 360, 'honnaytoilon.mp3', 'Hồng Nhan', '2025-01-10 10:10:00.000000', 1, 520),
-(11, 'Nhạc trẻ đình đám từ Erik', 'emkhacgiotroi.jpg', 210, 'emkhacgiotroi.mp3', 'Em Không Sai Chúng Ta Sai', '2025-01-11 16:40:00.000000', 2, 315),
-(12, 'Hit của Bích Phương', 'matbao.jpg', 150, 'matbao.mp3', 'Bao Giờ Lấy Chồng', '2025-01-12 09:00:00.000000', 3, 200),
-(13, 'Lofi gây nghiện của Thịnh Suy', 'morning.jpg', 120, 'morning.mp3', 'Một Đêm Say', '2025-01-13 20:00:00.000000', 4, 175),
-(14, 'Bài tủ của Hương Giang Idol', 'annhathangia.jpg', 340, 'annhathangia.mp3', 'Anh Đang Ở Đâu Đấy Anh', '2025-01-14 12:15:00.000000', 5, 490),
-(15, 'Bản Ballad của Mỹ Tâm', 'mattrang.jpg', 420, 'mattrang.mp3', 'Nơi Mình Dừng Chân', '2025-01-15 08:50:00.000000', 1, 580),
-(16, 'Ca khúc nổi bật từ Ngô Kiến Huy', 'muonguoila.jpg', 275, 'muonguoila.mp3', 'Truyền Thái Y', '2025-01-16 15:35:00.000000', 2, 330),
-(17, 'Nhạc EDM sôi động từ Hoaprox', 'nguoilayo.jpg', 195, 'nguoilayo.mp3', 'Ngẫu Hứng', '2025-01-17 11:45:00.000000', 3, 270),
-(18, 'Nhạc pop của Tóc Tiên', 'nudoibat.jpg', 390, 'nudoibat.mp3', 'Ngày Mai', '2025-01-18 19:10:00.000000', 4, 450),
-(19, 'Nhạc indie của Chillies', 'duongve.jpg', 310, 'duongve.mp3', 'Vùng Ký Ức', '2025-01-19 10:20:00.000000', 5, 400),
-(20, 'Ca khúc sâu lắng của Phan Mạnh Quỳnh', 'nhungoi.jpg', 150, 'nhungoi.mp3', 'Nước Ngoài', '2025-01-20 14:00:00.000000', 1, 190),
-(21, 'Bản pop ballad đậm chất của Hòa Minzy', 'khongthe.jpg', 250, 'khongthe.mp3', 'Không Thể Cùng Nhau Suốt Kiếp', '2025-01-21 16:50:00.000000', 2, 340),
-(22, 'Nhạc hot của Min', 'ngoailanh.jpg', 320, 'ngoailanh.mp3', 'Có Em Chờ', '2025-01-22 13:45:00.000000', 3, 375),
-(23, 'Nhạc trẻ sôi động từ Đức Phúc', 'nguoinong.jpg', 270, 'nguoinong.mp3', 'Hơn Cả Yêu', '2025-01-23 11:30:00.000000', 4, 480),
-(24, 'Bản rap nhẹ nhàng từ Karik', 'quakho.jpg', 310, 'quakho.mp3', 'Người Lạ Ơi', '2025-01-24 08:45:00.000000', 5, 520),
-(25, 'Hit của Đông Nhi', 'ongmat.jpg', 295, 'ongmat.mp3', 'Bad Boy', '2025-01-25 19:20:00.000000', 1, 410);
 
 insert into music.genre (id, name)
 values  (1, 'J-Pop'),
