@@ -35,3 +35,22 @@ begin
 end;
 
 call find_comment_by_singer_id(1);
+
+# Song
+CREATE PROCEDURE find_all_song_by_user_id(
+    IN p_user_id LONG
+)
+BEGIN
+    SELECT
+        s.name AS "SongName",
+        u.username AS "UserName",
+        s.description AS "Description",
+        s.image_file AS "ImageFile",
+        s.music_file AS "MusicFile",
+        s.upload_time AS "UploadTime"
+    FROM song s
+             INNER JOIN user u ON s.user_id = u.id
+    WHERE s.user_id = p_user_id
+    ORDER BY s.upload_time DESC;
+END;
+call find_all_song_by_user_id(1);

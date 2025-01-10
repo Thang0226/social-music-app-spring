@@ -45,7 +45,6 @@ INSERT INTO user_info (full_name, email, phone_number, user_id) VALUES
 
 
 
-
 insert into music.song (id, description, image_file, like_count, music_file, name, upload_time, user_id, listening_count)
 values  (1, '人気曲 YOASOBI', 'yorunikakeru.jpg', 150, 'yorunikakeru.mp3', '夜に駆ける (よるにかける)', '2025-01-01 10:00:00.000000', 1, 212),
         (2, 'King Gnuの名曲', 'hakujitsu.jpg', 120, 'hakujitsu.mp3', '白日 (はくじつ)', '2025-01-02 11:30:00.000000', 2, 4),

@@ -1,5 +1,6 @@
 package com.codegym.service;
 
+import com.codegym.model.DTO.song.UserSongDTO;
 import com.codegym.model.Song;
 import com.codegym.repository.ISongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,11 @@ public class SongService implements ISongService {
 
     public List<Song> getTopLikedSongs() {
         return iSongRepository.findTopLikedSongs();
+    }
+
+
+    @Override
+    public List<UserSongDTO> findAllSongsByUserId(Long userId) {
+        return iSongRepository.findAllSongsByUserId(userId);
     }
 }
