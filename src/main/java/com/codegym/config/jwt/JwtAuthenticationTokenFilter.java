@@ -1,7 +1,7 @@
 package com.codegym.config.jwt;
 
 import com.codegym.config.jwt.service.JwtService;
-import com.codegym.service.impl.UserService;
+import com.codegym.service.user.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

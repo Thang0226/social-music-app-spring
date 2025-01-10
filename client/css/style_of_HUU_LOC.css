@@ -1,0 +1,440 @@
+
+
+
+/* Search Section Styling */
+.search-bar {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto; /* Center horizontally */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    border-radius: 25px; /* Keep input corners rounded */
+    transition: all 0.3s ease-in-out;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.search-bar input::placeholder {
+    color: #aaa;
+}
+
+.search-bar input:focus {
+    background-color: #fff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+    color: #000;
+}
+
+.search-bar::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: url('https://img.icons8.com/ios-filled/50/000000/search.png') no-repeat center;
+    background-size: contain;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .search-bar {
+        max-width: 90%;
+    }
+}
+
+
+
+
+
+
+
+/* Latest Songs Section Styling */
+.site-section {
+    padding: 80px 0;
+    background-color: #f8f9fa;
+}
+
+.site-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.site-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #4a90e2, #67b8e3);
+    border-radius: 2px;
+}
+
+.song-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.song-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.song-card img {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.song-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 5px 0;
+    color: #2c3e50;
+}
+
+.song-card p {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.song-card .btn-primary {
+    background: linear-gradient(90deg, #4a90e2, #67b8e3);
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: 500;
+    transition: transform 0.2s ease;
+}
+
+.song-card .btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 4px rgba(74, 144, 226, 0.2);
+}
+
+@media (max-width: 768px) {
+    .site-section {
+        padding: 40px 0;
+    }
+
+    .site-section h2 {
+        font-size: 2rem;
+    }
+
+    .song-card {
+        padding: 15px;
+    }
+
+    .song-card img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .song-card h3 {
+        font-size: 1rem;
+    }
+
+    .song-card p {
+        font-size: 0.8rem;
+    }
+
+    .song-card .btn-primary {
+        padding: 6px 16px;
+        font-size: 0.9rem;
+    }
+}
+
+
+
+/* Popular Playlists Section */
+.site-section {
+    padding: 50px 0;
+    background-color: #f9f9f9; /* Màu nền nhẹ nhàng */
+}
+
+.site-section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.playlist-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.playlist-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Hiệu ứng khi hover */
+}
+
+.playlist-card img {
+    border-radius: 8px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.playlist-card h3 {
+    font-size: 1.5rem;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+.playlist-card p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.playlist-card .btn {
+    font-size: 0.8rem;
+    padding: 8px 16px;
+    border-radius: 20px;
+}
+
+.playlist-card .btn-primary {
+    background: #ff6b6b; /* Màu chủ đạo cho nút */
+    border: none;
+    color: #fff;
+    transition: background 0.3s ease;
+}
+
+.playlist-card .btn-primary:hover {
+    background: #e63946;
+}
+
+.playlist-card .btn-outline-primary {
+    border: 1px solid #ff6b6b;
+    color: #ff6b6b;
+    background: transparent;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.playlist-card .btn-outline-primary:hover {
+    background: #ff6b6b;
+    color: #fff;
+}
+
+.d-flex {
+    gap: 10px; /* Khoảng cách giữa các nút */
+}
+
+@media (max-width: 768px) {
+    .playlist-card {
+        margin-bottom: 30px;
+    }
+    .site-section h2 {
+        font-size: 2rem;
+    }
+}
+
+
+/* Most Liked Section Styles */
+.site-section {
+    padding: 60px 0;
+    background-color: #f8f9fa; /* Màu nền nhã nhặn */
+}
+
+.site-section h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.site-section h3 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+.song-card, .playlist-card {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.song-card:hover, .playlist-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.song-card .d-flex, .playlist-card .d-flex {
+    align-items: center;
+}
+
+.song-card span, .playlist-card span {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #555;
+}
+
+.song-card img, .playlist-card img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.song-card h4, .playlist-card h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    color: #222;
+}
+
+.song-card p, .playlist-card p {
+    font-size: 0.9rem;
+    color: #777;
+    margin: 5px 0 0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .site-section {
+        padding: 40px 15px;
+    }
+
+    .site-section h2 {
+        font-size: 2rem;
+    }
+
+    .site-section h3 {
+        font-size: 1.5rem;
+    }
+
+    .song-card, .playlist-card {
+        padding: 10px 15px;
+    }
+
+    .song-card span, .playlist-card span {
+        font-size: 1rem;
+    }
+
+    .song-card h4, .playlist-card h4 {
+        font-size: 1rem;
+    }
+
+    .song-card p, .playlist-card p {
+        font-size: 0.8rem;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    .zm-carousel-wrapper {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .zm-carousel__container {
+        display: flex;
+        gap: 20px;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .song-card {
+        width: 200px;
+        flex-shrink: 0;
+    }
+
+    .card {
+        border: none;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    .card-img-top {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+    }
+
+    .carousel-control {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        border-radius: 50%;
+        transition: background-color 0.3s ease;
+        z-index: 10;
+    }
+
+    .carousel-prev {
+        left: 10px;
+    }
+
+    .carousel-next {
+        right: 10px;
+    }
+
+    .carousel-control:hover {
+        background-color: rgba(0, 0, 0, 1);
+    }
+
+    .carousel-control svg {
+        display: block;
+        margin: 0 auto;
+        stroke-width: 2;
+        stroke: white;
+    }
+
+    .carousel-control:active {
+        transform: translateY(-50%) scale(0.95);
+    }
+
+
+
+
+}
+
+
+
+
+

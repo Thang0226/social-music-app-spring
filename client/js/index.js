@@ -5,3 +5,4 @@ function storeSongId(songId) {
 function storeUserId(userId) {
     localStorage.setItem("user-id",userId)
 }
+

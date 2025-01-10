@@ -27,3 +27,13 @@ function signUp() {
     event.preventDefault();
     window.location.href = "./sign-up.html";
 }
+
+function changePassword() {
+    event.preventDefault();
+    window.location.href = "./username2.html";
+}
+
+function update() {
+    event.preventDefault();
+    window.location.href = "./username.html";
+}
