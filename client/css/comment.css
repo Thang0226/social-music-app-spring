@@ -1,0 +1,4 @@
+#comment-box {
+    resize: none; /* Ẩn biểu tượng gạch chéo */
+    overflow: hidden; /* Ẩn thanh cuộn */
+}
