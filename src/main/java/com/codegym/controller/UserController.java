@@ -15,7 +15,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -32,6 +32,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private IUserInforService userInforService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user) {
@@ -50,7 +52,7 @@ public class UserController {
             User user = new User();
             user.setUsername(userDTO.getUsername());
             String rawPassword = userDTO.getPassword();
-            String password = (new BCryptPasswordEncoder(12)).encode(rawPassword);
+            String password = passwordEncoder.encode(rawPassword);
             user.setPassword(password);
             userService.save(user);
             UserInfor userInfor = new UserInfor();
@@ -133,6 +135,28 @@ public class UserController {
 
     @PutMapping("/update4password")
     public ResponseEntity<?> changePassword(@RequestBody AccountDTO accountDTO) {
-        return null;
+        if (passwordValidated(accountDTO)) {
+            User user = userService.findByUsername(accountDTO.getUsername());
+            String newPassword = passwordEncoder.encode(accountDTO.getNewPassword());
+            user.setPassword(newPassword);
+            userService.save(user);
+            return ResponseEntity.ok().body("Password changed successfully");
+        } else {
+            return ResponseEntity.badRequest().body("Invalid old password/confirm password");
+        }
+    }
+
+    private boolean passwordValidated(AccountDTO accountDTO) {
+        User user = userService.findByUsername(accountDTO.getUsername());
+        if (user == null) {
+            return false;
+        }
+        if (!accountDTO.getNewPassword().equals(accountDTO.getConfirmPassword())) {
+            return false;
+        }
+        if (!passwordEncoder.matches(accountDTO.getOldPassword(), user.getPassword())) {
+            return false;
+        }
+        return true;
     }
 }
