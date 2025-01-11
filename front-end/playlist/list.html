@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách Playlist</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #formContainer {
+            display: none;
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .success {
+            color: green;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>Danh sách Playlist</h1>
+
+<button id="addPlaylistBtn">Thêm Playlist</button>
+
+<div id="formContainer">
+    <h2>Thêm Mới Playlist</h2>
+    <p id="message" class="success" style="display: none;"></p>
+    <p id="error" class="error" style="display: none;"></p>
+    <form id="playlistForm">
+        <label for="name">Tên Playlist:</label>
+        <input type="text" id="name" name="name" placeholder="Nhập tên playlist" required>
+
+        <label for="userId">ID Người Dùng:</label>
+        <input type="number" id="userId" name="userId" placeholder="Nhập ID người dùng" required>
+
+        <label for="songs">Danh sách bài hát (ID, cách nhau bởi dấu phẩy):</label>
+        <input type="text" id="songs" name="songs" placeholder="VD: 1,2,3">
+
+        <button type="submit">Thêm Playlist</button>
+    </form>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Tên Playlist</th>
+        <th>Lượt Thích</th>
+        <th>Số Lượt Nghe</th>
+        <th>Thời Gian Tạo</th>
+        <th>Người Dùng</th>
+        <th>Số Bài Hát</th>
+    </tr>
+    </thead>
+    <tbody id="playlist">
+    <!-- Dữ liệu danh sách playlist sẽ được thêm tại đây -->
+    <tr th:each="playlist : ${playlists}">
+        <td th:text="${playlist.id}"></td>
+        <td th:text="${playlist.name}"></td>
+        <td th:text="${playlist.likeCount}"></td>
+        <td th:text="${playlist.listeningCount}"></td>
+        <td th:text="${#dates.format(playlist.createTime, 'yyyy-MM-dd HH:mm')}"></td>
+        <td th:text="${playlist.userId}"></td>
+        <td th:text="${playlist.songs.size()}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<script>
+    document.getElementById('addPlaylistBtn').addEventListener('click', () => {
+        const formContainer = document.getElementById('formContainer');
+        formContainer.style.display = formContainer.style.display === 'none' ? 'block' : 'none';
+    });
+
+    document.getElementById('playlistForm').addEventListener('submit', async function (event) {
+        event.preventDefault(); // Ngăn chặn hành vi gửi form mặc định
+
+        // Lấy dữ liệu từ form
+        const name = document.getElementById('name').value;
+        const userId = document.getElementById('userId').value;
+        const songsInput = document.getElementById('songs').value;
+        const songs = songsInput.split(',').map(id => id.trim()).filter(id => id !== '');
+
+        // Tạo object playlist
+        const playlist = {
+            name: name,
+            userId: parseInt(userId),
+            songs: songs.map(id => ({ id: parseInt(id) })), // Mapping bài hát
+            likeCount: 0,
+            listeningCount: 0,
+            createTime: new Date().toISOString(),
+        };
+
+        try {
+            // Gửi yêu cầu POST
+            const response = await fetch('/api/playlists', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(playlist),
+            });
+
+            if (response.ok) {
+                const newPlaylist = await response.json();
+
+                // Thêm playlist mới vào bảng
+                const tableBody = document.getElementById('playlistTableBody');
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                        <td>${newPlaylist.id}</td>
+                        <td>${newPlaylist.name}</td>
+                        <td>${newPlaylist.likeCount}</td>
+                        <td>${newPlaylist.listeningCount}</td>
+                        <td>${newPlaylist.createTime}</td>
+                    `;
+                tableBody.appendChild(newRow);
+
+                // Hiển thị thông báo thành công
+                document.getElementById('message').textContent = 'Thêm playlist thành công!';
+                document.getElementById('message').style.display = 'block';
+                document.getElementById('error').style.display = 'none';
+
+                // Reset form
+                document.getElementById('playlistForm').reset();
+            } else {
+                const errorData = await response.json();
+                document.getElementById('error').textContent = `Lỗi: ${errorData.message}`;
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('message').style.display = 'none';
+            }
+        } catch (error) {
+            document.getElementById('error').textContent = 'Đã xảy ra lỗi khi gửi yêu cầu!';
+            document.getElementById('error').style.display = 'block';
+            document.getElementById('message').style.display = 'none';
+        }
+    });
+</script>
+</body>
+</html>
