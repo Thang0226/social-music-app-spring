@@ -14,6 +14,7 @@ $(document).ready(function() {
                 alert('Login successful!');
                 // Redirect or handle success
                 localStorage.setItem('token', jwtResponse.token);
+                window.location.href = '/social-music-app-spring/client/index.html';
             },
             error: function(xhr) {
                 alert('Login failed: ' + xhr.responseText);
@@ -26,6 +27,11 @@ $(document).ready(function() {
 function signUp() {
     event.preventDefault();
     window.location.href = "./sign-up.html";
+}
+
+function changePassword() {
+    event.preventDefault();
+    window.location.href = "./username2.html";
 }
 
 function update() {
