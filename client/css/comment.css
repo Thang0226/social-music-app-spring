@@ -2,3 +2,17 @@
     resize: none; /* Ẩn biểu tượng gạch chéo */
     overflow: hidden; /* Ẩn thanh cuộn */
 }
+.btn-heart {
+    border: none;
+    background-color: transparent;
+    color: #dc3545; /* Bootstrap danger color for heart */
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+.btn-heart:focus {
+    outline: none;
+    box-shadow: none;
+}
+.btn-heart.liked {
+    color: #ff4b5c;
+}

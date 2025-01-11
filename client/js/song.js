@@ -19,6 +19,7 @@ $(document).ready(function(){
                     singers += `, `
                 }
             }
+            // song details
             let localTime = moment(song.uploadTime).tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY");
             $("#song-details").html(
                 `
@@ -30,8 +31,14 @@ $(document).ready(function(){
                 `
             );
 
+            // like
+            $("#like-count").html(
+                `${song.likeCount}`
+            );
+
+            // song player
             $("#song-player").html(
-                `<div class="player mb-5">
+                `<div class="player mb-3">
                 <audio id="player2" preload="none" controls style="width: 100%">
                 <source src="${API_BASE_URL}/audios/${song.musicFile}" type="audio/mp3">
                 </audio>
@@ -40,9 +47,6 @@ $(document).ready(function(){
         }
     });
 })
-
-let songId = localStorage.getItem("song-id");
-let userId = localStorage.getItem("user-id");
 
 let currentPage = 0;
 const pageSize = 10; // Number of comments per load
@@ -53,7 +57,7 @@ function getSongComment(songId, isLoadMore = false) {
             'accept': 'application/json',
             'content-type': 'application/json',
         },
-        url: `http://localhost:8080/api/song-comment/${songId}?page=${currentPage}&size=${pageSize}`,
+        url: `${API_BASE_URL}/api/song-comment/${songId}?page=${currentPage}&size=${pageSize}`,
         type: 'GET',
         success: function (data) {
             console.log(data);
@@ -112,7 +116,7 @@ function postComment() {
         headers: {
             'content-type': 'application/json',
         },
-        url: 'http://localhost:8080/api/comments',
+        url: `${API_BASE_URL}/api/comments`,
         type: 'POST',
         data: JSON.stringify(comment),
         success: function (response) {

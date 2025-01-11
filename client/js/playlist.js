@@ -1,5 +1,3 @@
-let playlistId = localStorage.getItem("playlist-id");
-let userId = localStorage.getItem("user-id");
 
 let currentPage = 0;
 const pageSize = 10; // Number of comments per load
