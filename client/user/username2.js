@@ -8,7 +8,7 @@ function showChangeForm() {
         data: username,
         success: function(username) {
             localStorage.setItem('username', username);
-            window.location.href = './update-password.html'
+            window.location.href = 'update-password.html'
         },
         error: function(xhr) {
             alert('Failed: ' + xhr.responseText);
@@ -19,5 +19,5 @@ function showChangeForm() {
 
 function login() {
     event.preventDefault();
-    window.location.href = './login.html';
+    window.location.href = 'login.html';
 }
