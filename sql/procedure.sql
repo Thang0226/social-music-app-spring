@@ -1,5 +1,6 @@
 
 # Comment
+drop procedure if exists find_comment_by_song_id;
 create procedure find_comment_by_song_id(_song_id LONG)
 begin
     select s.name as "SongName", u.username as "Username", c.comment_time as "CommentTime", c.content as "Content"
@@ -12,6 +13,7 @@ end;
 
 call find_comment_by_song_id(1);
 
+drop procedure if exists find_comment_by_playlist_id;
 create procedure find_comment_by_playlist_id(_playlist_id LONG)
 begin
     select pl.name as "PlaylistName", u.username as "Username", c.comment_time as "CommentTime", c.content as "Content"
@@ -24,6 +26,7 @@ end;
 
 call find_comment_by_playlist_id(1);
 
+drop procedure if exists find_comment_by_singer_id;
 create procedure find_comment_by_singer_id(_singer_id LONG)
 begin
     select s.singer_name as "SingerName", u.username as "Username", c.comment_time as "CommentTime", c.content as "Content"

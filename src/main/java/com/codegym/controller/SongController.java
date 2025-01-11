@@ -33,6 +33,11 @@ public class SongController {
         return new ResponseEntity<>(iSongService.findAllSongsByUserId(id), HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Song>> getSongById(@PathVariable Long id) {
+        return new ResponseEntity<>(iSongService.findById(id), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<String> createSong(@RequestBody Song song) {
         iSongService.save(song);
