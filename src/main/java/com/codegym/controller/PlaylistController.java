@@ -43,4 +43,32 @@ public class PlaylistController {
         playlistService.deleteById(id);
         return new ResponseEntity<>(playlistOptional.get(), HttpStatus.NO_CONTENT);
     }
+
+    @PostMapping("/like-playlist/{id}")
+    public ResponseEntity<String> likePlaylist(@PathVariable Long id) {
+        Optional<Playlist> playlistOptional = playlistService.findById(id);
+        if (playlistOptional.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        Playlist playlist = playlistOptional.get();
+        int newLikeCount = playlist.getLikeCount() + 1;
+        playlist.setLikeCount(newLikeCount);
+        playlistService.save(playlist);
+        String likeCountStr = String.valueOf(newLikeCount);
+        return new ResponseEntity<>(likeCountStr, HttpStatus.OK);
+    }
+
+    @PostMapping("/unlike-playlist/{id}")
+    public ResponseEntity<String> unlikePlaylist(@PathVariable Long id) {
+        Optional<Playlist> playlistOptional = playlistService.findById(id);
+        if (playlistOptional.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        Playlist playlist = playlistOptional.get();
+        int newLikeCount = playlist.getLikeCount() - 1;
+        playlist.setLikeCount(newLikeCount);
+        playlistService.save(playlist);
+        String likeCountStr = String.valueOf(newLikeCount);
+        return new ResponseEntity<>(likeCountStr, HttpStatus.OK);
+    }
 }
