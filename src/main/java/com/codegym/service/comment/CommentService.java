@@ -4,7 +4,6 @@ import com.codegym.model.Comment;
 import com.codegym.model.DTO.comment.PlaylistCommentDTO;
 import com.codegym.model.DTO.comment.SingerCommentDTO;
 import com.codegym.model.DTO.comment.SongCommentDTO;
-import com.codegym.model.Playlist;
 import com.codegym.repository.ICommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,9 +30,8 @@ public class CommentService implements ICommentService {
     }
 
     @Override
-    public Playlist save(Comment comment) {
+    public void save(Comment comment) {
         commentRepository.save(comment);
-        return null;
     }
 
     @Override
