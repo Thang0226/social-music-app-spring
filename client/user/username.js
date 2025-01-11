@@ -8,7 +8,7 @@ function showUpdateForm() {
         data: username,
         success: function(username) {
             localStorage.setItem('username', username);
-            window.location.href = './update-infor.html'
+            window.location.href = 'update-infor.html'
         },
         error: function(xhr) {
             alert('Failed: ' + xhr.responseText);
@@ -19,5 +19,5 @@ function showUpdateForm() {
 
 function login() {
     event.preventDefault();
-    window.location.href = './login.html';
+    window.location.href = 'login.html';
 }
