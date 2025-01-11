@@ -78,3 +78,53 @@ function postComment() {
     })
 }
 
+// like/unlike song
+likeButton.addEventListener('click', () => {
+    liked = !liked; // Toggle the liked state
+    if (liked) {
+        heartIcon.classList.remove('bi-heart');
+        heartIcon.classList.add('bi-heart-fill');
+        likeButton.classList.add('liked');
+        likePlaylist(playlistId);
+    } else {
+        heartIcon.classList.remove('bi-heart-fill');
+        heartIcon.classList.add('bi-heart');
+        likeButton.classList.remove('liked');
+        unlikePlaylist(playlistId)
+    }
+});
+
+// like/unlike song
+function likePlaylist(playlistId) {
+    event.preventDefault()
+    $.ajax({
+        headers:{
+            'content-type': 'application/json'
+        },
+        url: `http://localhost:8080/api/playlist/like-playlist/${playlistId}`,
+        type: 'POST',
+        success : function (result) {
+            console.log(result);
+            $("#like-count").html(
+                `${result}`
+            );
+        }
+    })
+}
+
+function unlikePlaylist(playlistId) {
+    event.preventDefault()
+    $.ajax({
+        headers:{
+            'content-type': 'application/json'
+        },
+        url: `http://localhost:8080/api/playlist/unlike-playlist/${playlistId}`,
+        type: 'POST',
+        success : function (result) {
+            console.log(result);
+            $("#like-count").html(
+                `${result}`
+            );
+        }
+    })
+}
