@@ -28,5 +28,5 @@ function updatePassword() {
 
 function login() {
     event.preventDefault();
-    window.location.href = './login.html';
+    window.location.href = 'login.html';
 }
