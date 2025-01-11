@@ -91,4 +91,31 @@ public class SongController {
         return new ResponseEntity<>("Genres assigned to song successfully",HttpStatus.OK);
     }
 
+    @PostMapping("/like-song/{id}")
+    public ResponseEntity<String> likeSong(@PathVariable Long id) {
+        Optional<Song> songOptional = iSongService.findById(id);
+        if (songOptional.isEmpty()) {
+            return new ResponseEntity<>("Song not found",HttpStatus.NOT_FOUND);
+        }
+        Song song = songOptional.get();
+        int newLikeCount = song.getLikeCount() + 1;
+        song.setLikeCount(newLikeCount);
+        iSongService.save(song);
+        String newLikeCountStr = String.valueOf(newLikeCount);
+        return new ResponseEntity<>(newLikeCountStr,HttpStatus.OK);
+    }
+
+    @PostMapping("/unlike-song/{id}")
+    public ResponseEntity<String> unlikeSong(@PathVariable Long id) {
+        Optional<Song> songOptional = iSongService.findById(id);
+        if (songOptional.isEmpty()) {
+            return new ResponseEntity<>("Song not found",HttpStatus.NOT_FOUND);
+        }
+        Song song = songOptional.get();
+        int newLikeCount = song.getLikeCount() - 1;
+        song.setLikeCount(newLikeCount);
+        iSongService.save(song);
+        String newLikeCountStr = String.valueOf(newLikeCount);
+        return new ResponseEntity<>(newLikeCountStr,HttpStatus.OK);
+    }
 }

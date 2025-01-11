@@ -986,7 +986,7 @@ a {
     color: #ccc; }
 
 .play-wrap {
-  margin-top: -70px; }
+  margin-top: 0; }
 
 @media (max-width: 991.98px) {
   .hero h1 {
