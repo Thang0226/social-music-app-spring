@@ -132,7 +132,8 @@ function storeSingerId(singerId) {
     localStorage.setItem("singer-id",singerId)
 }
 
-likeButton.addEventListener('click', () => {
+// like/unlike song
+function smashThatLikeButton(){
     liked = !liked; // Toggle the liked state
     if (liked) {
         heartIcon.classList.remove('bi-heart');
@@ -145,9 +146,8 @@ likeButton.addEventListener('click', () => {
         likeButton.classList.remove('liked');
         unlikeSong(songId)
     }
-});
+}
 
-// like/unlike song
 function likeSong(songId) {
     event.preventDefault()
     $.ajax({
