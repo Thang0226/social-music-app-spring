@@ -8,15 +8,26 @@ $(document).ready(function(){
         url: `http://localhost:8080/api/songs/${song_id}`,
         method: 'GET',
         success: function(result){
+            console.log(result);
             song = result;
-
+            let singerList = song.singers;
+            let listLength = singerList.length;
+            let singers = "";
+            for (let i = 0; i < listLength; i++) {
+                singers += `<a href="singer.html" onclick="storeSingerId(${song.singers[i].id})"> ${song.singers[i].singerName}</a>`
+                if (listLength > listLength - i) {
+                    singers += `, `
+                }
+            }
+            let localTime = moment(song.uploadTime).tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY");
             $("#song-details").html(
-                `<a href="#"> ${song.singers} </a>
-                <span class="mx-2">&bullet;</span> ${song.uploadTime} <span class="mx-2">&bullet;</span>
+                `
                 <h1 class="mb-3">
                     <img width="150" height="150" src="${API_BASE_URL}/images/${song.imageFile}" alt="No Image" class="img-thumbnail rounded-circle">
                     ${song.name}
-                </h1>`
+                </h1>
+                ${singers}<span class="mx-2">&bullet;</span> ${localTime} <span class="mx-2">&bullet;</span>
+                `
             );
 
             $("#song-player").html(
@@ -111,4 +122,8 @@ function postComment() {
         }
     })
 
+}
+
+function storeSingerId(singerId) {
+    localStorage.setItem("singer-id",singerId)
 }
