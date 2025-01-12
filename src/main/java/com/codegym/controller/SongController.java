@@ -166,7 +166,7 @@ public class SongController {
         return new ResponseEntity<>("Genres assigned to song successfully",HttpStatus.OK);
     }
 
-    @PostMapping("/like-song/{id}")
+    @PutMapping("/like-song/{id}")
     public ResponseEntity<String> likeSong(@PathVariable Long id) {
         Optional<Song> songOptional = iSongService.findById(id);
         if (songOptional.isEmpty()) {
@@ -180,7 +180,7 @@ public class SongController {
         return new ResponseEntity<>(newLikeCountStr,HttpStatus.OK);
     }
 
-    @PostMapping("/unlike-song/{id}")
+    @PutMapping("/unlike-song/{id}")
     public ResponseEntity<String> unlikeSong(@PathVariable Long id) {
         Optional<Song> songOptional = iSongService.findById(id);
         if (songOptional.isEmpty()) {
@@ -194,7 +194,7 @@ public class SongController {
         return new ResponseEntity<>(newLikeCountStr,HttpStatus.OK);
     }
 
-    @PostMapping("/update-listening-count/{id}")
+    @PutMapping("/update-listening-count/{id}")
     public ResponseEntity<String> updateListeningCount(@PathVariable Long id) {
         Optional<Song> songOptional = iSongService.findById(id);
         if (songOptional.isEmpty()) {

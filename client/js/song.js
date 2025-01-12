@@ -169,7 +169,7 @@ function likeSong(songId) {
             'content-type': 'application/json'
         },
         url: `${API_BASE_URL}/api/songs/like-song/${songId}`,
-        type: 'POST',
+        type: 'PUT',
         success : function (result) {
             console.log(result);
             $("#like-count").html(
@@ -186,7 +186,7 @@ function unlikeSong(songId) {
             'content-type': 'application/json'
         },
         url: `${API_BASE_URL}/api/songs/unlike-song/${songId}`,
-        type: 'POST',
+        type: 'PUT',
         success : function (result) {
             console.log(result);
             $("#like-count").html(
@@ -235,7 +235,7 @@ function increaseViewCount(songId) {
             'content-type': 'application/json'
         },
         url: `${API_BASE_URL}/api/songs/update-listening-count/${songId}`,
-        type: 'POST',
+        type: 'PUT',
         success: function (result) {
             $('#listening-count').html(`${parseInt(result, 10).toLocaleString('vi-VN')}`);
         }
