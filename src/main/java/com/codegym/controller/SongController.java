@@ -3,19 +3,18 @@ package com.codegym.controller;
 
 import com.codegym.model.DTO.song.UserSongDTO;
 import com.codegym.model.Genre;
+import com.codegym.model.Singer;
 import com.codegym.model.Song;
 import com.codegym.service.ISongService;
 import com.codegym.service.genre.IGenreService;
+import com.codegym.service.singer.ISingerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @RestController
 @CrossOrigin("*")
@@ -23,9 +22,10 @@ import java.util.Set;
 public class SongController {
     @Autowired
     private ISongService iSongService;
-
     @Autowired
     IGenreService iGenreService;
+    @Autowired
+    private ISingerService singerService;
 
     // User xem bai hat da tao
     @GetMapping("/by-user/{id}")
@@ -38,10 +38,14 @@ public class SongController {
         return new ResponseEntity<>(iSongService.findById(id), HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<String> createSong(@RequestBody Song song) {
-        iSongService.save(song);
-        return new ResponseEntity<>("Song saved", HttpStatus.CREATED);
+    @PostMapping("/create")
+    public Map<String, Object> showCreateForm() {
+        Map<String, Object> infor = new HashMap<>();
+        Iterable<Genre> genres = iGenreService.findAll();
+        Iterable<Singer> singers = singerService.findAll();
+        infor.put("genres", genres);
+        infor.put("singers", singers);
+        return infor;
     }
 
     @PutMapping("/{id}")
