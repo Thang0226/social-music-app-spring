@@ -208,15 +208,9 @@ public class SongController {
         return new ResponseEntity<>(newListeningCountStr,HttpStatus.OK);
     }
 
-    @PutMapping("/listening-count/{id}")
-    public ResponseEntity<String> listenSong(@PathVariable Long id) {
-        Optional<Song> songOptional = iSongService.findById(id);
-        if (songOptional.isEmpty()) {
-            return new ResponseEntity<>("Song not found",HttpStatus.NOT_FOUND);
-        }
-        Song song = songOptional.get();
-        song.setListeningCount(song.getListeningCount() + 1);
-        iSongService.save(song);
-        return new ResponseEntity<>("Song listening count: " + song.getListeningCount(),HttpStatus.OK);
+    @GetMapping("/singer-popular-song/{id}")
+    public ResponseEntity<List<Song>> getSingerPopularSong(@PathVariable Long id) {
+        List<Song> songs = iSongService.findSongBySingers(id);
+        return new ResponseEntity<>(songs,HttpStatus.OK);
     }
 }

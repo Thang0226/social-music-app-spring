@@ -1,6 +1,7 @@
 package com.codegym.service;
 
 import com.codegym.model.DTO.song.UserSongDTO;
+import com.codegym.model.Singer;
 import com.codegym.model.Song;
 import com.codegym.repository.ISongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class SongService implements ISongService {
@@ -52,5 +54,10 @@ public class SongService implements ISongService {
     @Override
     public List<UserSongDTO> findAllSongsByUserId(Long userId) {
         return iSongRepository.findAllSongsByUserId(userId);
+    }
+
+    @Override
+    public List<Song> findSongBySingers(Long singerID) {
+        return iSongRepository.findSongBySingersIdOrderByListeningCountDesc(singerID);
     }
 }
