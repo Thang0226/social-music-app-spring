@@ -1,6 +1,3 @@
-let songId = localStorage.getItem("song-id");
-let playlistId = localStorage.getItem("playlist-id");
-let singerId = localStorage.getItem("singer-id");
 let userId = localStorage.getItem("user-id");
 let token = localStorage.getItem("token");
 

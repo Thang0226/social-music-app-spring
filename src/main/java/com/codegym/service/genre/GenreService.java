@@ -31,4 +31,9 @@ public class GenreService implements IGenreService {
     public void deleteById(Long id) {
         genreRepository.deleteById(id);
     }
+
+    @Override
+    public Optional<Genre> findByName(String name) {
+        return genreRepository.findByName(name);
+    }
 }

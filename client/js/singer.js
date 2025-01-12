@@ -1,5 +1,4 @@
-
-
+let singerId = localStorage.getItem("singer-id");
 let currentPage = 0;
 const pageSize = 10; // Number of comments per load
 

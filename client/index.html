@@ -56,10 +56,10 @@
                   <a href="index.html">Home</a>
                 </li>
                 <li class="has-children">
-                  <a href="#">Dropdown</a>
+                  <a href="#">About Songs</a>
                   <ul class="dropdown arrow-top">
-                    <li><a href="#">Menu One</a></li>
-                    <li><a href="#">Menu Two</a></li>
+                    <li><a href="song-add.html">Add new song</a></li>
+                    <li><a href="song-update.html">Update song information</a></li>
                     <li><a href="#">Menu Three</a></li>
                   </ul>
                 </li>
@@ -620,15 +620,15 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      var mediaElements = document.querySelectorAll('video, audio'), total = mediaElements.length;
+      let mediaElements = document.querySelectorAll('video, audio'), total = mediaElements.length;
 
-      for (var i = 0; i < total; i++) {
+      for (let i = 0; i < total; i++) {
         new MediaElementPlayer(mediaElements[i], {
-          pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/',
+          pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@7.0.7/build/',
           shimScriptAccess: 'always',
           success: function () {
-            var target = document.body.querySelectorAll('.player'), targetTotal = target.length;
-            for (var j = 0; j < targetTotal; j++) {
+            let target = document.body.querySelectorAll('.player'), targetTotal = target.length;
+            for (let j = 0; j < targetTotal; j++) {
               target[j].style.visibility = 'visible';
             }
           }

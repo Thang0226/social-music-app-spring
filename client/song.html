@@ -41,32 +41,30 @@
 
 
                 <div class="col-3">
-                    <h1 class="site-logo"><a href="index.html" class="h2">Podcast<span class="text-primary">.</span>
-                    </a></h1>
+                    <h1 class="site-logo"><a href="index.html" class="h2">Podcast<span class="text-primary">.</span> </a></h1>
                 </div>
                 <div class="col-9">
                     <nav class="site-navigation position-relative text-right text-md-right" role="navigation">
 
 
-                        <div class="d-block d-lg-none ml-md-0 mr-auto"><a href="#"
-                                                                          class="site-menu-toggle js-menu-toggle text-black"><span
-                                class="icon-menu h3"></span></a></div>
+
+                        <div class="d-block d-lg-none ml-md-0 mr-auto"><a href="#" class="site-menu-toggle js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
 
                         <ul class="site-menu js-clone-nav d-none d-lg-block">
-                            <li class="has-children">
+                            <li class="active">
                                 <a href="index.html">Home</a>
                             </li>
                             <li class="has-children">
-                                <a href="#">Dropdown</a>
+                                <a href="#">About Songs</a>
                                 <ul class="dropdown arrow-top">
-                                    <li><a href="#">Menu One</a></li>
-                                    <li><a href="#">Menu Two</a></li>
+                                    <li><a href="song-add.html">Add new song</a></li>
+                                    <li><a href="song-update.html">Update song information</a></li>
                                     <li><a href="#">Menu Three</a></li>
                                 </ul>
                             </li>
                             <li><a href="about.html">About</a></li>
                             <li><a href="contact.html">Contact</a></li>
-                            <li><a href="login-register.html">Login / Register</a></li>
+                            <li><a href="user/login.html">Login / Register</a></li>
                         </ul>
                     </nav>
 
@@ -109,7 +107,7 @@
     <div class="container">
         <div class="row justify-content-between">
             <div class="col-lg-3 ml-auto">
-                <div class="featured-user  mb-5 mb-lg-0">
+                <div class="featured-user  mb-5 mb-lg-0" id="singer-popular-songs">
                     <h3 class="mb-4">Popular Podcaster</h3>
                     <ul class="list-unstyled">
                         <li>
@@ -357,11 +355,11 @@
 
         for (let i = 0; i < total; i++) {
             new MediaElementPlayer(mediaElements[i], {
-                pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/',
+                pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@7.0.7/build/',
                 shimScriptAccess: 'always',
                 success: function () {
-                    var target = document.body.querySelectorAll('.player'), targetTotal = target.length;
-                    for (var j = 0; j < targetTotal; j++) {
+                    let target = document.body.querySelectorAll('.player'), targetTotal = target.length;
+                    for (let j = 0; j < targetTotal; j++) {
                         target[j].style.visibility = 'visible';
                     }
                 }
