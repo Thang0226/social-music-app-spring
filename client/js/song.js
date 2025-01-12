@@ -15,7 +15,7 @@ $(document).ready(function(){
             let singers = "";
             for (let i = 0; i < listLength; i++) {
                 singers += `<a href="singer.html" onclick="storeSingerId(${song.singers[i].id})"> ${song.singers[i].singerName}</a>`
-                if (listLength > listLength - i) {
+                if (i < listLength - 1) {
                     singers += `, `
                 }
             }
@@ -42,10 +42,9 @@ $(document).ready(function(){
                 `
             );
 
-
             // like
             $("#like-count").html(
-                `${parseInt(song.likeCount, 10).toLocaleString('vi-VN')}`
+                `${song.likeCount}`
             );
 
             // song player
@@ -57,6 +56,22 @@ $(document).ready(function(){
                 </div>`
             );
             initializeMediaPlayers();
+
+            // add listening count event
+            $("#player2").on("play", function(){
+                $.ajax({
+                    url: `${API_BASE_URL}/api/songs/listening-count/${song_id}`,
+                    method: "PUT",
+                    success: function (result) {
+                        console.log(result);
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(status);
+                        console.log(error);
+                        console.log(xhr.responseText);
+                    }
+                });
+            })
         }
     });
 })
@@ -145,6 +160,10 @@ function postComment() {
 function storeSingerId(singerId) {
     localStorage.setItem("singer-id",singerId)
 }
+
+
+
+
 
 // like/unlike song
 function smashThatLikeButton(){
