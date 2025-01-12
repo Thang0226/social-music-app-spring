@@ -40,6 +40,7 @@ end;
 call find_comment_by_singer_id(1);
 
 # Song
+drop procedure if exists find_all_song_by_user_id;
 CREATE PROCEDURE find_all_song_by_user_id(
     IN p_user_id LONG
 )

@@ -45,4 +45,9 @@ public class SingerService implements ISingerService {
                .limit(5)
                .collect(Collectors.toList());
     }
+
+    @Override
+    public Optional<Singer> findBySingerName(String singerName) {
+        return iSingerRepository.findBySingerName(singerName);
+    }
 }

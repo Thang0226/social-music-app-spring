@@ -44,7 +44,7 @@ public class PlaylistController {
         return new ResponseEntity<>(playlistOptional.get(), HttpStatus.NO_CONTENT);
     }
 
-    @PostMapping("/like-playlist/{id}")
+    @PutMapping("/like-playlist/{id}")
     public ResponseEntity<String> likePlaylist(@PathVariable Long id) {
         Optional<Playlist> playlistOptional = playlistService.findById(id);
         if (playlistOptional.isEmpty()) {
@@ -58,7 +58,7 @@ public class PlaylistController {
         return new ResponseEntity<>(likeCountStr, HttpStatus.OK);
     }
 
-    @PostMapping("/unlike-playlist/{id}")
+    @PutMapping("/unlike-playlist/{id}")
     public ResponseEntity<String> unlikePlaylist(@PathVariable Long id) {
         Optional<Playlist> playlistOptional = playlistService.findById(id);
         if (playlistOptional.isEmpty()) {

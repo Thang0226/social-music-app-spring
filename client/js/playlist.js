@@ -1,4 +1,4 @@
-
+let playlistId = localStorage.getItem("playlist-id");
 let currentPage = 0;
 const pageSize = 10; // Number of comments per load
 
@@ -102,11 +102,11 @@ function likePlaylist(playlistId) {
             'content-type': 'application/json'
         },
         url: `http://localhost:8080/api/playlist/like-playlist/${playlistId}`,
-        type: 'POST',
+        type: 'PUT',
         success : function (result) {
             console.log(result);
             $("#like-count").html(
-                `${result}`
+                `${parseInt(result, 10).toLocaleString('vi-VN')}`
             );
         }
     })
@@ -119,11 +119,11 @@ function unlikePlaylist(playlistId) {
             'content-type': 'application/json'
         },
         url: `http://localhost:8080/api/playlist/unlike-playlist/${playlistId}`,
-        type: 'POST',
+        type: 'PUT',
         success : function (result) {
             console.log(result);
             $("#like-count").html(
-                `${result}`
+                `${parseInt(result, 10).toLocaleString('vi-VN')}`
             );
         }
     })
