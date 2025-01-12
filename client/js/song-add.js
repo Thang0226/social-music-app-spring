@@ -29,19 +29,23 @@ function renderForm(infor) {
     $("#genres").html(genreDropdown);
 }
 
+
+
+
+
 const singersSelect = document.getElementById('singers');
 const selectedSingersInput = document.getElementById('selectedSingers');
-let selectedSingers = [];
+let singers = [];
 const genresSelect = document.getElementById('genres');
 const selectedGenresInput = document.getElementById('selectedGenres');
-let selectedGenres = [];
+let genres = [];
 
 singersSelect.addEventListener('change', function () {
     const selectedSinger = this.value;
 
     // Avoid duplicate entries
-    if (!selectedSingers.includes(selectedSinger)) {
-        selectedSingers.push(selectedSinger);
+    if (!singers.includes(selectedSinger)) {
+        singers.push(selectedSinger);
         updateSingersInputField();
     }
 
@@ -50,15 +54,15 @@ singersSelect.addEventListener('change', function () {
 
 function updateSingersInputField() {
     // Join selected singers with commas and update the input field
-    selectedSingersInput.value = selectedSingers.join(', ');
+    selectedSingersInput.value = singers.join(', ');
 }
 
 genresSelect.addEventListener('change', function () {
     const selectedGenre = this.value;
 
     // Avoid duplicate entries
-    if (!selectedGenres.includes(selectedGenre)) {
-        selectedGenres.push(selectedGenre);
+    if (!genres.includes(selectedGenre)) {
+        genres.push(selectedGenre);
         updateGenresInputField();
     }
 
@@ -67,5 +71,40 @@ genresSelect.addEventListener('change', function () {
 
 function updateGenresInputField() {
     // Join selected singers with commas and update the input field
-    selectedGenresInput.value = selectedGenres.join(', ');
+    selectedGenresInput.value = genres.join(', ');
+}
+
+
+
+
+
+function createSong() {
+    event.preventDefault();
+
+    let formData = new FormData();
+    formData.append('name', $("#name").val());
+    formData.append('description', $("#description").val());
+    formData.append('musicFile', $("#musicFile")[0].files[0]);
+    formData.append('imageFile', $("#imageFile")[0].files[0]);
+    formData.append('singers', singers);
+    formData.append('genres', genres);
+    formData.append('user_id', localStorage.getItem('user-id'));
+
+    for (let pair of formData.entries()) {
+        console.log(pair[0] + ': ' + pair[1]);
+    }
+
+    $.ajax({
+        url: `${API_BASE_URL}/api/songs/save`,
+        type: 'POST',
+        data: formData,
+        processData: false,  // Don't process the files
+        contentType: false,  // Set content type to false as jQuery will tell the server it's a query string request
+        success: function(response) {
+            alert('Song has been created!');
+        },
+        error: function(error) {
+            alert('Failed: ' + error);
+        }
+    })
 }

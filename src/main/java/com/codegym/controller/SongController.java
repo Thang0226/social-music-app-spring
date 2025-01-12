@@ -1,19 +1,26 @@
 package com.codegym.controller;
 
 
+import com.codegym.model.*;
 import com.codegym.model.DTO.song.UserSongDTO;
-import com.codegym.model.Genre;
-import com.codegym.model.Singer;
-import com.codegym.model.Song;
 import com.codegym.service.ISongService;
 import com.codegym.service.genre.IGenreService;
 import com.codegym.service.singer.ISingerService;
+import com.codegym.service.user.IUserService;
+import com.codegym.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @RestController
@@ -26,6 +33,10 @@ public class SongController {
     IGenreService iGenreService;
     @Autowired
     private ISingerService singerService;
+    @Autowired
+    private IUserService userService;
+    @Autowired
+    private IGenreService genreService;
 
     // User xem bai hat da tao
     @GetMapping("/by-user/{id}")
@@ -46,6 +57,66 @@ public class SongController {
         infor.put("genres", genres);
         infor.put("singers", singers);
         return infor;
+    }
+
+    @Value("${image-upload}")
+    private String imagePath;
+    @Value("${audio-upload}")
+    private String audioPath;
+
+    @PostMapping(path = "/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> saveSong(@RequestParam String name, @RequestParam String description,
+                                      @RequestParam("musicFile") MultipartFile musicFile,
+                                      @RequestParam("imageFile") MultipartFile imageFile,
+                                      @RequestParam("singers") String[] singers,
+                                      @RequestParam("genres") String[] genres,
+                                      @RequestParam(value="user_id") Long userId) {
+        Optional<User> userOptional = userService.findById(userId);
+        if (userOptional.isEmpty()) {
+            return ResponseEntity.badRequest().body("User ID not found");
+        }
+        String musicFileName = musicFile.getOriginalFilename();
+        String imageFileName = imageFile.getOriginalFilename();
+        try {
+            FileCopyUtils.copy(imageFile.getBytes(), new File(imagePath + imageFileName));
+            FileCopyUtils.copy(musicFile.getBytes(), new File(audioPath + musicFileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+        Song song = new Song();
+        song.setName(name);
+        song.setDescription(description);
+        song.setMusicFile(musicFileName);
+        song.setImageFile(imageFileName);
+        song.setUploadTime(LocalDateTime.now());
+        song.setGenres(findGenres(genres));
+        song.setSingers(findSingers(singers));
+        song.setUser(userOptional.get());
+        iSongService.save(song);
+        return new ResponseEntity<>(song, HttpStatus.OK);
+    }
+
+    private Set<Genre> findGenres(String[] genres) {
+        if (genres == null || genres.length == 0) {
+            return new HashSet<>();
+        }
+        Set<Genre> genresSet = new HashSet<>();
+        for (String genre : genres) {
+            genresSet.add(genreService.findByName(genre).get());
+        }
+        return genresSet;
+    }
+
+    private Set<Singer> findSingers(String[] singers) {
+        if (singers == null || singers.length == 0) {
+            return new HashSet<>();
+        }
+        Set<Singer> singersSet = new HashSet<>();
+        for (String singer : singers) {
+            singersSet.add(singerService.findBySingerName(singer).get());
+        }
+        return singersSet;
     }
 
     @PutMapping("/{id}")

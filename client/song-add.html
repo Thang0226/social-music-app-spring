@@ -105,28 +105,28 @@
                             <div class="form-group row">
                                 <div class="col-md-12">
                                     <label for="name" class="text-black">Name <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="name" name="name">
+                                    <input type="text" class="form-control" id="name" name="name" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-12">
-                                    <label for="audio" class="text-black mt-3">Audio <span
+                                    <label for="musicFile" class="text-black mt-3">Audio <span
                                             class="text-danger">*</span></label>
-                                    <input type="file" class="form-control" id="audio" name="audio" placeholder="">
+                                    <input type="file" class="form-control" id="musicFile" name="musicFile" placeholder="" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-12">
-                                    <label for="image" class="text-black mt-3">Image <span
+                                    <label for="imageFile" class="text-black mt-3">Image <span
                                             class="text-danger">*</span></label>
-                                    <input type="file" class="form-control" id="image" name="image">
+                                    <input type="file" class="form-control" id="imageFile" name="imageFile" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-12">
                                     <label for="description" class="text-black mt-3">Description <span
                                             class="text-danger">*</span></label>
-                                    <textarea name="description" id="description" cols="30" rows="10" class="form-control"></textarea>
+                                    <textarea name="description" id="description" cols="30" rows="10" class="form-control" required></textarea>
                                 </div>
                             </div>
                         </div>
@@ -159,7 +159,7 @@
 
                 <div class="form-group row">
                     <div class="col-lg-12 text-center">
-                        <input type="submit" class="btn btn-primary btn-lg" value="Create Song"
+                        <input type="submit" class="btn btn-success btn-lg" value="Create Song"
                                onclick="createSong()">
                     </div>
                 </div>
