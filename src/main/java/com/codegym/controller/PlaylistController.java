@@ -1,12 +1,15 @@
 package com.codegym.controller;
 
 import com.codegym.model.Playlist;
+import com.codegym.service.ISongService;
 import com.codegym.service.playlist.IPlaylistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -15,6 +18,9 @@ import java.util.Optional;
 public class PlaylistController {
     @Autowired
     private IPlaylistService playlistService;
+
+    @Autowired
+    private ISongService songService;
 
     @GetMapping
     public ResponseEntity<Iterable<Playlist>> listPlaylist() {
@@ -25,6 +31,24 @@ public class PlaylistController {
     public ResponseEntity<String> createPlaylist(@RequestBody Playlist playlist) {
         playlistService.save(playlist);
         return new ResponseEntity<>("playlist created", HttpStatus.CREATED);
+    }
+
+    // API: Lấy danh sách bài hát trong một playlist
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getSongsByPlaylist(@PathVariable Long id) {
+        // Tìm playlist theo ID
+        Playlist playlist = playlistService.findById(id).orElseThrow(() -> new RuntimeException("Playlist không tồn tại"));
+        Map<String, Object> response = new HashMap<>();
+        response.put("playlist", playlist.getName());
+        response.put("songs", playlist.getSongs());
+        return ResponseEntity.ok(response);
+    }
+
+    // API: Xóa một bài hát khỏi playlist
+    @DeleteMapping("/songs/{id}")
+    public ResponseEntity<?> deleteSong(@PathVariable Long id) {
+        songService.deleteById(id);
+        return ResponseEntity.ok("Xóa bài hát trong playlist thành công");
     }
 
     @PutMapping("/{id}")
