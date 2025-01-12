@@ -193,4 +193,18 @@ public class SongController {
         String newLikeCountStr = String.valueOf(newLikeCount);
         return new ResponseEntity<>(newLikeCountStr,HttpStatus.OK);
     }
+
+    @PostMapping("/update-listening-count/{id}")
+    public ResponseEntity<String> updateListeningCount(@PathVariable Long id) {
+        Optional<Song> songOptional = iSongService.findById(id);
+        if (songOptional.isEmpty()) {
+            return new ResponseEntity<>("Song not found",HttpStatus.NOT_FOUND);
+        }
+        Song song = songOptional.get();
+        int newListeningCount = song.getListeningCount() + 1;
+        song.setListeningCount(newListeningCount);
+        iSongService.save(song);
+        String newListeningCountStr = String.valueOf(newListeningCount);
+        return new ResponseEntity<>(newListeningCountStr,HttpStatus.OK);
+    }
 }

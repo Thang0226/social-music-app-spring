@@ -25,4 +25,6 @@ public interface ISongRepository extends JpaRepository<Song, Long> {
 
     @Query(nativeQuery = true, value = "call find_all_song_by_user_id(:userId)")
     List<UserSongDTO> findAllSongsByUserId(@Param("userId") Long userId);
+
+
 }
