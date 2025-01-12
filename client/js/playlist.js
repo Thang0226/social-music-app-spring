@@ -102,7 +102,7 @@ function likePlaylist(playlistId) {
             'content-type': 'application/json'
         },
         url: `http://localhost:8080/api/playlist/like-playlist/${playlistId}`,
-        type: 'POST',
+        type: 'PUT',
         success : function (result) {
             console.log(result);
             $("#like-count").html(
@@ -119,7 +119,7 @@ function unlikePlaylist(playlistId) {
             'content-type': 'application/json'
         },
         url: `http://localhost:8080/api/playlist/unlike-playlist/${playlistId}`,
-        type: 'POST',
+        type: 'PUT',
         success : function (result) {
             console.log(result);
             $("#like-count").html(
