@@ -15,7 +15,7 @@ $(document).ready(function(){
             let singers = "";
             for (let i = 0; i < listLength; i++) {
                 singers += `<a href="singer.html" onclick="storeSingerId(${song.singers[i].id})"> ${song.singers[i].singerName}</a>`
-                if (listLength > listLength - i) {
+                if (i < listLength - 1) {
                     singers += `, `
                 }
             }
@@ -42,10 +42,9 @@ $(document).ready(function(){
                 `
             );
 
-
             // like
             $("#like-count").html(
-                `${parseInt(song.likeCount, 10).toLocaleString('vi-VN')}`
+                `${song.likeCount}`
             );
 
             // song player
