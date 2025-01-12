@@ -35,6 +35,7 @@ $(document).ready(function(){
                     ${song.name}
                 </h1>
                 ${singers}<span class="mx-2">&bullet;</span> ${localTime} <span class="mx-2">&bullet;</span><br>
+                <span>${song.description}</span><br>
                 ${genres}<br>
                 <span><i class="bi bi-eye"></i> <span id="listening-count">
                     ${parseInt(song.listeningCount, 10).toLocaleString('vi-VN')}</span>
@@ -56,6 +57,11 @@ $(document).ready(function(){
                 </audio>
                 </div>`
             );
+
+            for (let i = 0; i < singerList.length; i++) {
+                get3PopularSongOfSinger(singerList[i].id);
+            }
+
             initializeMediaPlayers();
         }
     });
@@ -192,6 +198,46 @@ function unlikeSong(songId) {
             $("#like-count").html(
                 `${parseInt(result, 10).toLocaleString('vi-VN')}`
             );
+        }
+    })
+}
+
+function get3PopularSongOfSinger(singerID) {
+    $.ajax({
+        headers: {
+            'accept': 'application/json',
+            'content-type': 'application/json',
+        },
+        url: `${API_BASE_URL}/api/songs/singer-popular-song/${singerID}`,
+        type: 'GET',
+        success: function (result) {
+            let song = result;
+            console.log(song);
+            let content = "";
+            content += `<h3 class="mb-4">
+                            <a href="singer.html" onclick="storeSingerId(${song[0].singers[0].id})">
+                            ${song[0].singers[0].singerName} popular song</a>
+                        </h3>
+                        <ul class="list-unstyled">`;
+            for (let i = 0; i < song.length; i++) {
+                if (song[i].id !== parseInt(songId)) {
+                    content += `                
+                    <li>
+                        <a href="song.html" class="d-flex align-items-center" onclick="storeSongId(${song[i].id})">
+                            <img src="${API_BASE_URL}/images/${song[i].imageFile}" alt=" No Image" class="img-fluid mr-2">
+                            <div class="podcaster">
+                                <span class="d-block">${song[i].name}</span>
+                                <span class="small">
+                                    <i class="bi bi-eye"></i> <span id="listening-count">
+                                       ${parseInt(song[i].listeningCount, 10).toLocaleString('vi-VN')}</span>
+                                </span>
+                            </div>
+                        </a>
+                    </li>`
+                }
+            }
+            content += `</ul>`
+            $('#singer-popular-songs').html(content);
         }
     })
 }

@@ -207,4 +207,10 @@ public class SongController {
         String newListeningCountStr = String.valueOf(newListeningCount);
         return new ResponseEntity<>(newListeningCountStr,HttpStatus.OK);
     }
+
+    @GetMapping("/singer-popular-song/{id}")
+    public ResponseEntity<List<Song>> getSingerPopularSong(@PathVariable Long id) {
+        List<Song> songs = iSongService.findSongBySingers(id);
+        return new ResponseEntity<>(songs,HttpStatus.OK);
+    }
 }
