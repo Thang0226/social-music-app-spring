@@ -46,6 +46,7 @@ public class PlaylistController {
         return ResponseEntity.ok(response);
     }
 
+
     // API: Xóa một bài hát khỏi playlist
     @DeleteMapping("/songs/{id}")
     public ResponseEntity<?> deleteSong(@PathVariable Long id) {
@@ -61,14 +62,15 @@ public class PlaylistController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Playlist> deletePlaylist(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePlaylist(@PathVariable Long id) {
         Optional<Playlist> playlistOptional = playlistService.findById(id);
         if (!playlistOptional.isPresent()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);  // Trả về 404 nếu playlist không tồn tại
         }
-        playlistService.deleteById(id);
-        return new ResponseEntity<>(playlistOptional.get(), HttpStatus.NO_CONTENT);
+        playlistService.deleteById(id);  // Thực hiện xóa playlist
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);  // Trả về 204 nếu xóa thành công
     }
+
 
     @PutMapping("/like-playlist/{id}")
     public ResponseEntity<String> likePlaylist(@PathVariable Long id) {
