@@ -103,7 +103,7 @@ function createSong() {
         success: function(response) {
             alert('Song has been created!');
         },
-        error: function(error) {
+            error: function(error) {
             alert('Failed: ' + error);
         }
     })

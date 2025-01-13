@@ -49,6 +49,11 @@ public class SongController {
         return new ResponseEntity<>(iSongService.findById(id), HttpStatus.OK);
     }
 
+    @GetMapping
+    public ResponseEntity<Iterable<Song>> getAllSongs() {
+        return new ResponseEntity<>(iSongService.findAll(), HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public Map<String, Object> showCreateForm() {
         Map<String, Object> infor = new HashMap<>();

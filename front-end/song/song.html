@@ -1,21 +1,173 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Management</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        /* Custom styling for the main container */
+        .main-container {
+            padding: 2rem;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+        }
+
+        /* Styling for the header section */
+        .header-section {
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        /* Custom styling for the form */
+        .song-form {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        /* Styling for form inputs */
+        .form-control:focus {
+            border-color: #6c757d;
+            box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.25);
+        }
+
+        /* Custom file input styling */
+        .custom-file-input {
+            cursor: pointer;
+        }
+
+        /* Message styling */
+        .alert {
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        /* Song list table styling */
+        .song-table {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .song-table th {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        /* Audio player styling */
+        audio {
+            width: 200px;
+            height: 30px;
+        }
+
+        /* Thumbnail styling */
+        .song-thumbnail {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        /* Button styling */
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border: none;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <h1>All songs by user</h1>
+<!-- Main container with background -->
+<div class="main-container">
+    <!-- Header section -->
+    <div class="header-section">
+        <h1 class="text-center mb-4">
+            <i class="fas fa-music me-2"></i>Music Management System
+        </h1>
+        <!-- Alert messages -->
+        <div class="alert alert-success" id="successMessage" role="alert"></div>
+        <div class="alert alert-danger" id="errorMessage" role="alert"></div>
+    </div>
 
-    <div id="songList"></div>
+    <!-- Add song button -->
+    <div class="text-end mb-4">
+        <button id="addBtn" class="btn btn-primary">
+            <i class="fas fa-plus me-2"></i>Add New Song
+        </button>
+    </div>
+
+    <!-- Song form -->
+    <form id="createSongForm" class="song-form" th:action="@{songs/save}" th:object="${songForm}"
+          method="post" novalidate="novalidate" enctype="multipart/form-data">
+        <div class="row g-3">
+            <!-- Song name input -->
+            <div class="col-md-6">
+                <label for="name" class="form-label">Song Name</label>
+                <input type="text" class="form-control" id="name" th:field="*{name}"
+                       required placeholder="Enter song name">
+            </div>
+            <!-- Description input -->
+            <div class="col-md-6">
+                <label for="description" class="form-label">Description</label>
+                <input type="text" class="form-control" id="description" th:field="*{description}"
+                       required placeholder="Enter song description">
+            </div>
+            <!-- Music file input -->
+            <div class="col-md-6">
+                <label for="musicFile" class="form-label">Music File</label>
+                <input type="file" class="form-control custom-file-input" id="musicFile"
+                       th:field="*{musicFile}" required accept="audio/*">
+            </div>
+            <!-- Image file input -->
+            <div class="col-md-6">
+                <label for="imageFile" class="form-label">Cover Image</label>
+                <input type="file" class="form-control custom-file-input" id="imageFile"
+                       th:field="*{imageFile}" required accept="image/*">
+            </div>
+            <!-- Form buttons -->
+            <div class="col-12 text-end">
+                <button type="button" id="cancelBtn" class="btn btn-secondary me-2">
+                    <i class="fas fa-times me-2"></i>Cancel
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save me-2"></i>Save Song
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Song list table -->
+    <div id="songList" class="song-table">
+        <!-- Table content will be dynamically populated by JavaScript -->
+    </div>
 </div>
 
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="song.js"></script>
 </body>
 </html>
