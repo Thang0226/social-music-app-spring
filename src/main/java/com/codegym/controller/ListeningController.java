@@ -24,24 +24,12 @@ public class ListeningController {
         return new ResponseEntity<>(songs, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getSongById(@PathVariable Long id) {
-        Optional<Song> songOptional = listeningService.findById(id);
-
-        if (songOptional.isPresent()) {
-            SongDTO songDTO = listeningService.convertToDTO(songOptional.get());
-            return new ResponseEntity<>(songDTO, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Song not found", HttpStatus.NOT_FOUND);
-        }
-    }
-
     @GetMapping("/search")
     public ResponseEntity<List<SongDTO>> searchSongs(@RequestParam String keyword) {
         List<SongDTO> songs = listeningService.searchSongs(keyword);
         return new ResponseEntity<>(songs, HttpStatus.OK);
     }
-    @GetMapping("/latest")
+    @GetMapping("/lastest")
     public ResponseEntity<List<SongDTO>> getLatestSongs() {
         List<SongDTO> songs = listeningService.getLatestSongs();
         return new ResponseEntity<>(songs, HttpStatus.OK);
@@ -51,8 +39,10 @@ public class ListeningController {
         List<SongDTO> songs = listeningService.getMostPlayedSongs();
         return new ResponseEntity<>(songs, HttpStatus.OK);
     }
-
-
-
+    @GetMapping("/most-liked")
+    public ResponseEntity<List<SongDTO>> getMostLikedSongs() {
+        List<SongDTO> songs = listeningService.getMostLikedSongs();
+        return new ResponseEntity<>(songs, HttpStatus.OK);
+    }
 }
 

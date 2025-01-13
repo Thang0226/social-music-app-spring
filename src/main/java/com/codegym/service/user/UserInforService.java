@@ -1,9 +1,8 @@
-package com.codegym.service.impl;
+package com.codegym.service.user;
 
+import com.codegym.model.User;
 import com.codegym.model.UserInfor;
 import com.codegym.repository.IUserInforRepository;
-import com.codegym.repository.IUserRepository;
-import com.codegym.service.IUserInforService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +31,10 @@ public class UserInforService implements IUserInforService {
     @Override
     public void deleteById(Long id) {
         userInforRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<UserInfor> findByUser(User user) {
+        return userInforRepository.findByUser(user);
     }
 }

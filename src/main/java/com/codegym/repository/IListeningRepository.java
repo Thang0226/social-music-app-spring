@@ -17,6 +17,8 @@ public interface IListeningRepository extends JpaRepository<Song, Long> {
     @Query("SELECT s FROM Song s WHERE LOWER(s.name) LIKE LOWER(CONCAT('%', :keyword, '%'))")
     List<Song> searchSongsByName(@Param("keyword") String keyword);
 
+    @Query("SELECT s FROM Song s ORDER BY s.likeCount DESC")
+    List<Song> findMostLikedSongs();
 
     @Query("SELECT s FROM Song s ORDER BY s.uploadTime DESC")
     List<Song> findLatestSongs();

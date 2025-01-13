@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -17,10 +16,6 @@ public class ListeningService implements IListeningService {
     @Autowired
     private IListeningRepository listeningRepository;
 
-    @Override
-    public Optional<Song> findById(Long id) {
-        return listeningRepository.findById(id);
-    }
 
     @Override
     public List<SongDTO> searchSongs(String keyword) {
@@ -62,7 +57,10 @@ public class ListeningService implements IListeningService {
         List<Song> songs = listeningRepository.findAll();
         return songs.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
-
-
+    @Override
+    public List<SongDTO> getMostLikedSongs() {
+        List<Song> songs = listeningRepository.findMostLikedSongs();
+        return songs.stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
 }
 
