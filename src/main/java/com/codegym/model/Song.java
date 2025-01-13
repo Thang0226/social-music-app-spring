@@ -54,5 +54,4 @@ public class Song {
 
     private int listeningCount;
 
-
 }

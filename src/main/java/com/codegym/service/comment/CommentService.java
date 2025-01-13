@@ -62,4 +62,10 @@ public class CommentService implements ICommentService {
         int end = Math.min((start + pageable.getPageSize()), comments.size());
         return new PageImpl<>(comments.subList(start, end), pageable, comments.size());
     }
+
+    // Delete song also delete comments
+    @Override
+    public void deleteCommentsBySongId(Long songId){
+        commentRepository.deleteCommentsBySongId(songId);
+    }
 }
