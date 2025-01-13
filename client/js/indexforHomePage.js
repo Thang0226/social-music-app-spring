@@ -126,9 +126,33 @@ function getTopLikedSongs() {
 
 
 
-/* ----------------NHIỆM VỤ 39: HIỂN THỊ PLAYLIST ĐANG ĐƯỢC NGHE NHIỀU NHẤT <anh thang dang lam> ------------------------ */
+/* ----------------NHIỆM VỤ 39: HIỂN THỊ PLAYLIST ĐANG ĐƯỢC NGHE NHIỀU NHẤT ------------------------ */
 function getTopPlayedPlaylists() {
-
+    $.ajax({
+        headers: {
+            'accept': 'application/json',
+            'content-type': 'application/json',
+        },
+        url: 'http://localhost:8080/api/homepage/top-played-playlists',
+        type: 'GET',
+        success: function (data) {
+            let content = "";
+            data.forEach(playlist => {
+                content += `
+                    <div class="col-md-3">
+                        <div class="playlist-card">                                         
+                            <h3>${playlist.name}</h3>
+                            <p>${playlist.songs.length} songs • ${playlist.listeningCount} views</p>
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-primary btn-sm">Play</button>
+                                <button class="btn btn-outline-primary btn-sm">Edit</button>
+                            </div>
+                        </div>
+                    </div>`;
+            });
+            $("#top-played-playlists").html(content);
+        }
+    });
 }
 
 /* ---------------- NHIỆM VỤ 42: HIỂN THỊ PLAYLIST MỚI NHẤT VỪA ĐƯỢC THÊM VÀO ------------------------ */
@@ -142,13 +166,19 @@ function getNewPlaylists() {
         type: 'GET',
         success: function (data) {
             let content = "";
-            data.forEach(playlist => {
+            for (let i = 0; i < 4 && i < data.length; i++) {
                 content += `
-                    <div>
-                        <strong>${playlist.name}</strong><br>
-                        <span>Ngày thêm: ${moment(playlist.addedDate).format("DD/MM/YYYY")}</span>
+                    <div class="col-md-3">
+                        <div class="playlist-card">                                         
+                            <h3>${data[i].name}</h3>
+                            <p>${data[i].songs.length} songs • ${data[i].listeningCount} views• ${data[i].likeCount} likes</p>
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-primary btn-sm">Play</button>
+                                <button class="btn btn-outline-primary btn-sm">Edit</button>
+                            </div>
+                        </div>
                     </div>`;
-            });
+            }
             $("#new-playlists").html(content);
         }
     });
