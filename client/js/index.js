@@ -14,7 +14,7 @@ function storePlaylistId(playlistId) {
     localStorage.setItem("playlist-id", playlistId)
 }
 
-const API_BASE_URL = 'http://localhost:8080';
+const API_BASE_URL = "http://localhost:8080";
 let userId = localStorage.getItem("user-id");
 let token = localStorage.getItem("token");
 
@@ -38,7 +38,7 @@ $(document).ready(function(){
                 let localDate = moment(songs[i].uploadTime).tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY");
                 content += `
                         <div class="d-block d-md-flex podcast-entry bg-white mb-3" data-aos="fade-up">
-                          <div class="image" style="background-image: url('${API_BASE_URL}/images/${songs[i].imageFile}')">
+                          <div class="image" style="background-image: url(${API_BASE_URL}/images/${songs[i].imageFile})">                      
                           </div>
                           <div class="text">
                             <h3 class="font-weight-light">
@@ -59,7 +59,7 @@ $(document).ready(function(){
                             <div id="song-player">
                               <div class="player">
                                 <audio id="player2" preload="none" controls style="max-width: 100%">
-                                  <source src="${API_BASE_URL}/audios/${songs[i].musicFile}" type="audio/mp3">
+                                  <source src="${API_BASE_URL}/music/${songs[i].musicFile}" type="audio/mp3">
                                 </audio>
                               </div>
                             </div>

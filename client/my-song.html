@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,700,900">
     <link rel="stylesheet" href="fonts/icomoon/style.css">
-
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
     <link rel="stylesheet" href="css/jquery-ui.css">
@@ -14,10 +13,9 @@
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelementplayer.min.css">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <link rel="stylesheet" href="css/aos.css">
-
     <link rel="stylesheet" href="css/style.css">
 
     <title>My Songs</title>
@@ -99,8 +97,7 @@
                                         <div class="mejs__mediaelement">
                                             <mediaelementwrapper id="player2">
                                                 <audio id="player2_html5" preload="none"
-                                                       style="max-width: 100%; width: 100%; height: 100%;"
-                                                       src="http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3">
+                                                       style="max-width: 100%; width: 100%; height: 100%;">
                                                     <source src="http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3"
                                                             type="audio/mp3">
                                                 </audio>
@@ -149,7 +146,10 @@
                                     </div>
                                 </div>
                             </div>
-
+                        </div>
+                        <div class="actions p-3 d-flex justify-content-end gap-3">
+                            <button id="update" class="btn btn-secondary h-25 d-flex align-items-center" onclick="updateSong()"><i class="bi bi-pencil"></i></button>
+                            <button id="delete" class="btn btn-danger h-25 d-flex align-items-center" onclick="deleteSong()"><i class="bi bi-trash"></i></button>
                         </div>
                     </div>
                 </div>
@@ -202,5 +202,8 @@
     });
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.43/moment-timezone-with-data.min.js"></script>
+<script src="js/MediaElementInit.js"></script>
 </body>
 </html>
