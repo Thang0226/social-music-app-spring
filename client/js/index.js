@@ -26,7 +26,7 @@ $(document).ready(function(){
             let songs = result;
             console.log(songs);
             let content = "";
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < 10 && i < songs.length; i++) {
                 let singers = "";
                 for (let j = 0; j < songs[i].singers.length; j++) {
                     singers += `<a href="singer.html" onclick="storeSingerId(${songs[i].singers[j].id})"> ${songs[i].singers[j].singerName}</a>`
