@@ -205,7 +205,6 @@ function getTopLikedPlaylists() {
     });
 }
 
-
 $(document).ready(function () {
     const playlistContainer = $(".featured-user .list-unstyled");
 
@@ -245,6 +244,7 @@ $(document).ready(function () {
     // Gọi hàm fetchPlaylist khi trang tải
     fetchPlaylist();
 });
+
 getTopPlayedSongs();
 getNewSongs();
 getTopLikedSongs();
