@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://themewagon.github.io/podcast/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://themewagon.github.io/podcast/css/style.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<!-- Navbar -->
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <a class="navbar-brand" href="#">MusicApp</a>
@@ -24,18 +24,16 @@
                 <li class="nav-item"><a class="nav-link" href="#" onclick="getLatestSongs()">Mới nhất</a></li>
                 <li class="nav-item"><a class="nav-link" href="#" onclick="getMostPlayedSongs()">Nghe nhiều nhất</a></li>
                 <li class="nav-item"><a class="nav-link" href="#" onclick="getMostLikedSongs()">Được yêu thích nhất</a></li>
-
             </ul>
             <form class="d-flex ms-3">
                 <input id="searchInput" class="form-control me-2" type="search" placeholder="Tìm kiếm bài hát">
-                <button class="btn btn-outline-success" type="button" onclick="searchSongs()">Tìm kiếm</button>
+                <button class="btn btn-outline-success btn-search" type="button" onclick="searchSongs()">Tìm kiếm</button>
             </form>
         </div>
     </div>
-
 </nav>
 
-<!-- Banner -->
+
 <section class="hero-section" style="background-image: url('https://themewagon.github.io/podcast/img/hero-bg.jpg'); height: 400px;">
     <div class="container text-center text-white">
         <h1 class="display-4">Khám phá âm nhạc tuyệt vời</h1>
@@ -43,24 +41,21 @@
     </div>
 </section>
 
-<!-- Danh sách bài hát -->
 <section class="container my-5">
-    <h2 class="text-center mb-4">Danh sách bài hát</h2>
-    <div id="songList" class="row">
-        <!-- Các bài hát sẽ được hiển thị tại đây -->
-    </div>
+    <h2 id="sectionTitle" class="text-center mb-4">Danh sách bài hát</h2>
+    <div id="songList" class="row"></div>
 </section>
 
-<!-- Audio Player -->
 <div class="fixed-bottom bg-dark text-white py-2 px-4 d-flex align-items-center">
     <audio id="audioPlayer" controls style="width: 100%;">
         Trình duyệt không hỗ trợ phát nhạc.
     </audio>
 </div>
 
-
-<script src="index1.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://themewagon.github.io/podcast/js/bootstrap.bundle.min.js"></script>
+<script src="listening.js"></script>
+
 </body>
 </html>
 

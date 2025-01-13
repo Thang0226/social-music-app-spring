@@ -51,7 +51,7 @@
 
 
           <div class="col-3">
-            <h1 class="site-logo"><a href="testListening/index.html" class="h2">Podcast<span class="text-primary">.</span> </a></h1>
+            <h1 class="site-logo"><a href="testListening/listening.html" class="h2">Podcast<span class="text-primary">.</span> </a></h1>
           </div>
           <div class="col-9">
             <nav class="site-navigation position-relative text-right text-md-right" role="navigation">
@@ -62,7 +62,7 @@
 
               <ul class="site-menu js-clone-nav d-none d-lg-block">
                 <li class="active">
-                  <a href="testListening/index.html">Home</a>
+                  <a href="testListening/listening.html">Home</a>
                 </li>
                 <li class="has-children">
                   <a href="#">About Songs</a>
@@ -94,6 +94,7 @@
         <div class="col-md-12">
           <div class="search-bar">
             <input type="text" class="form-control" placeholder="Search for songs, playlists, or artists...">
+            <button class="btn btn-primary btn-search" onclick="searchSongs()">Search</button>
           </div>
         </div>
       </div>
@@ -720,6 +721,15 @@
       });
     }
   });
+
+  function searchSongs() {
+    const keyword = document.querySelector('.search-bar input').value.trim();
+    if (!keyword) {
+      alert("Vui lòng nhập từ khóa tìm kiếm!");
+      return;
+    }
+    window.location.href = `testListening/listening.html?keyword=${encodeURIComponent(keyword)}`;
+  }
 </script>
 
 
