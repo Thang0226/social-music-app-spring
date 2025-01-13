@@ -35,6 +35,7 @@ $(document).ready(function(){
                     ${song.name}
                 </h1>
                 ${singers}<span class="mx-2">&bullet;</span> ${localTime} <span class="mx-2">&bullet;</span><br>
+                <span>${song.description}</span><br>
                 ${genres}<br>
                 <span><i class="bi bi-eye"></i> <span id="listening-count">
                     ${parseInt(song.listeningCount, 10).toLocaleString('vi-VN')}</span>
@@ -55,6 +56,11 @@ $(document).ready(function(){
                 </audio>
                 </div>`
             );
+
+            for (let i = 0; i < singerList.length; i++) {
+                get3PopularSongOfSinger(singerList[i].id);
+            }
+
             initializeMediaPlayers();
         }
     });
@@ -195,6 +201,86 @@ function unlikeSong(songId) {
     })
 }
 
+
+$(document).ready(function () {
+    const playlistContainer = $(".featured-user .list-unstyled");
+
+    // Hàm gọi API để lấy danh sách playlist
+    function fetchPlaylist() {
+        $.ajax({
+            url: "http://localhost:8080/api/playlist", // URL của API
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                // Xóa nội dung cũ
+                playlistContainer.empty();
+
+                // Lặp qua danh sách và thêm vào HTML
+                data.forEach(playlist => {
+                    const listPlaylist = `
+            <li>
+              <a href="#" class="d-flex align-items-center">
+<!--                <img src="${playlist.image}" alt="${playlist.name}" class="img-fluid mr-2">-->
+                <div class="podcaster">
+                  <span class="d-block">${playlist.name}</span>
+                  <span class="small">${playlist.listeningCount} lượt nghe</span>
+                </div>
+              </a>
+            </li>
+          `;
+                    playlistContainer.append(listPlaylist);
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error("Error fetching playlist:", error);
+                playlistContainer.html("<p>Unable to load playlist. Please try again later.</p>");
+            }
+        });
+    }
+
+    // Gọi hàm fetchPlaylist khi trang tải
+    fetchPlaylist();
+
+function get3PopularSongOfSinger(singerID) {
+    $.ajax({
+        headers: {
+            'accept': 'application/json',
+            'content-type': 'application/json',
+        },
+        url: `${API_BASE_URL}/api/songs/singer-popular-song/${singerID}`,
+        type: 'GET',
+        success: function (result) {
+            let song = result;
+            console.log(song);
+            let content = "";
+            content += `<h3 class="mb-4">
+                            <a href="singer.html" onclick="storeSingerId(${song[0].singers[0].id})">
+                            ${song[0].singers[0].singerName} popular song</a>
+                        </h3>
+                        <ul class="list-unstyled">`;
+            for (let i = 0; i < song.length; i++) {
+                if (song[i].id !== parseInt(songId)) {
+                    content += `                
+                    <li>
+                        <a href="song.html" class="d-flex align-items-center" onclick="storeSongId(${song[i].id})">
+                            <img src="${API_BASE_URL}/images/${song[i].imageFile}" alt=" No Image" class="img-fluid mr-2">
+                            <div class="podcaster">
+                                <span class="d-block">${song[i].name}</span>
+                                <span class="small">
+                                    <i class="bi bi-eye"></i> <span id="listening-count">
+                                       ${parseInt(song[i].listeningCount, 10).toLocaleString('vi-VN')}</span>
+                                </span>
+                            </div>
+                        </a>
+                    </li>`
+                }
+            }
+            content += `</ul>`
+            $('#singer-popular-songs').html(content);
+        }
+    })
+}
+
 // MediaElement
 function initializeMediaPlayers() {
     let mediaElements = document.querySelectorAll('video, audio'), total = mediaElements.length;
@@ -240,3 +326,4 @@ function increaseViewCount(songId) {
         }
     })
 }
+
