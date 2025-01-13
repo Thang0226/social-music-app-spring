@@ -2,11 +2,14 @@ package com.codegym.controller;
 
 
 import com.codegym.model.Singer;
+import com.codegym.model.Song;
 import com.codegym.service.singer.ISingerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
@@ -26,10 +29,12 @@ public class SingerController {
         return new ResponseEntity<>("Singer saved", HttpStatus.CREATED);
     }
 
+
     @GetMapping("/{id}")
     public ResponseEntity<Singer> findById(@PathVariable Long id) {
         return iSingerService.findById(id)
                .map(ResponseEntity::ok)
                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
 }
