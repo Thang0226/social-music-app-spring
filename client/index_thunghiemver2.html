@@ -26,7 +26,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 
 
+<style>
 
+</style>
 
 
 </head>
@@ -145,7 +147,7 @@
             <h2 class="font-weight-bold text-black">Popular Playlists</h2>
           </div>
         </div>
-        <div class="row" id="top-liked-playlists">
+        <div class="row" id="top-played-playlists">
           <!-- Các playlist sẽ được chèn vào đây -->
         </div>
       </div>
@@ -157,43 +159,27 @@
 
 
     <!-- Most Liked Section -->
+    <!-- HTML Structure -->
     <div class="site-section">
       <div class="container">
-        <div class="row mb-5">
-          <div class="col-md-12 text-center">
-            <h2 class="font-weight-bold text-black">Most Liked</h2>
+        <h2 class="section-title">Most Liked</h2>
+
+        <div class="columns-container">
+          <!-- Top Liked Songs Column -->
+          <div class="column">
+            <h3 class="column-title">Top Liked Songs</h3>
+            <div id="top-liked-songs"></div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <h3>Top Liked Songs</h3>
-            <div class="song-card">
-              <div class="d-flex align-items-center">
-                <span class="mr-3">1</span>
-                <img src="/api/placeholder/50/50" alt="Song" class="mr-3">
-                <div>
-                  <h4 class="mb-0">Popular Song Title</h4>
-                  <p class="mb-0">10K likes</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <h3>Top Liked Playlists</h3>
-            <div class="playlist-card">
-              <div class="d-flex align-items-center">
-                <span class="mr-3">1</span>
-                <img src="/api/placeholder/50/50" alt="Playlist" class="mr-3">
-                <div>
-                  <h4 class="mb-0">Popular Playlist Name</h4>
-                  <p class="mb-0">5K likes</p>
-                </div>
-              </div>
-            </div>
+
+          <!-- Top Liked Playlists Column -->
+          <div class="column">
+            <h3 class="column-title">Top Liked Playlists</h3>
+            <div id="top-liked-playlists"></div>
           </div>
         </div>
       </div>
     </div>
+
 
 
 
