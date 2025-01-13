@@ -1,16 +1,16 @@
 package com.codegym.controller;
 
-import com.codegym.model.Playlist;
+import com.codegym.model.*;
 import com.codegym.service.ISongService;
 import com.codegym.service.playlist.IPlaylistService;
+import com.codegym.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @CrossOrigin("*")
@@ -21,6 +21,8 @@ public class PlaylistController {
 
     @Autowired
     private ISongService songService;
+    @Autowired
+    private IUserService userService;
 
     @GetMapping
     public ResponseEntity<Iterable<Playlist>> listPlaylist() {
@@ -95,4 +97,41 @@ public class PlaylistController {
         String likeCountStr = String.valueOf(newLikeCount);
         return new ResponseEntity<>(likeCountStr, HttpStatus.OK);
     }
+
+    @PostMapping("/create")
+    public Map<String, Object> showCreateForm() {
+        Map<String, Object> infor = new HashMap<>();
+        Iterable<Song> songs = songService.findAll();
+        infor.put("songs", songs);
+        return infor;
+    }
+
+
+    @PostMapping(path = "/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> savePlaylist(@RequestParam String name,
+                                          @RequestParam("song") String[] songs,
+                                          @RequestParam(value="user_id") Long userId) {
+        Optional<User> userOptional = userService.findById(userId);
+        if (userOptional.isEmpty()) {
+            return ResponseEntity.badRequest().body("User ID not found");
+        }
+        Playlist playlist = new Playlist();
+        playlist.setName(name);
+        playlist.setSongs(findSongs(songs));
+        playlist.setUser(userOptional.get());
+        playlistService.save(playlist);
+        return new ResponseEntity<>(playlist, HttpStatus.OK);
+    }
+
+    private Set<Song> findSongs(String[] songs) {
+        if (songs == null || songs.length == 0) {
+            return new HashSet<>();
+        }
+        Set<Song> songSet = new HashSet<>();
+        for (String song : songs) {
+            songSet.add(songService.findByName(song).get());
+        }
+        return songSet;
+    }
+
 }

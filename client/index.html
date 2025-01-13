@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelementplayer.min.css">
     <link rel="stylesheet" href="css/aos.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/index.css">
+
 
 </head>
 <body>
@@ -61,7 +63,14 @@
                     <li><a href="#">Menu Three</a></li>
                   </ul>
                 </li>
-                <li><a href="about.html">About</a></li>
+                <li class="has-children">
+                    <a href="#">Singer</a>
+                    <ul class="dropdown arrow-top">
+                        <li><a href="listsinger.html">List Singer</a></li>
+                        <li><a href="addsinger.html">Add new singer</a></li>
+
+                    </ul>
+                </li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="user/login.html">Login / Register</a></li>
               </ul>
@@ -139,138 +148,20 @@
                         </div>
                     </div>
 
-                    <!-- <div class="site-section">
-                      <div class="container" data-aos="fade-up">
-                        <div class="row mb-5">
-                          <div class="col-md-12 text-center">
-                            <h2 class="font-weight-bold text-black">Behind The Mic</h2>
-                          </div>
+                    <!-- Audio Player -->
+                    <div id="main-player-container"
+                         class="fixed-bottom justify-content-center align-items-center none" style="background-color: lightgray">
+                        <div id="song-details"
+                             class="col-lg-3 justify-content-center align-items-center gap-3"></div>
+                        <div class="text-white py-2 px-4 align-items-center col-lg-7"
+                             id="main-player" >
+                            <audio preload="none" controls style="max-width: 100%">
+                                <source src="#" type="audio/mp3">
+                                Trình duyệt không hỗ trợ phát nhạc.
+                            </audio>
                         </div>
-                        <div class="row">
-                          <div class="col-md-6 col-lg-4 mb-5 mb-lg-5">
-                            <div class="team-member">
+                    </div>
 
-                              <img src="images/person_1.jpg" alt="Image" class="img-fluid">
-
-                              <div class="text">
-
-                                <h2 class="mb-2 font-weight-light h4">Megan Smith</h2>
-                                <span class="d-block mb-2 text-white-opacity-05">Creative Director</span>
-                                <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit ullam reprehenderit nemo.</p>
-                                <p>
-                                  <a href="#" class="text-white p-2"><span class="icon-facebook"></span></a>
-                                  <a href="#" class="text-white p-2"><span class="icon-twitter"></span></a>
-                                  <a href="#" class="text-white p-2"><span class="icon-linkedin"></span></a>
-                                </p>
-                              </div>
-
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-lg-4 mb-5 mb-lg-5">
-                            <div class="team-member">
-
-                              <img src="images/person_2.jpg" alt="Image" class="img-fluid">
-
-                              <div class="text">
-
-                                <h2 class="mb-2 font-weight-light h4">Brooke Cagle</h2>
-                                <span class="d-block mb-2 text-white-opacity-05">Creative Director</span>
-                                <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit ullam reprehenderit nemo.</p>
-                                <p>
-                                  <a href="#" class="text-white p-2"><span class="icon-facebook"></span></a>
-                                  <a href="#" class="text-white p-2"><span class="icon-twitter"></span></a>
-                                  <a href="#" class="text-white p-2"><span class="icon-linkedin"></span></a>
-                                </p>
-                              </div>
-
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-lg-4 mb-5 mb-lg-5">
-                            <div class="team-member">
-
-                              <img src="images/person_3.jpg" alt="Image" class="img-fluid">
-
-                              <div class="text">
-
-                                <h2 class="mb-2 font-weight-light h4">Philip Martin</h2>
-                                <span class="d-block mb-2 text-white-opacity-05">Creative Director</span>
-                                <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit ullam reprehenderit nemo.</p>
-                                <p>
-                                  <a href="#" class="text-white p-2"><span class="icon-facebook"></span></a>
-                                  <a href="#" class="text-white p-2"><span class="icon-twitter"></span></a>
-                                  <a href="#" class="text-white p-2"><span class="icon-linkedin"></span></a>
-                                </p>
-                              </div>
-
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-lg-4 mb-5 mb-lg-5">
-                            <div class="team-member">
-
-                              <img src="images/person_4.jpg" alt="Image" class="img-fluid">
-
-                              <div class="text">
-
-                                <h2 class="mb-2 font-weight-light h4">Steven Ericson</h2>
-                                <span class="d-block mb-2 text-white-opacity-05">Creative Director</span>
-                                <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit ullam reprehenderit nemo.</p>
-                                <p>
-                                  <a href="#" class="text-white p-2"><span class="icon-facebook"></span></a>
-                                  <a href="#" class="text-white p-2"><span class="icon-twitter"></span></a>
-                                  <a href="#" class="text-white p-2"><span class="icon-linkedin"></span></a>
-                                </p>
-                              </div>
-
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-lg-4 mb-5 mb-lg-5">
-                            <div class="team-member">
-
-                              <img src="images/person_5.jpg" alt="Image" class="img-fluid">
-
-                              <div class="text">
-
-                                <h2 class="mb-2 font-weight-light h4">Nathan Dumlao</h2>
-                                <span class="d-block mb-2 text-white-opacity-05">Creative Director</span>
-                                <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit ullam reprehenderit nemo.</p>
-                                <p>
-                                  <a href="#" class="text-white p-2"><span class="icon-facebook"></span></a>
-                                  <a href="#" class="text-white p-2"><span class="icon-twitter"></span></a>
-                                  <a href="#" class="text-white p-2"><span class="icon-linkedin"></span></a>
-                                </p>
-                              </div>
-
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-lg-4 mb-5 mb-lg-5">
-                            <div class="team-member">
-
-                              <img src="images/person_6.jpg" alt="Image" class="img-fluid">
-
-                              <div class="text">
-
-                                <h2 class="mb-2 font-weight-light h4">Brooke Cagle</h2>
-                                <span class="d-block mb-2 text-white-opacity-05">Creative Director</span>
-                                <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit ullam reprehenderit nemo.</p>
-                                <p>
-                                  <a href="#" class="text-white p-2"><span class="icon-facebook"></span></a>
-                                  <a href="#" class="text-white p-2"><span class="icon-twitter"></span></a>
-                                  <a href="#" class="text-white p-2"><span class="icon-linkedin"></span></a>
-                                </p>
-                              </div>
-
-                            </div>
-                          </div>
-
-
-                        </div>
-                      </div>
-                    </div> -->
 
                     <div class="site-section bg-light block-13">
                         <div class="container">

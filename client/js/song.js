@@ -3,11 +3,11 @@ const API_BASE_URL = 'http://localhost:8080';
 let song_id = localStorage.getItem("song-id");
 let song = {};
 
-$(document).ready(function(){
+$(document).ready(function () {
     $.ajax({
         url: `http://localhost:8080/api/songs/${song_id}`,
         method: 'GET',
-        success: function(result){
+        success: function (result) {
             console.log(result);
             song = result;
             let singerList = song.singers;
@@ -121,6 +121,7 @@ function loadMore() {
     currentPage++;
     getSongComment(songId, true);
 }
+
 getSongComment(songId, false);
 
 function postComment() {
@@ -155,11 +156,11 @@ function postComment() {
 }
 
 function storeSingerId(singerId) {
-    localStorage.setItem("singer-id",singerId)
+    localStorage.setItem("singer-id", singerId)
 }
 
 // like/unlike song
-function smashThatLikeButton(){
+function smashThatLikeButton() {
     liked = !liked; // Toggle the liked state
     if (liked) {
         heartIcon.classList.remove('bi-heart');
@@ -177,12 +178,12 @@ function smashThatLikeButton(){
 function likeSong(songId) {
     event.preventDefault()
     $.ajax({
-        headers:{
+        headers: {
             'content-type': 'application/json'
         },
         url: `${API_BASE_URL}/api/songs/like-song/${songId}`,
         type: 'PUT',
-        success : function (result) {
+        success: function (result) {
             console.log(result);
             $("#like-count").html(
                 `${parseInt(result, 10).toLocaleString('vi-VN')}`
@@ -194,12 +195,12 @@ function likeSong(songId) {
 function unlikeSong(songId) {
     event.preventDefault()
     $.ajax({
-        headers:{
+        headers: {
             'content-type': 'application/json'
         },
         url: `${API_BASE_URL}/api/songs/unlike-song/${songId}`,
         type: 'PUT',
-        success : function (result) {
+        success: function (result) {
             console.log(result);
             $("#like-count").html(
                 `${parseInt(result, 10).toLocaleString('vi-VN')}`
@@ -207,6 +208,7 @@ function unlikeSong(songId) {
         }
     })
 }
+
 
 function get3PopularSongOfSinger(singerID) {
     $.ajax({
