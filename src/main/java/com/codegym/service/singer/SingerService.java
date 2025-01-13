@@ -46,7 +46,9 @@ public class SingerService implements ISingerService {
     }
 
     @Override
-    public Optional<Singer> findBySingerName(String singerName) {
-        return iSingerRepository.findBySingerName(singerName);
+    public Optional<Singer> findBySingerName(String name) {
+        return iSingerRepository.findBySingerName(name);
     }
+
+
 }

@@ -1,28 +1,28 @@
 const API_BASE_URL = 'http://localhost:8080';
 
-/* ----------------NHIEM VU 40: HIỂN THỊ BÀI HÁT MỚI NHẤT ------------------------ */
-function getNewSongs() {
-    $.ajax({
-        headers: {
-            'accept': 'application/json',
-            'content-type': 'application/json',
-        },
-        url: 'http://localhost:8080/api/homepage/new-songs',
-        type: 'GET',
-        success: function (data) {
-            let content = "";
-            data.forEach(song => {
-                content += `
-                    <div>
-                        <strong>${song.title}</strong><br>
-                        <span>Lượt view: ${song.views}</span><br>
-                        <p>${song.artist}</p>
-                    </div>`;
-            });
-            $("#new-songs").html(content);
-        }
-    });
-}
+/* ----------------NHIEM VU 40: HIỂN THỊ BÀI HÁT MỚI NHẤT (closed) ------------------------ */
+// function getNewSongs() {
+//     $.ajax({
+//         headers: {
+//             'accept': 'application/json',
+//             'content-type': 'application/json',
+//         },
+//         url: 'http://localhost:8080/api/homepage/new-songs',
+//         type: 'GET',
+//         success: function (data) {
+//             let content = "";
+//             data.forEach(song => {
+//                 content += `
+//                     <div>
+//                         <strong>${song.title}</strong><br>
+//                         <span>Lượt view: ${song.views}</span><br>
+//                         <p>${song.artist}</p>
+//                     </div>`;
+//             });
+//             $("#new-songs").html(content);
+//         }
+//     });
+// }
 
 /* ---------------- NHIỆM VỤ 41: HIỂN THỊ BÀI HÁT CÓ LƯỢT VIEW NHIỀU NHẤT------------------------ */
 function getTopPlayedSongs() {
@@ -40,16 +40,15 @@ function getTopPlayedSongs() {
           <div class="song-card col-2">
             <div class="card">
 
-
-              <img src="${API_BASE_URL}/images/${data[i].imageFile}" 
-                   alt="${data[i].name}" class="card-img-top">     
+              <img src="${API_BASE_URL}/images/${data[i].imageFile}"
+                   alt="${data[i].name}" class="card-img-top">
 
               <div class="card-body text-center">
                 <h5 class="card-title">${data[i].name}</h5>
                 <p class="card-text">
                   ${data[i].singers.map(s => s.singerName).join(', ')}
                 </p>
-                <button class="btn btn-primary btn-sm " onclick="playSong('${data[i].musicFile}')">Play</button>
+                <button class="btn btn-primary btn-sm " onclick="playSong(${data[i].id})">Play</button>
               </div>
             </div>
           </div>`;
@@ -62,6 +61,43 @@ function getTopPlayedSongs() {
     });
 }
 
+/* ---------------- NHIỆM VỤ 41: HIỂN THỊ BÀI HÁT MỚI NHẤT <da fix thanh bai hat duoc nghe nhieu nhat> VỪA ĐƯỢC THÊM VÀO <da co> <done>------------------------ */
+// function getNewSongs() {   //bản chất là để hien thi bai hát dược nghe nhiều nhất
+//     $.ajax({
+//         headers: {
+//             'accept': 'application/json',
+//             'content-type': 'application/json',
+//         },
+//         url: 'http://localhost:8080/api/homepage/top-played-songs',
+//         type: 'GET',
+//         success: function (data) {
+//             let content = "";
+//             for(let i=0; i < 6; i++) {
+//                 content += `
+//           <div class="song-card col-2">
+//             <div class="card">
+//
+//
+//               <img src="${data[i].imageFile}"
+//                    alt="${data[i].name}" class="card-img-top">
+//
+//               <div class="card-body text-center">
+//                 <h5 class="card-title">${data[i].name}</h5>
+//                 <p class="card-text">
+//                   ${data[i].singers.map(s => s.singerName).join(', ')}
+//                 </p>
+//                 <button class="btn btn-primary btn-sm " onclick="playSong('${data[i].musicFile}')">Play</button>
+//               </div>
+//             </div>
+//           </div>`;
+//             };
+//             $("#new-songs-container").html(content);
+//         },
+//         error: function (xhr, status, error) {
+//             console.error("Lỗi:", error);
+//         }
+//     });
+// }
 
 /* ----------------NHIEM VU 43: HIỂN THỊ BÀI HÁT CÓ LƯỢT LIKE NHIỀU NHẤT<da co> ------------------------ */
 function getTopLikedSongs() {
@@ -88,8 +124,7 @@ function getTopLikedSongs() {
                 content += `
                     <div class="music-card">
                         <img src="${API_BASE_URL}/images/${data[i].imageFile}" alt="${data[i].name}">
-                        <div class="row">
-                        <div class="music-card-content col-9">
+                        <div class="music-card-content">
                             <h3>${data[i].name}</h3>
                             <p>${singers}</p>
                             <div class="like-count">
@@ -97,9 +132,8 @@ function getTopLikedSongs() {
                                 <span>${data[i].likeCount} likes</span>
                             </div>
                         </div>
-                        <div class="col-3"> 
-                        <button class="btn btn-primary btn-sm " onclick="playSong('${data[i].musicFile}')">Play</button>
-                        </div>
+                        <div> 
+                        <button class="btn btn-primary btn-sm " onclick="playSong(${data[i].id})">Play</button>
                         </div>
                     </div>`;
             }
@@ -130,7 +164,7 @@ function getTopPlayedPlaylists() {
                             <h3>${playlist.name}</h3>
                             <p>${playlist.songs.length} songs • ${playlist.listeningCount} views</p>
                             <div class="d-flex justify-content-between">
-                                <button class="btn btn-primary btn-sm">Play</button>
+                                <button class="btn btn-primary btn-sm" onclick="playList(${playlist.id})">Play</button>
                                 <button class="btn btn-outline-primary btn-sm">Edit</button>
                             </div>
                         </div>
@@ -159,7 +193,7 @@ function getNewPlaylists() {
                             <h3>${data[i].name}</h3>
                             <p>${data[i].songs.length} songs • ${data[i].listeningCount} views• ${data[i].likeCount} likes</p>
                             <div class="d-flex justify-content-between">
-                                <button class="btn btn-primary btn-sm">Play</button>
+                                <button class="btn btn-primary btn-sm" onclick="playList(${data[i].id})">Play</button>
                                 <button class="btn btn-outline-primary btn-sm">Edit</button>
                             </div>
                         </div>
@@ -181,10 +215,10 @@ function getTopLikedPlaylists() {
         type: 'GET',
         success: function (data) {
             let content = "";
-            for (let i = 0; i< 8 && i < data.length; i++) {
+            for (let i = 0; i < 8 && i < data.length; i++) {
                 content += `
                     <div class="music-card row">
-                        <div class="music-card-content col-9">
+                        <div class="music-card-content col-6">
                             <h3>${data[i].name}</h3>
                             <p>${data[i].listeningCount} views</p>
                             <div class="like-count">
@@ -193,7 +227,7 @@ function getTopLikedPlaylists() {
                             </div>
                         </div>
                         <div class="col-3">
-                        <button class="btn btn-primary btn-sm " onclick="playSong('${data[i].musicFile}')">Play</button>
+                        <button class="btn btn-primary btn-sm " onclick="playList(${data[i].id})">Play</button>
                         </div>
                     </div>`;
             }
@@ -204,6 +238,34 @@ function getTopLikedPlaylists() {
         }
     });
 }
+
+
+
+$(document).ready(function() {
+    $(".nonloop-block-13").owlCarousel({
+        items: 3,               // Hiển thị 3 mục mỗi lần
+        loop: true,             // Lặp lại slider
+        margin: 20,             // Khoảng cách giữa các mục
+        nav: true,              // Hiển thị nút điều hướng
+        autoplay: true,         // Tự động cuộn
+        autoplayTimeout: 3000,  // Thời gian chờ trước khi chuyển (ms)
+        responsive: {
+            0: {
+                items: 1            // Hiển thị 1 mục trên màn hình nhỏ
+            },
+            600: {
+                items: 2            // Hiển thị 2 mục trên màn hình trung bình
+            },
+            1000: {
+                items: 3            // Hiển thị 3 mục trên màn hình lớn
+            }
+        }
+    });
+});
+
+
+
+
 
 $(document).ready(function () {
     const playlistContainer = $(".featured-user .list-unstyled");
@@ -244,10 +306,23 @@ $(document).ready(function () {
     // Gọi hàm fetchPlaylist khi trang tải
     fetchPlaylist();
 });
-
-getTopPlayedSongs();
+// getTopPlayedSongs();
 getNewSongs();
 getTopLikedSongs();
 getTopPlayedPlaylists();
 getNewPlaylists();
 getTopLikedPlaylists();
+
+
+
+
+
+function playList(id) {
+    localStorage.setItem("playlist-id", id);
+    window.location.href = "playlist-view.html";
+}
+
+function playSong(id) {
+    localStorage.setItem("song-id", id);
+    window.location.href = "song.html";
+}

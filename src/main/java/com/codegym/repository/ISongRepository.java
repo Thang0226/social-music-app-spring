@@ -33,4 +33,6 @@ public interface ISongRepository extends JpaRepository<Song, Long> {
     List<Song> findSongBySingersIdOrderByListeningCountDesc(Long singerId);
 
     Optional<Song> findByName(String name);
+
+    List<Song> findAllBySingers(Singer singer);
 }

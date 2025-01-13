@@ -16,4 +16,5 @@ public interface ISongService extends IGenerateService<Song> {
 
     List<Song> findSongBySingers(Long singerId);
     Optional<Song> findByName(String name);
+
 }
