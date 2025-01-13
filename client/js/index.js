@@ -14,11 +14,10 @@ function storePlaylistId(playlistId) {
     localStorage.setItem("playlist-id", playlistId)
 }
 
-const API_BASE_URL = 'http://localhost:8080';
 let userId = localStorage.getItem("user-id");
 let token = localStorage.getItem("token");
 
-$(document).ready(function(){
+function initializeNewSongs() {
     $.ajax({
         url: `http://localhost:8080/api/homepage/new-songs`,
         method: 'GET',
@@ -26,7 +25,7 @@ $(document).ready(function(){
             let songs = result;
             console.log(songs);
             let content = "";
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < 10 && i < songs.length; i++) {
                 let singers = "";
                 for (let j = 0; j < songs[i].singers.length; j++) {
                     singers += `<a href="singer.html" onclick="storeSingerId(${songs[i].singers[j].id})"> ${songs[i].singers[j].singerName}</a>`
@@ -72,7 +71,38 @@ $(document).ready(function(){
             initializeMediaPlayers();
         }
     });
-})
+}
+
+initializeNewSongs();
+
+// MediaElement
+function initializeMediaPlayers() {
+    let mediaElements = document.querySelectorAll('video, audio'), total = mediaElements.length;
+
+    for (let i = 0; i < total; i++) {
+        new MediaElementPlayer(mediaElements[i], {
+            features: ['playpause', 'current', 'progress', 'duration', 'volume'],
+            pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@7.0.7/build/',
+            shimScriptAccess: 'always',
+            success: function (mediaElement) {
+                let target = document.body.querySelectorAll('.player'), targetTotal = target.length;
+                for (let j = 0; j < targetTotal; j++) {
+                    target[j].style.visibility = 'visible';
+                }
+                // Increase view count after 30 seconds
+                mediaElement.addEventListener('timeupdate', function () {
+                    if (mediaElement.currentTime >= 30) {
+                        // Call your function to increase the view count
+                        increaseViewCount(songId);
+                        // Remove the event listener after it triggers once
+                        mediaElement.removeEventListener('timeupdate', arguments.callee);
+                    }
+                });
+            }
+        });
+    }
+}
+
 
 function showMainPlayer(audioSrc) {
     // Unhide the main player
@@ -149,3 +179,5 @@ function getTopPlayedSongs() {
     })
 }
 getTopPlayedSongs();
+
+gerSongInfoForMPC(songId);

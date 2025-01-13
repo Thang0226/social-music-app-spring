@@ -35,6 +35,11 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <script>
+    function playSong(id) {
+        localStorage.setItem("song-id", id);
+        window.parent.location.href = "song.html";
+    }
+
     function getNewSongs() {
         $.ajax({
             headers: { 'accept': 'application/json', 'content-type': 'application/json' },
@@ -46,11 +51,11 @@
                     content += `
               <div class="song-card">
                 <div class="card">
-                  <img src="${data[i].imageFile}" alt="${data[i].name}" class="card-img-top">
+                  <img src="http://localhost:8080/images/${data[i].imageFile}" alt="${data[i].name}" class="card-img-top">
                   <div class="card-body text-center">
                     <h5 class="card-title">${data[i].name}</h5>
                     <p class="card-text">${data[i].singers.map(s => s.singerName).join(', ')}</p>
-                    <button class="btn btn-primary btn-sm" onclick="playSong('${data[i].musicFile}')">Play</button>
+                    <button class="btn btn-primary btn-sm" onclick="playSong('${data[i].id}')">Play</button>
                   </div>
                 </div>
               </div>`;
