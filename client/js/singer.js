@@ -1,7 +1,7 @@
 let singerId = localStorage.getItem("singer-id");
 const API_BASE_URL = 'http://localhost:8080';
 let currentPage = 0;
-const pageSize = 10; // Number of comments per load
+let pageSize = 10; // Number of comments per load
 
 function getSingerComment(singerId, isLoadMore = false) {
     $.ajax({
@@ -9,7 +9,7 @@ function getSingerComment(singerId, isLoadMore = false) {
             'accept': 'application/json',
             'content-type': 'application/json',
         },
-        url: `http://localhost:8080/api/singer-comment/${singerId}?page=${currentPage}&size=${pageSize}`,
+        url: `http://localhost:8080/api/comments/singer-comment/${singerId}?page=${currentPage}&size=${pageSize}`,
         type: 'GET',
         success: function (data) {
             console.log(data);
