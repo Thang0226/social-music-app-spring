@@ -13,9 +13,10 @@ function storeSingerId(singerId) {
 function storePlaylistId(playlistId) {
     localStorage.setItem("playlist-id", playlistId)
 }
-
+let songId = localStorage.getItem("song-id");
 let userId = localStorage.getItem("user-id");
 let token = localStorage.getItem("token");
+const API_BASE_URL = 'http://localhost:8080';
 
 // Get latest songs
 function initializeNewSongs() {
@@ -49,8 +50,8 @@ function initializeNewSongs() {
                             </div>
                           </div>
                           <div class="text">
-                            <h3 class="font-weight-light" style="text-align:left">
-                              <a href="song.html" onclick="storeSongId(${songs[i].id}); storeUserId(userId)">
+                            <h3 class="font-weight-light">
+                              <a href="song.html" onclick="storeSongId(${songs[i].id}); storeUserId(${userId})">
                                 ${songs[i].name}
                               </a>
                             </h3>
@@ -114,6 +115,8 @@ function showMainPlayer(audioSrc) {
     mainPlayer.classList.add('d-flex');
     songDetails.classList.add('d-flex');
 
+    getSongInfoForMPC(songId);
+
     // Update the audio source
     let mainAudio = mainPlayer.querySelector('audio');
     mainAudio.src = audioSrc;
@@ -139,7 +142,7 @@ function getSongInfoForMPC(songId) {
                 style="max-width: 80px; max-height: 80px; width: 100%; height: auto;">
                 <div class="podcaster">
                     <span class="d-block" style="font-weight: bold">
-                        <a href="song.html" onclick="storeSongId(${data.id}); storeUserId(userId)"> ${data.name}</a>                       
+                        <a href="song.html" onclick="storeSongId(${data.id}); storeUserId(${userId})"> ${data.name}</a>                       
                     </span>
                     <span>
                         ${singers}
@@ -151,31 +154,32 @@ function getSongInfoForMPC(songId) {
     })
 }
 
-// function getTopPlayedSongs() {
-//     $.ajax({
-//         url: "http://localhost:8080/api/homepage/top-played-songs", // URL của API
-//         method: "GET",
-//         success: function (data) {
-//             let content = "";
-//             for (let i = 0; i < 10; i++) {
-//                 content +=`
-//                 <li>
-//                     <a href="playlist.html" class="d-flex align-items-center">
-//                         <img src="${API_BASE_URL}/images/${data[i].imageFile}"
-//                         alt="${data[i].name}" class="img-fluid mr-2"
-//                         style="max-width: 50px; max-height: 50px; width: 100%; height: auto;">
-//                         <div class="podcaster">
-//                             <span class="d-block" style="font-weight: bold">${data[i].name}</span>
-//                             <span class="small">
-//                             ${parseInt(data[i].listeningCount, 10).toLocaleString('vi-VN')} lượt nghe
-//                             </span>
-//                         </div>
-//                     </a>
-//                 </li>
-//                 `
-//             }
-//             $("#popular-songs").html(content)
-//         }
-//     })
-// }
-// getTopPlayedSongs();
+function getTopPlayedSongs() {
+    $.ajax({
+        url: "http://localhost:8080/api/homepage/top-played-songs",
+        method: "GET",
+        success: function (data) {
+            let content = "";
+            for (let i = 0; i < 10; i++) {
+                content +=`
+                <li>
+                    <a href="song.html" class="d-flex align-items-center" 
+                    onclick="storeSongId(${data[i].id}); storeUserId(${userId})">
+                        <img src="${API_BASE_URL}/images/${data[i].imageFile}" 
+                        alt="${data[i].name}" class="img-fluid mr-2" 
+                        style="max-width: 50px; max-height: 50px; width: 100%; height: auto;">
+                        <div class="podcaster">
+                            <span class="d-block" style="font-weight: bold">${data[i].name}</span>
+                            <span class="small">
+                            ${parseInt(data[i].listeningCount, 10).toLocaleString('vi-VN')} lượt nghe
+                            </span>
+                        </div>
+                    </a>
+                </li>
+                `
+            }
+            $("#popular-songs").html(content)
+        }
+    })
+}
+getTopPlayedSongs();

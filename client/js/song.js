@@ -1,6 +1,7 @@
 const API_BASE_URL = 'http://localhost:8080';
 
 let song_id = localStorage.getItem("song-id");
+console.log(song_id)
 let song = {};
 
 $(document).ready(function () {
@@ -83,7 +84,7 @@ function getSongComment(songId, isLoadMore = false) {
             'accept': 'application/json',
             'content-type': 'application/json',
         },
-        url: `${API_BASE_URL}/api/song-comment/${songId}?page=${currentPage}&size=${pageSize}`,
+        url: `${API_BASE_URL}/api/comments/song-comment/${songId}?page=${currentPage}&size=${pageSize}`,
         type: 'GET',
         success: function (data) {
             console.log(data);
@@ -220,7 +221,6 @@ function get3PopularSongOfSinger(singerID) {
         type: 'GET',
         success: function (result) {
             let song = result;
-            console.log(song);
             let content = "";
             content += `<h3 class="mb-4">
                         <a href="singer.html" onclick="storeSingerId(${song[0].singers[0].id})">
@@ -250,39 +250,6 @@ function get3PopularSongOfSinger(singerID) {
         }
     })
 }
-
-// MediaElement
-function initializeMediaPlayers() {
-    let mediaElements = document.querySelectorAll('video, audio'), total = mediaElements.length;
-
-    for (let i = 0; i < total; i++) {
-        new MediaElementPlayer(mediaElements[i], {
-            features: ['playpause', 'current', 'progress', 'duration', 'volume'],
-            pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@7.0.7/build/',
-            shimScriptAccess: 'always',
-            success: function (mediaElement) {
-                let target = document.body.querySelectorAll('.player'), targetTotal = target.length;
-                for (let j = 0; j < targetTotal; j++) {
-                    target[j].style.visibility = 'visible';
-                }
-                // Increase view count after 30 seconds
-                mediaElement.addEventListener('timeupdate', function () {
-                    if (mediaElement.currentTime >= 30) {
-                        // Call your function to increase the view count
-                        increaseViewCount(songId);
-                        // Remove the event listener after it triggers once
-                        mediaElement.removeEventListener('timeupdate', arguments.callee);
-                    }
-                });
-            }
-        });
-    }
-}
-
-// Initialize players on DOMContentLoaded
-document.addEventListener('DOMContentLoaded', function () {
-    initializeMediaPlayers();
-});
 
 function increaseViewCount(songId) {
     $.ajax({
