@@ -38,7 +38,16 @@ $(document).ready(function(){
                 let localDate = moment(songs[i].uploadTime).tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY");
                 content += `
                         <div class="d-block d-md-flex podcast-entry bg-white mb-3" data-aos="fade-up">
-                          <div class="image" style="background-image: url('${API_BASE_URL}/images/${songs[i].imageFile}')">
+                          <div class="image-container">
+                            <div
+                              class="image"
+                              style="background-image: url('${API_BASE_URL}/images/${songs[i].imageFile}');">
+                              <div class="play-button"
+                              onclick="showMainPlayer('${API_BASE_URL}/audios/${songs[i].musicFile}'); 
+                              gerSongInfoForMPC(${songs[i].id})">
+                                <i class="bi bi-play-circle"></i>
+                              </div>
+                            </div>
                           </div>
                           <div class="text">
                             <h3 class="font-weight-light">
@@ -48,27 +57,16 @@ $(document).ready(function(){
                             </h3>
                             <div class="text-white mb-3">
                               <span class="text-black-opacity-05">
-                                <span>By ${singers} <span class="sep">&bullet;
-                                </span> ${localDate} <span class="sep">&bullet;
-                                <span> <i class="bi bi-eye"></i> <span id="listening-count">
-                                    ${parseInt(songs[i].listeningCount, 10).toLocaleString('vi-VN')}</span>
+                                <span>By ${singers} <span class="sep">&bullet;</span> ${localDate} <span class="sep">&bullet;</span>
+                                  <span> <i class="bi bi-eye"></i> <span id="listening-count">
+                                      ${parseInt(songs[i].listeningCount, 10).toLocaleString('vi-VN')}</span>
+                                  </span>
                                 </span>
                               </span>
-                            </div>
-                        
-                            <div id="song-player">
-                              <div class="player">
-                                <audio id="player2" preload="none" controls style="max-width: 100%">
-                                  <source src="${API_BASE_URL}/audios/${songs[i].musicFile}" type="audio/mp3">
-                                </audio>
-                              </div>
-                            </div>
-                            </div>
+                            </div>                     
+                          </div>
                         </div>
                     `;
-
-
-
             }
             $("#new-songs").html(content);
             initializeMediaPlayers();
@@ -76,42 +74,78 @@ $(document).ready(function(){
     });
 })
 
-$(document).ready(function () {
-    const playlistContainer = $(".featured-user .list-unstyled");
+function showMainPlayer(audioSrc) {
+    // Unhide the main player
+    let mainPlayerContainer = document.getElementById('main-player-container');
+    let mainPlayer = document.getElementById('mep_1');
+    let songDetails = document.getElementById('song-details');
+    mainPlayerContainer.classList.remove('none');
+    mainPlayerContainer.classList.add('d-flex');
+    mainPlayer.classList.add('d-flex');
+    songDetails.classList.add('d-flex');
 
-    // Hàm gọi API để lấy danh sách playlist
-    function fetchPlaylist() {
-        $.ajax({
-            url: "http://localhost:8080/api/playlist", // URL của API
-            method: "GET",
-            dataType: "json",
-            success: function (data) {
-                // Xóa nội dung cũ
-                playlistContainer.empty();
+    // Update the audio source
+    let mainAudio = mainPlayer.querySelector('audio');
+    mainAudio.src = audioSrc;
+    mainAudio.play();
+}
 
-                // Lặp qua danh sách và thêm vào HTML
-                data.forEach(playlist => {
-                    const listPlaylist = `
-            <li>
-              <a href="playlist.html" class="d-flex align-items-center">
-<!--                <img src="${playlist.image}" alt="${playlist.name}" class="img-fluid mr-2">-->
-                <div class="podcaster">
-                  <span class="d-block" style="font-weight: bold">${playlist.name}</span>
-                  <span class="small">${playlist.listeningCount} lượt nghe</span>
-                </div>
-              </a>
-            </li>
-          `;
-                    playlistContainer.append(listPlaylist);
-                });
-            },
-            error: function (xhr, status, error) {
-                console.error("Error fetching playlist:", error);
-                playlistContainer.html("<p>Unable to load playlist. Please try again later.</p>");
+function gerSongInfoForMPC(songId) {
+    $.ajax({
+        url: `http://localhost:8080/api/songs/${songId}`,
+        method: 'GET',
+        success: function (data) {
+            let singers = "";
+            for (let j = 0; j < data.singers.length; j++) {
+                singers += `<a href="singer.html" onclick="storeSingerId(${data.singers[j].id})"> ${data.singers[j].singerName}</a>`
+                if (j < data.singers.length - 1) {
+                    singers += `, `
+                }
             }
-        });
-    }
+            let content = "";
+            content +=`           
+                <img src="${API_BASE_URL}/images/${data.imageFile}" 
+                alt="${data.name}" class="img-fluid mr-2" 
+                style="max-width: 80px; max-height: 80px; width: 100%; height: auto;">
+                <div class="podcaster">
+                    <span class="d-block" style="font-weight: bold">
+                        <a href="song.html" onclick="storeSongId(${data.id}); storeUserId(userId)"> ${data.name}</a>                       
+                    </span>
+                    <span>
+                        ${singers}
+                    </span>
+                </div>         
+            `
+            $("#song-details").html(content)
+        }
+    })
+}
 
-    // Gọi hàm fetchPlaylist khi trang tải
-    fetchPlaylist();
-});
+function getTopPlayedSongs() {
+    $.ajax({
+        url: "http://localhost:8080/api/homepage/top-played-songs", // URL của API
+        method: "GET",
+        success: function (data) {
+            let content = "";
+            for (let i = 0; i < 10; i++) {
+                content +=`
+                <li>
+                    <a href="playlist.html" class="d-flex align-items-center">
+                        <img src="${API_BASE_URL}/images/${data[i].imageFile}" 
+                        alt="${data[i].name}" class="img-fluid mr-2" 
+                        style="max-width: 50px; max-height: 50px; width: 100%; height: auto;">
+                        <div class="podcaster">
+                            <span class="d-block" style="font-weight: bold">${data[i].name}</span>
+                            <span class="small">
+                            ${parseInt(data[i].listeningCount, 10).toLocaleString('vi-VN')} lượt nghe
+                            </span>
+                        </div>
+                    </a>
+                </li>
+                `
+            }
+            $("#popular-songs").html(content)
+        }
+    })
+}
+getTopPlayedSongs();
