@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/api")
@@ -21,6 +23,7 @@ public class CommentController {
 
     @PostMapping("/comments")
     public ResponseEntity<String> createComment(@RequestBody Comment comment) {
+        comment.setCommentTime(LocalDateTime.now());
         commentService.save(comment);
         return new ResponseEntity<>("Comment saved", HttpStatus.CREATED);
     }
