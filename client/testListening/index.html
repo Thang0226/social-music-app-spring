@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .song-item {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+        }
+        .song-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+        .song-info {
+            flex-grow: 1;
+        }
+        .song-info h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+        .song-info p {
+            margin: 5px 0;
+            color: #555;
+        }
+        .btn {
+            padding: 8px 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        #audio-player {
+            width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Music Player Test</h1>
+
+<input type="text" id="searchInput" placeholder="Search songs..." />
+<button class="btn" onclick="searchSongs()">Search</button>
+<button class="btn" onclick="getLatestSongs()">Latest Songs</button>
+<button class="btn" onclick="getMostPlayedSongs()">Most Played Songs</button>
+<button class="btn" onclick="getAllSongs()">All Songs</button>
+
+<div id="songList"></div>
+
+
+
+<audio id="audio-player" controls>
+    Your browser does not support the audio element.
+</audio>
+
+<script src="script.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+</html>

@@ -40,7 +40,7 @@ public class ListeningService implements IListeningService {
         return songs.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
-    private SongDTO convertToDTO(Song song) {
+    public SongDTO convertToDTO(Song song) {
         Set<String> singers = song.getSingers().stream().map(singer -> singer.getSingerName()).collect(Collectors.toSet());
         Set<String> genres = song.getGenres().stream().map(genre -> genre.getName()).collect(Collectors.toSet());
 
@@ -57,5 +57,12 @@ public class ListeningService implements IListeningService {
                 genres
         );
     }
+    @Override
+    public List<SongDTO> getAllSongs() {
+        List<Song> songs = listeningRepository.findAll();
+        return songs.stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
+
+
 }
 
