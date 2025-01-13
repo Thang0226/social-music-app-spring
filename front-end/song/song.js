@@ -326,7 +326,10 @@
 //     loadSongs();
 // });
 // Load songs on page load
-$(document).ready(() => loadSongs());
+$(document).ready(() => {
+    loadSongs();
+    $("#createSongForm").hide();
+});
 
 // Add button toggle
 $("#addBtn").click(() => {
@@ -380,7 +383,7 @@ $("#createSongForm").submit((e) => {
 function loadSongs() {
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/api/songs",
+        url: "http://localhost:8080/api/songs/by-user/2",
         success: (data) => {
             const content = `
                 <table class="table table-hover">
@@ -411,7 +414,7 @@ function getSongs(song) {
     const uploadTime = new Date(song.uploadTime).toLocaleString();
     return `
         <tr>
-            <td>${song.name}</td>
+            <td>${song.songName}</td>
             <td>${song.description}</td>
             <td><img src="/images/${song.imageFile}" style="max-width: 100px;"></td>
             <td>
