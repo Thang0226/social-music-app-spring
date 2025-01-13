@@ -5,7 +5,7 @@ function getTopPlayedSongs() {
             'accept': 'application/json',
             'content-type': 'application/json',
         },
-        url: 'http://localhost:8080/api/top-played-songs',
+        url: 'http://localhost:8080/api/homepage/top-played-songs',
         type: 'GET',
         success: function (data) {
             let content = "";
@@ -29,13 +29,13 @@ function getNewSongs() {
             'accept': 'application/json',
             'content-type': 'application/json',
         },
-        url: 'http://localhost:8080/api/homepage/new-songs',
+        url: 'http://localhost:8080/api/homepage/top-played-songs',
         type: 'GET',
         success: function (data) {
             let content = "";
             for(let i=0; i < 6; i++) {
                 content += `
-          <div class="song-card">
+          <div class="song-card col-2">
             <div class="card">
 
 
@@ -47,7 +47,7 @@ function getNewSongs() {
                 <p class="card-text">
                   ${data[i].singers.map(s => s.singerName).join(', ')}
                 </p>
-                <button class="btn btn-primary btn-sm" onclick="playSong('${data[i].musicFile}')">Play</button>
+                <button class="btn btn-primary btn-sm " onclick="playSong('${data[i].musicFile}')">Play</button>
               </div>
             </div>
           </div>`;
@@ -85,44 +85,40 @@ function getTopLikedSongs() {
             'accept': 'application/json',
             'content-type': 'application/json',
         },
-        url: 'http://localhost:8080/api/top-liked-songs',
+        url: 'http://localhost:8080/api/homepage/top-liked-songs',
         type: 'GET',
-        success: function (data) {
+        success: function(data) {
             let content = "";
-            data.forEach(song => {
+            for (let i = 0; i < 8; i++) {
                 content += `
-                    <div>
-                        <strong>${song.title}</strong><br>
-                        <span>Lượt thích: ${song.likes}</span><br>
-                        <p>${song.artist}</p>
+                    <div class="music-card">
+                        <img src="${data[i].imageUrl || '/api/placeholder/80/80'}" alt="${data[i].name}">
+                        <div class="music-card-content">
+                            <h3>${data[i].name}</h3>
+                            <p>${data[i].singer}</p>
+                            <div class="like-count">
+                                <i class="fas fa-heart"></i>
+                                <span>${data[i].likeCount}</span>
+                            </div>
+                        </div>
                     </div>`;
-            });
+            }
             $("#top-liked-songs").html(content);
+        },
+        error: function(xhr, status, error) {
+            console.error("Error fetching songs:", error);
         }
     });
 }
 
-/* ----------------NHIỆM VỤ 39: HIỂN THỊ PLAYLIST ĐANG ĐƯỢC NGHE NHIỀU NHẤT <da co> ------------------------ */
+
+
+
+
+
+/* ----------------NHIỆM VỤ 39: HIỂN THỊ PLAYLIST ĐANG ĐƯỢC NGHE NHIỀU NHẤT <anh thang dang lam> ------------------------ */
 function getTopPlayedPlaylists() {
-    $.ajax({
-        headers: {
-            'accept': 'application/json',
-            'content-type': 'application/json',
-        },
-        url: 'http://localhost:8080/api/top-played-playlists',
-        type: 'GET',
-        success: function (data) {
-            let content = "";
-            data.forEach(playlist => {
-                content += `
-                    <div>
-                        <strong>${playlist.name}</strong><br>
-                        <span>Lượt nghe: ${playlist.views}</span>
-                    </div>`;
-            });
-            $("#top-played-playlists").html(content);
-        }
-    });
+
 }
 
 /* ---------------- NHIỆM VỤ 42: HIỂN THỊ PLAYLIST MỚI NHẤT VỪA ĐƯỢC THÊM VÀO ------------------------ */
@@ -132,7 +128,7 @@ function getNewPlaylists() {
             'accept': 'application/json',
             'content-type': 'application/json',
         },
-        url: 'http://localhost:8080/api/new-playlists',
+        url: 'http://localhost:8080/api/homepage/new-playlists',
         type: 'GET',
         success: function (data) {
             let content = "";
@@ -157,25 +153,31 @@ function getTopLikedPlaylists() {
         },
         url: 'http://localhost:8080/api/homepage/top-liked-playlists',
         type: 'GET',
-        success: function (data) {
+        success: function(data) {
             let content = "";
-            data.forEach(playlist => {
+            for (let i = 0; i < data.length; i++) {
                 content += `
-                    <div class="col-md-4">
-                        <div class="playlist-card">                                         
-                            <h3>${playlist.name}</h3>
-                            <p>${playlist.songs.length} songs • ${playlist.listeningCount} views</p>
-                            <div class="d-flex justify-content-between">
-                                <button class="btn btn-primary btn-sm">Open</button>
-                                <button class="btn btn-outline-primary btn-sm">Edit</button>
+                    <div class="music-card">
+                        <img src="${data[i].imageUrl || '/api/placeholder/80/80'}" alt="${data[i].name}">
+                        <div class="music-card-content">
+                            <h3>${data[i].name}</h3>
+                            <p>${data[i].singer}</p>
+                            <div class="like-count">
+                                <i class="fas fa-heart"></i>
+                                <span>${data[i].likeCount}</span>
                             </div>
                         </div>
                     </div>`;
-            });
+            }
             $("#top-liked-playlists").html(content);
+        },
+        error: function(xhr, status, error) {
+            console.error("Error fetching playlists:", error);
         }
     });
 }
+
+
 
 $(document).ready(function () {
     const playlistContainer = $(".featured-user .list-unstyled");

@@ -166,201 +166,217 @@
 
 
 
-/* Popular Playlists Section */
+/*!* Popular Playlists Section *!*/
+/*.site-section {*/
+/*    padding: 50px 0;*/
+/*    background-color: #f9f9f9; !* Màu nền nhẹ nhàng *!*/
+/*}*/
+
+/*.site-section h2 {*/
+/*    font-size: 2.5rem;*/
+/*    font-weight: 700;*/
+/*    color: #333;*/
+/*    margin-bottom: 30px;*/
+/*    text-transform: uppercase;*/
+/*    letter-spacing: 2px;*/
+/*}*/
+
+/*.playlist-card {*/
+/*    background: #fff;*/
+/*    border-radius: 12px;*/
+/*    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); !* Hiệu ứng đổ bóng *!*/
+/*    padding: 20px;*/
+/*    transition: transform 0.3s ease, box-shadow 0.3s ease;*/
+/*}*/
+
+/*.playlist-card:hover {*/
+/*    transform: translateY(-10px);*/
+/*    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); !* Hiệu ứng khi hover *!*/
+/*}*/
+
+/*.playlist-card img {*/
+/*    border-radius: 8px;*/
+/*    width: 100%;*/
+/*    object-fit: cover;*/
+/*}*/
+
+/*.playlist-card h3 {*/
+/*    font-size: 1.5rem;*/
+/*    color: #222;*/
+/*    margin-bottom: 10px;*/
+/*}*/
+
+/*.playlist-card p {*/
+/*    font-size: 0.9rem;*/
+/*    color: #666;*/
+/*    margin-bottom: 15px;*/
+/*}*/
+
+/*.playlist-card .btn {*/
+/*    font-size: 0.8rem;*/
+/*    padding: 8px 16px;*/
+/*    border-radius: 20px;*/
+/*}*/
+
+/*.playlist-card .btn-primary {*/
+/*    background: #ff6b6b; !* Màu chủ đạo cho nút *!*/
+/*    border: none;*/
+/*    color: #fff;*/
+/*    transition: background 0.3s ease;*/
+/*}*/
+
+/*.playlist-card .btn-primary:hover {*/
+/*    background: #e63946;*/
+/*}*/
+
+/*.playlist-card .btn-outline-primary {*/
+/*    border: 1px solid #ff6b6b;*/
+/*    color: #ff6b6b;*/
+/*    background: transparent;*/
+/*    transition: background 0.3s ease, color 0.3s ease;*/
+/*}*/
+
+/*.playlist-card .btn-outline-primary:hover {*/
+/*    background: #ff6b6b;*/
+/*    color: #fff;*/
+/*}*/
+
+/*.d-flex {*/
+/*    gap: 10px; !* Khoảng cách giữa các nút *!*/
+/*}*/
+
+/*@media (max-width: 768px) {*/
+/*    .playlist-card {*/
+/*        margin-bottom: 30px;*/
+/*    }*/
+/*    .site-section h2 {*/
+/*        font-size: 2rem;*/
+/*    }*/
+/*}*/
+
+
+/* Most Liked Section Styles */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .site-section {
     padding: 50px 0;
-    background-color: #f9f9f9; /* Màu nền nhẹ nhàng */
+    background-color: #f9f9f9;
 }
 
-.site-section h2 {
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.section-title {
     font-size: 2.5rem;
     font-weight: 700;
     color: #333;
     margin-bottom: 30px;
     text-transform: uppercase;
     letter-spacing: 2px;
+    text-align: center;
 }
 
-.playlist-card {
+.columns-container {
+    display: flex;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.column {
+    flex: 1;
+    min-width: 0;
+}
+
+.column-title {
+    font-size: 1.8rem;
+    color: #222;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.music-card {
     background: #fff;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    margin-bottom: 20px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
-.playlist-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Hiệu ứng khi hover */
+.music-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
-.playlist-card img {
+.music-card img {
+    width: 80px;
+    height: 80px;
     border-radius: 8px;
-    width: 100%;
     object-fit: cover;
 }
 
-.playlist-card h3 {
-    font-size: 1.5rem;
-    color: #222;
-    margin-bottom: 10px;
+.music-card-content {
+    flex: 1;
+    min-width: 0;
 }
 
-.playlist-card p {
+.music-card h3 {
+    font-size: 1.2rem;
+    color: #222;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.music-card p {
     font-size: 0.9rem;
     color: #666;
-    margin-bottom: 15px;
+    margin-bottom: 8px;
 }
 
-.playlist-card .btn {
+.like-count {
     font-size: 0.8rem;
-    padding: 8px 16px;
-    border-radius: 20px;
-}
-
-.playlist-card .btn-primary {
-    background: #ff6b6b; /* Màu chủ đạo cho nút */
-    border: none;
-    color: #fff;
-    transition: background 0.3s ease;
-}
-
-.playlist-card .btn-primary:hover {
-    background: #e63946;
-}
-
-.playlist-card .btn-outline-primary {
-    border: 1px solid #ff6b6b;
     color: #ff6b6b;
-    background: transparent;
-    transition: background 0.3s ease, color 0.3s ease;
-}
-
-.playlist-card .btn-outline-primary:hover {
-    background: #ff6b6b;
-    color: #fff;
-}
-
-.d-flex {
-    gap: 10px; /* Khoảng cách giữa các nút */
-}
-
-@media (max-width: 768px) {
-    .playlist-card {
-        margin-bottom: 30px;
-    }
-    .site-section h2 {
-        font-size: 2rem;
-    }
-}
-
-
-/* Most Liked Section Styles */
-.site-section {
-    padding: 60px 0;
-    background-color: #f8f9fa; /* Màu nền nhã nhặn */
-}
-
-.site-section h2 {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 30px;
-}
-
-.site-section h3 {
-    font-size: 1.75rem;
-    font-weight: 600;
-    color: #444;
-    margin-bottom: 20px;
-}
-
-.song-card, .playlist-card {
-    background: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 15px 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.song-card:hover, .playlist-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-}
-
-.song-card .d-flex, .playlist-card .d-flex {
+    display: flex;
     align-items: center;
+    gap: 5px;
 }
 
-.song-card span, .playlist-card span {
-    font-size: 1.25rem;
-    font-weight: bold;
-    color: #555;
+.like-count i {
+    color: #ff6b6b;
 }
 
-.song-card img, .playlist-card img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.song-card h4, .playlist-card h4 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin: 0;
-    color: #222;
-}
-
-.song-card p, .playlist-card p {
-    font-size: 0.9rem;
-    color: #777;
-    margin: 5px 0 0;
-}
-
-/* Responsive Adjustments */
 @media (max-width: 768px) {
-    .site-section {
-        padding: 40px 15px;
+    .columns-container {
+        flex-direction: column;
     }
 
-    .site-section h2 {
+    .section-title {
         font-size: 2rem;
     }
 
-    .site-section h3 {
+    .column-title {
         font-size: 1.5rem;
     }
-
-    .song-card, .playlist-card {
-        padding: 10px 15px;
-    }
-
-    .song-card span, .playlist-card span {
-        font-size: 1rem;
-    }
-
-    .song-card h4, .playlist-card h4 {
-        font-size: 1rem;
-    }
-
-    .song-card p, .playlist-card p {
-        font-size: 0.8rem;
-    }
-
-
-
-
-
-
-
-
-
-
-
 
 }
 
