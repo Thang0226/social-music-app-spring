@@ -46,6 +46,7 @@ function loadMore() {
     currentPage++;
     getSingerComment(singerId, true);
 }
+
 getSingerComment(singerId, false);
 
 function postComment() {
@@ -117,3 +118,4 @@ $(document).ready(function () {
     // Gọi hàm fetchPlaylist khi trang tải
     fetchPlaylist();
 });
+

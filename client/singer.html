@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <title>Podcast &mdash; Colorlib Website Template</title>
   <meta charset="utf-8">
@@ -17,6 +17,112 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelementplayer.min.css">
   <link rel="stylesheet" href="css/aos.css">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f9;
+    }
+
+    table {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto 20px;
+      border-collapse: collapse;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px 15px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #007bff;
+      color: white;
+      text-transform: uppercase;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    td {
+      font-size: 14px;
+      color: #333;
+      word-wrap: break-word;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+      transition: background-color 0.3s;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      padding: 10px 20px;
+      margin: 10px auto;
+      border-radius: 4px;
+      display: block;
+      text-align: center;
+      max-width: 200px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #formContainer {
+      display: none;
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input {
+      width: calc(100% - 22px);
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .success {
+      color: green;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .error {
+      color: red;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+  </style>
+
+
 
 </head>
 <body>
@@ -74,17 +180,49 @@
       </div>
 
     </header>
+    <button id="addSingerBtn">Thêm Singer</button>
+
+    <div id="formContainer">
+      <h2>Thêm Mới Singer</h2>
+      <p id="message" class="success" style="display: none;"></p>
+      <p id="error" class="error" style="display: none;"></p>
+      <form id="singerForm">
+        <label for="singerName">Tên Singer:</label>
+        <input type="text" id="singerName" name="singerName" placeholder="Nhập tên ca sĩ" required>
+
+        <button type="submit">Thêm Singer</button>
+      </form>
+    </div>
 
     <div class="site-blocks-cover inner-page-cover bg-light mb-5">
       <div class="container">
         <div class="row align-items-center">
           <div class="col-12 text-center">
-            <a href="#">Mike Smith </a><span class="mx-2">&bullet;</span> Jun 25, 2020 <span class="mx-2">&bullet;</span> 1:30:20
             <h1 class="mb-3">Thông tin của singer</h1>
           </div>
         </div>
       </div>
     </div>
+    <table>
+      <thead>
+      <tr>
+        <th>STT</th>
+        <th>Tên Ca Sĩ</th>
+        <th>Hoạt động</th>
+      </tr>
+      </thead>
+      <tbody id="singer">
+      <!-- Dữ liệu danh sách playlist sẽ được thêm tại đây -->
+      <tr th:each="singer : ${singers}">
+        <td th:text="${singer.id}"></td>
+        <td th:text="${singer.singerName}"></td>
+        <td>
+          <!-- Liên kết đến trang xem bài hát -->
+          <a th:href="#" class="btn btn-primary">Xem bài hát</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
 
 
       <div class="container">
@@ -214,7 +352,7 @@
 
 
                     <div class="player">
-                      <audio id="player2" preload="none" controls style="max-width: 100%">
+                      <audio id="player3" preload="none" controls style="max-width: 100%">
                         <source src="http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3" type="audio/mp3">
                         </audio>
                       </div>
@@ -375,6 +513,7 @@
 
         <script src="js/mediaelement-and-player.min.js"></script>
 
+
         <script>
           document.addEventListener('DOMContentLoaded', function() {
             var mediaElements = document.querySelectorAll('video, audio'), total = mediaElements.length;
@@ -400,5 +539,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.43/moment-timezone-with-data.min.js"></script>
   <script src="js/comment.js"></script>
   <script src="js/singer.js"></script>
+  <script src="js/singer1.js"></script>
 </body>
 </html>
