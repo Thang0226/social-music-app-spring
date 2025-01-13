@@ -33,7 +33,9 @@ $(document).ready(function () {
             $("#song-details").html(
                 `
                 <div class="d-flex align-items-center justify-content-center mb-2 gap-2">
-                    <img width="150" height="150" src="${API_BASE_URL}/images/${song.imageFile}" alt="No Image" class="img-thumbnail rounded-circle">
+                    <img src="${API_BASE_URL}/images/${song.imageFile}" alt="No Image" 
+                    class="img-thumbnail rounded-circle"
+                    style="max-width: 150px; max-height: 150px; width: 100%; height: auto;">
                     <h1>
                         ${song.name}
                     </h1>
