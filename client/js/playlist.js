@@ -164,7 +164,6 @@ $(document).ready(function () {
             }
         });
     }
-
     // Gọi hàm fetchPlaylist khi trang tải
     fetchPlaylist();
 });
