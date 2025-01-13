@@ -203,19 +203,59 @@ function unlikeSong(songId) {
     })
 }
 
-function get3PopularSongOfSinger(singerID) {
-    $.ajax({
-        headers: {
-            'accept': 'application/json',
-            'content-type': 'application/json',
-        },
-        url: `${API_BASE_URL}/api/songs/singer-popular-song/${singerID}`,
-        type: 'GET',
-        success: function (result) {
-            let song = result;
-            console.log(song);
-            let content = "";
-            content += `<h3 class="mb-4">
+
+$(document).ready(function () {
+    const playlistContainer = $(".featured-user .list-unstyled");
+
+    // Hàm gọi API để lấy danh sách playlist
+    function fetchPlaylist() {
+        $.ajax({
+            url: "http://localhost:8080/api/playlist", // URL của API
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                // Xóa nội dung cũ
+                playlistContainer.empty();
+
+                // Lặp qua danh sách và thêm vào HTML
+                data.forEach(playlist => {
+                    const listPlaylist = `
+            <li>
+              <a href="#" class="d-flex align-items-center">
+<!--                <img src="${playlist.image}" alt="${playlist.name}" class="img-fluid mr-2">-->
+                <div class="podcaster">
+                  <span class="d-block">${playlist.name}</span>
+                  <span class="small">${playlist.listeningCount} lượt nghe</span>
+                </div>
+              </a>
+            </li>
+          `;
+                    playlistContainer.append(listPlaylist);
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error("Error fetching playlist:", error);
+                playlistContainer.html("<p>Unable to load playlist. Please try again later.</p>");
+            }
+        });
+    }
+
+    // Gọi hàm fetchPlaylist khi trang tải
+    fetchPlaylist();
+
+    function get3PopularSongOfSinger(singerID) {
+        $.ajax({
+            headers: {
+                'accept': 'application/json',
+                'content-type': 'application/json',
+            },
+            url: `${API_BASE_URL}/api/songs/singer-popular-song/${singerID}`,
+            type: 'GET',
+            success: function (result) {
+                let song = result;
+                console.log(song);
+                let content = "";
+                content += `<h3 class="mb-4">
                             <a href="singer.html" onclick="storeSingerId(${song[0].singers[0].id})">
                             ${song[0].singers[0].singerName} popular song</a>
                         </h3>
@@ -236,9 +276,9 @@ function get3PopularSongOfSinger(singerID) {
                             </div>
                         </a>
                     </li>`
-                }
-            }
-            content += `</ul>`
+                    }
+                }   
+              content += `</ul>`
             $('#singer-popular-songs').append(content);
         }
     })
