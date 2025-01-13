@@ -133,8 +133,6 @@ public class SongController {
 
     @Autowired
     private ICommentService iCommentService;
-    @Autowired
-    private IPlaylistService iPlaylistService;
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Song> deleteSong(@PathVariable Long id) {
