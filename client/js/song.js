@@ -12,7 +12,7 @@ $(document).ready(function () {
             song = result;
             let singerList = song.singers;
             let singerListLength = singerList.length;
-            let genreList = song.singers;
+            let genreList = song.genres;
             let genreListLength = genreList.length;
             let singers = "";
             for (let i = 0; i < singerListLength; i++) {
@@ -23,7 +23,7 @@ $(document).ready(function () {
             }
             let genres = "";
             for (let i = 0; i < genreListLength; i++) {
-                genres += `<span> ${song.genres[i].name}</span>`
+                genres += `<span> ${song.genres[i].name}</span>`;
                 if (genreListLength > genreListLength - i) {
                     genres += `, `
                 }
@@ -32,10 +32,15 @@ $(document).ready(function () {
             let localTime = moment(song.uploadTime).tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY");
             $("#song-details").html(
                 `
-                <h1 class="mb-3">
-                    <img width="150" height="150" src="${API_BASE_URL}/images/${song.imageFile}" alt="No Image" class="img-thumbnail rounded-circle">
-                    ${song.name}
-                </h1>
+                <div class="d-flex align-items-center justify-content-center mb-2 gap-2">
+                    <img src="${API_BASE_URL}/images/${song.imageFile}" alt="No Image" 
+                    class="img-thumbnail rounded-circle"
+                    style="max-width: 150px; max-height: 150px; width: 100%; height: auto;">
+                    <h1>
+                        ${song.name}
+                    </h1>
+                </div>
+                
                 ${singers}<span class="mx-2">&bullet;</span> ${localTime} <span class="mx-2">&bullet;</span><br>
                 <span>${song.description}</span><br>
                 ${genres}<br>
@@ -203,46 +208,6 @@ function unlikeSong(songId) {
         }
     })
 }
-
-
-$(document).ready(function () {
-    const playlistContainer = $(".featured-user .list-unstyled");
-})
-    // Hàm gọi API để lấy danh sách playlist
-function fetchPlaylist() {
-    $.ajax({
-        url: "http://localhost:8080/api/playlist", // URL của API
-        method: "GET",
-        dataType: "json",
-        success: function (data) {
-            // Xóa nội dung cũ
-            playlistContainer.empty();
-
-            // Lặp qua danh sách và thêm vào HTML
-            data.forEach(playlist => {
-                const listPlaylist = `
-        <li>
-          <a href="#" class="d-flex align-items-center">
-<!--                <img src="${playlist.image}" alt="${playlist.name}" class="img-fluid mr-2">-->
-            <div class="podcaster">
-              <span class="d-block">${playlist.name}</span>
-              <span class="small">${playlist.listeningCount} lượt nghe</span>
-            </div>
-          </a>
-        </li>
-      `;
-                playlistContainer.append(listPlaylist);
-            });
-        },
-        error: function (xhr, status, error) {
-            console.error("Error fetching playlist:", error);
-            playlistContainer.html("<p>Unable to load playlist. Please try again later.</p>");
-        }
-    });
-}
-
-// Gọi hàm fetchPlaylist khi trang tải
-fetchPlaylist();
 
 function get3PopularSongOfSinger(singerID) {
     $.ajax({
