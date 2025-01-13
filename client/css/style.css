@@ -587,7 +587,14 @@ a {
         width: calc(100% - 300px); } }
 
 .mejs__container {
-  width: 100% !important; }
+  width: 100% !important;
+  background-color: gainsboro;
+  border-radius: 20px;
+}
+
+.mejs__controls {
+  border-radius: 20px;
+}
 
 @media (max-width: 991.98px) {
   .display-4 {
@@ -986,7 +993,7 @@ a {
     color: #ccc; }
 
 .play-wrap {
-  margin-top: -70px; }
+  margin-top: 0; }
 
 @media (max-width: 991.98px) {
   .hero h1 {

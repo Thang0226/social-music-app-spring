@@ -39,4 +39,14 @@ public class SingerService implements ISingerService {
     public List<Singer> getNewSingers() {
         return iSingerRepository.findNewSingers();
     }
+
+    @Override
+    public List<Singer> getNewSinger() {
+        return List.of();
+    }
+
+    @Override
+    public Optional<Singer> findBySingerName(String singerName) {
+        return iSingerRepository.findBySingerName(singerName);
+    }
 }

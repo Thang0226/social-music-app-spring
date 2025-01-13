@@ -28,5 +28,5 @@ $(document).ready(function() {
 });
 
 function login() {
-    window.location.href = './login.html';
+    window.location.href = 'login.html';
 }

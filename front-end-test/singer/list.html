@@ -109,9 +109,9 @@
 <table>
     <thead>
     <tr>
-        <th>ID</th>
-        <th>Tên Singer</th>
-        <th>Hoat dong</th>
+        <th>STT</th>
+        <th>Tên Ca Sĩ</th>
+        <th>Hoạt động</th>
     </tr>
     </thead>
     <tbody id="singer">
@@ -119,9 +119,14 @@
     <tr th:each="singer : ${singers}">
         <td th:text="${singer.id}"></td>
         <td th:text="${singer.singerName}"></td>
+        <td>
+            <!-- Liên kết đến trang xem chi tiết -->
+            <a href="#">Xem Chi Tiết </a>
+        </td>
     </tr>
     </tbody>
 </table>
+
 
 <script>
     // Lắng nghe sự kiện click để hiển thị form thêm Singer

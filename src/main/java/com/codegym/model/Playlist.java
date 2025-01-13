@@ -18,8 +18,8 @@ public class Playlist {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "like_count")
-    private int likeCount;
+    @Column(name = "like_count", nullable = false)
+    private int likeCount = 0; // Giá trị mặc định là 0
 
     @ManyToMany
     @JoinTable(
@@ -29,11 +29,17 @@ public class Playlist {
     )
     private Set<Song> songs;
 
-    @Column(name = "create_time")
+    @Column(name = "create_time", updatable = false)
     private LocalDateTime createTime;
 
     @Column(name = "user_id")
     private Long userId;
 
-    private int listeningCount;
+    @Column(name = "listening_count", nullable = false)
+    private int listeningCount = 0; // Giá trị mặc định là 0
+
+    @PrePersist
+    protected void onCreate() {
+        this.createTime = LocalDateTime.now();
+    }
 }
