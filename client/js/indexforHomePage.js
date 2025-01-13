@@ -39,7 +39,7 @@ function getTopPlayedSongs() {
                 content += `
           <div class="song-card col-2">
             <div class="card">
-     
+
               <img src="${API_BASE_URL}/images/${data[i].imageFile}"
                    alt="${data[i].name}" class="card-img-top">
 
@@ -242,7 +242,6 @@ function getTopLikedPlaylists() {
 }
 
 
-
 $(document).ready(function() {
     $(".nonloop-block-13").owlCarousel({
         items: 3,               // Hiển thị 3 mục mỗi lần
@@ -264,7 +263,6 @@ $(document).ready(function() {
         }
     });
 });
-
 
 
 
@@ -308,9 +306,7 @@ $(document).ready(function () {
     // Gọi hàm fetchPlaylist khi trang tải
     fetchPlaylist();
 });
-
 // getTopPlayedSongs();
-
 getNewSongs();
 getTopLikedSongs();
 getTopPlayedPlaylists();
