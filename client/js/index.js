@@ -49,7 +49,7 @@ $(document).ready(function(){
                               </div>
                             </div>
                           </div>
-                          <div class="text w-100">
+                          <div class="text">
                             <h3 class="font-weight-light">
                               <a href="song.html" onclick="storeSongId(${songs[i].id}); storeUserId(userId)">
                                 ${songs[i].name}
@@ -149,4 +149,3 @@ function getTopPlayedSongs() {
     })
 }
 getTopPlayedSongs();
-

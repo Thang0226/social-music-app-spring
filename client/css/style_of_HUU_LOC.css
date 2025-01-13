@@ -93,6 +93,22 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+
+.song-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card {
+    width: 200px;
+    margin: 10px;
+}
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+
 .song-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
