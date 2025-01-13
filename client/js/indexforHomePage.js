@@ -39,31 +39,7 @@ function getTopPlayedSongs() {
                 content += `
           <div class="song-card col-2">
             <div class="card">
-/* ----------------NHIEM VU 40: HIỂN THỊ BÀI HÁT CÓ LƯỢT VIEW NHIỀU NHẤT ------------------------ */
-
-
-// function getTopPlayedSongs() {
-//     $.ajax({
-//         headers: {
-//             'accept': 'application/json',
-//             'content-type': 'application/json',
-//         },
-//         url: 'http://localhost:8080/api/homepage/top-played-songs',
-//         type: 'GET',
-//         success: function (data) {
-//             let content = "";
-//             data.forEach(song => {
-//                 content += `
-//                     <div>
-//                         <strong>${song.title}</strong><br>
-//                         <span>Lượt view: ${song.views}</span><br>
-//                         <p>${song.artist}</p>
-//                     </div>`;
-//             });
-//             $("#top-played-songs").html(content);
-//         }
-//     });
-// }
+     
               <img src="${API_BASE_URL}/images/${data[i].imageFile}"
                    alt="${data[i].name}" class="card-img-top">
 
@@ -266,6 +242,7 @@ function getTopLikedPlaylists() {
 }
 
 
+
 $(document).ready(function() {
     $(".nonloop-block-13").owlCarousel({
         items: 3,               // Hiển thị 3 mục mỗi lần
@@ -287,6 +264,7 @@ $(document).ready(function() {
         }
     });
 });
+
 
 
 
@@ -330,7 +308,9 @@ $(document).ready(function () {
     // Gọi hàm fetchPlaylist khi trang tải
     fetchPlaylist();
 });
+
 // getTopPlayedSongs();
+
 getNewSongs();
 getTopLikedSongs();
 getTopPlayedPlaylists();
