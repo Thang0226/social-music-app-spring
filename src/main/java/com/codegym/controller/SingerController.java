@@ -1,14 +1,16 @@
 package com.codegym.controller;
 
 
+
 import com.codegym.model.Singer;
-import com.codegym.model.Song;
 import com.codegym.service.singer.ISingerService;
+import com.codegym.service.singer.SingerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -17,6 +19,8 @@ import java.util.Optional;
 public class SingerController {
     @Autowired
     private ISingerService iSingerService;
+    @Autowired
+    private SingerService singerService;
 
     @GetMapping
     public ResponseEntity<Iterable<Singer>> listSinger() {
@@ -36,5 +40,10 @@ public class SingerController {
                .map(ResponseEntity::ok)
                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-
+    @GetMapping("/findByName/{singerName}")
+    public ResponseEntity<Singer> findBySingerName(@PathVariable String singerName){
+        return iSingerService.findBySingerName(singerName)
+                .map(ResponseEntity::ok)
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
 }
