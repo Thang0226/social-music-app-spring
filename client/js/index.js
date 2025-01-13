@@ -17,6 +17,7 @@ function storePlaylistId(playlistId) {
 let userId = localStorage.getItem("user-id");
 let token = localStorage.getItem("token");
 
+// Get latest songs
 function initializeNewSongs() {
     $.ajax({
         url: `http://localhost:8080/api/homepage/new-songs`,
@@ -48,7 +49,7 @@ function initializeNewSongs() {
                             </div>
                           </div>
                           <div class="text">
-                            <h3 class="font-weight-light">
+                            <h3 class="font-weight-light" style="text-align:left">
                               <a href="song.html" onclick="storeSongId(${songs[i].id}); storeUserId(userId)">
                                 ${songs[i].name}
                               </a>
@@ -108,7 +109,7 @@ function showMainPlayer(audioSrc) {
     let mainPlayerContainer = document.getElementById('main-player-container');
     let mainPlayer = document.getElementById('mep_1');
     let songDetails = document.getElementById('song-details');
-    mainPlayerContainer.classList.remove('none');
+    mainPlayerContainer.classList.remove('d-none');
     mainPlayerContainer.classList.add('d-flex');
     mainPlayer.classList.add('d-flex');
     songDetails.classList.add('d-flex');
@@ -150,33 +151,31 @@ function getSongInfoForMPC(songId) {
     })
 }
 
-function getTopPlayedSongs() {
-    $.ajax({
-        url: "http://localhost:8080/api/homepage/top-played-songs", // URL của API
-        method: "GET",
-        success: function (data) {
-            let content = "";
-            for (let i = 0; i < 10; i++) {
-                content +=`
-                <li>
-                    <a href="playlist.html" class="d-flex align-items-center">
-                        <img src="${API_BASE_URL}/images/${data[i].imageFile}" 
-                        alt="${data[i].name}" class="img-fluid mr-2" 
-                        style="max-width: 50px; max-height: 50px; width: 100%; height: auto;">
-                        <div class="podcaster">
-                            <span class="d-block" style="font-weight: bold">${data[i].name}</span>
-                            <span class="small">
-                            ${parseInt(data[i].listeningCount, 10).toLocaleString('vi-VN')} lượt nghe
-                            </span>
-                        </div>
-                    </a>
-                </li>
-                `
-            }
-            $("#popular-songs").html(content)
-        }
-    })
-}
-getTopPlayedSongs();
-
-gerSongInfoForMPC(songId);
+// function getTopPlayedSongs() {
+//     $.ajax({
+//         url: "http://localhost:8080/api/homepage/top-played-songs", // URL của API
+//         method: "GET",
+//         success: function (data) {
+//             let content = "";
+//             for (let i = 0; i < 10; i++) {
+//                 content +=`
+//                 <li>
+//                     <a href="playlist.html" class="d-flex align-items-center">
+//                         <img src="${API_BASE_URL}/images/${data[i].imageFile}"
+//                         alt="${data[i].name}" class="img-fluid mr-2"
+//                         style="max-width: 50px; max-height: 50px; width: 100%; height: auto;">
+//                         <div class="podcaster">
+//                             <span class="d-block" style="font-weight: bold">${data[i].name}</span>
+//                             <span class="small">
+//                             ${parseInt(data[i].listeningCount, 10).toLocaleString('vi-VN')} lượt nghe
+//                             </span>
+//                         </div>
+//                     </a>
+//                 </li>
+//                 `
+//             }
+//             $("#popular-songs").html(content)
+//         }
+//     })
+// }
+// getTopPlayedSongs();
