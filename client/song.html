@@ -292,24 +292,6 @@
 <script src="js/jquery.magnific-popup.min.js"></script>
 <script src="js/aos.js"></script>
 <script src="js/song.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        let mediaElements = document.querySelectorAll('video, audio'), total = mediaElements.length;
-
-        for (let i = 0; i < total; i++) {
-            new MediaElementPlayer(mediaElements[i], {
-                pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@7.0.7/build/',
-                shimScriptAccess: 'always',
-                success: function () {
-                    let target = document.body.querySelectorAll('.player'), targetTotal = target.length;
-                    for (let j = 0; j < targetTotal; j++) {
-                        target[j].style.visibility = 'visible';
-                    }
-                }
-            });
-        }
-    });
-</script>
 <script src="js/main.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
