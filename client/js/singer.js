@@ -1,4 +1,5 @@
 let singerId = localStorage.getItem("singer-id");
+const API_BASE_URL = 'http://localhost:8080';
 let currentPage = 0;
 const pageSize = 10; // Number of comments per load
 
@@ -119,3 +120,74 @@ $(document).ready(function () {
     fetchPlaylist();
 });
 
+//  get singer information
+function getSingerInfo(singerId) {
+    $.ajax({
+        url: `http://localhost:8080/api/singers/${singerId}`,
+        type: 'GET',
+        success: function (result) {
+            console.log(result);
+            let content =`<h1 class="mb-3">${result.singerName}</h1>`;
+            $('#singer-info').html(content);
+        }
+    })
+}
+getSingerInfo(singerId);
+
+// get singer popular songs
+function getSingerPopularSongs(singerId) {
+    $.ajax({
+        headers: {
+            'accept': 'application/json',
+            'content-type': 'application/json',
+        },
+        url: `${API_BASE_URL}/api/songs/singer-popular-song/${singerId}`,
+        type: 'GET',
+        success: function (result) {
+            console.log(result);
+            let content = '';
+            for (let i = 0; i < result.length; i++) {
+                let singers = "";
+                for (let j = 0; j < result[i].singers.length; j++) {
+                    singers += `<a href="singer.html" onclick="storeSingerId(${result[i].singers[j].id})"> ${result[i].singers[j].singerName}</a>`
+                    if (j < result[i].singers.length - 1) {
+                        singers += `, `
+                    }
+                }
+                let localDate = moment(result[i].uploadTime).tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY");
+                content =`
+                 <div class="d-block d-md-flex podcast-entry bg-white mb-3 col-6 mt-3 mb-3 rounded-4" data-aos="fade-up">
+                  <div class="image-container">
+                    <div
+                      class="image"
+                      style="background-image: url('${API_BASE_URL}/images/${result[i].imageFile}');">
+                      <div class="play-button"
+                      onclick="showMainPlayer('${API_BASE_URL}/audios/${result[i].musicFile}'); 
+                      getSongInfoForMPC(${result[i].id})">
+                        <i class="bi bi-play-circle"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="text w-100">
+                    <h3 class="font-weight-light">
+                      <a href="song.html" onclick="storeSongId(${result[i].id}); storeUserId(userId)">
+                        ${result[i].name}
+                      </a>
+                    </h3>
+                    <div class="text-white mb-3">
+                      <span class="text-black-opacity-05">
+                        <span>${singers} <span class="sep">&bullet;</span> ${localDate} <span class="sep">&bullet;</span>
+                          <span> <i class="bi bi-eye"></i> <span id="listening-count">
+                              ${parseInt(result[i].listeningCount, 10).toLocaleString('vi-VN')}</span>
+                          </span>
+                        </span>
+                      </span>
+                    </div>                     
+                  </div>
+                </div>`;
+            }
+            $('#featured-song').html(content);
+        }
+    })
+}
+getSingerPopularSongs(singerId);

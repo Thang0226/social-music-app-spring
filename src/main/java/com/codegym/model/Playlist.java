@@ -32,8 +32,9 @@ public class Playlist {
     @Column(name = "create_time", updatable = false)
     private LocalDateTime createTime;
 
-    @Column(name = "user_id")
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Column(name = "listening_count", nullable = false)
     private int listeningCount = 0; // Giá trị mặc định là 0

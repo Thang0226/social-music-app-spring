@@ -93,6 +93,22 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+
+.song-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card {
+    width: 200px;
+    margin: 10px;
+}
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+
 .song-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
@@ -319,6 +335,7 @@
     display: flex;
     align-items: center;
     gap: 20px;
+    justify-content: space-evenly;
 }
 
 .music-card:hover {
@@ -351,6 +368,20 @@
     font-size: 0.9rem;
     color: #666;
     margin-bottom: 8px;
+}
+
+.music-card .btn-primary {
+    background: linear-gradient(90deg, #4a90e2, #67b8e3);
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: 500;
+    transition: transform 0.2s ease;
+}
+
+.music-card .btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 4px rgba(74, 144, 226, 0.2);
 }
 
 .like-count {

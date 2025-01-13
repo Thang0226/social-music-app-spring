@@ -224,4 +224,10 @@ public class SongController {
         List<Song> songs = iSongService.findSongBySingers(id);
         return new ResponseEntity<>(songs,HttpStatus.OK);
     }
+
+    @GetMapping("/findAllSongBySinger/{id}")
+    public ResponseEntity<List<Song>> findAllSongBySinger(@PathVariable Long id) {
+        List<Song> songs = iSongService.findSongBySingers(id);
+        return new ResponseEntity<>(songs, HttpStatus.OK);
+    }
 }

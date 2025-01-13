@@ -1,0 +1,86 @@
+<!-- slider.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Songs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .song-card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .card {
+            width: 200px;
+            margin: 10px;
+        }
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="text-center font-weight-bold text-black mb-5">Top Most Favorite Songs</h2>
+    <div id="new-songs-container" class="owl-carousel owl-theme">
+        <!-- Dynamic content will be loaded here -->
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script>
+    function playSong(id) {
+        localStorage.setItem("song-id", id);
+        window.parent.location.href = "song.html";
+    }
+
+    function getNewSongs() {
+        $.ajax({
+            headers: { 'accept': 'application/json', 'content-type': 'application/json' },
+            url: 'http://localhost:8080/api/homepage/top-played-songs',
+            type: 'GET',
+            success: function (data) {
+                let content = "";
+                for (let i = 0; i < 20; i++) {
+                    content += `
+              <div class="song-card">
+                <div class="card">
+                  <img src="http://localhost:8080/images/${data[i].imageFile}" alt="${data[i].name}" class="card-img-top">
+                  <div class="card-body text-center">
+                    <h5 class="card-title">${data[i].name}</h5>
+                    <p class="card-text">${data[i].singers.map(s => s.singerName).join(', ')}</p>
+                    <button class="btn btn-primary btn-sm" onclick="playSong('${data[i].id}')">Play</button>
+                  </div>
+                </div>
+              </div>`;
+                }
+                $("#new-songs-container").html(content);
+                $('#new-songs-container').owlCarousel({
+                    loop: true,
+                    margin: 10,
+                    nav: true,
+                    autoplay: true,
+                    autoplayTimeout: 3000,
+                    autoplayHoverPause: true,
+                    responsive: {
+                        0: { items: 1 },
+                        600: { items: 2 },
+                        1000: { items: 3 }
+                    }
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error("Lỗi:", error);
+            }
+        });
+    }
+    getNewSongs();
+</script>
+</body>
+</html>
