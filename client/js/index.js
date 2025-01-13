@@ -33,7 +33,6 @@ $(document).ready(function(){
                     if (j < songs[i].singers.length - 1) {
                         singers += `, `
                     }
-
                 }
                 let localDate = moment(songs[i].uploadTime).tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY");
                 content += `
@@ -44,7 +43,7 @@ $(document).ready(function(){
                               style="background-image: url('${API_BASE_URL}/images/${songs[i].imageFile}');">
                               <div class="play-button"
                               onclick="showMainPlayer('${API_BASE_URL}/audios/${songs[i].musicFile}'); 
-                              gerSongInfoForMPC(${songs[i].id})">
+                              getSongInfoForMPC(${songs[i].id})">
                                 <i class="bi bi-play-circle"></i>
                               </div>
                             </div>
@@ -90,7 +89,7 @@ function showMainPlayer(audioSrc) {
     mainAudio.play();
 }
 
-function gerSongInfoForMPC(songId) {
+function getSongInfoForMPC(songId) {
     $.ajax({
         url: `http://localhost:8080/api/songs/${songId}`,
         method: 'GET',
