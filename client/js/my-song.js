@@ -2,7 +2,6 @@ const API_BASE_URL = 'http://localhost:8080';
 let user_id = localStorage.getItem("user-id");
 console.log("Hello");
 $(function () {
-    console.log("jQuery ready function is working!");
     $("#update-form").hide();
     $.ajax({
         url: `http://localhost:8080/api/songs/by-user/${user_id}`,
@@ -17,7 +16,7 @@ $(function () {
                 songsHtml += `
                     <div class="d-block d-md-flex podcast-entry bg-white mb-5 aos-init aos-animate" data-aos="fade-up">
                         <img width="150" height="150" src="${API_BASE_URL}/images/${item.imageFile}" alt="Thumbnail Image" class="image">
-                        <div class="text" style="padding-bottom: 50px">
+                        <div class="text" >
                             <h3 class="font-weight-light"><a href="song.html" onclick="storeSongId(${item.songId})">${item.songName}</a></h3>
                             <div class="text-white mb-3">
                                 <span class="text-black-opacity-05">
@@ -59,7 +58,7 @@ function storeSongId(songId) {
 function updateSong(id) {
     event.preventDefault();
     $.ajax({
-        type: "GET",
+        type: "GET", // fetching data
         url: `http://localhost:8080/api/songs/${id}`,
         headers: {
             'Accept': 'application/json',
@@ -67,24 +66,105 @@ function updateSong(id) {
         },
         success: function (song){
             console.log(song);
+            $("#update-form").show();
 
-            let content = `            
-                    <button type="submit" class="btn btn-primary" onclick="updateSongData(song.songId)">Update</button>
-                    <button id="cancelUpdate" class="btn btn-danger">Cancel</button>`
-            $("#buttons").html(content);
+
             $("#name").val(song.name);
-            $("#musicFile")[0].files[0];
-            $("#imageFile")[0].files[0];
             $("#description").val(song.description);
 
-            $("#update-form").show();
+            $("#update-form").data("current-music", song.musicFile);
+            $("#update-form").data("current-image", song.imageFile);
+
+
+            if (!$("#songId").length) {
+                $("#update-form").append(`<input type="hidden" id="songId" value="${song.id}">`);
+            } else {
+                $("#songId").val(song.id);
+            }
+
+            let content = `
+                <div class="col-md-12 mt-3">
+                    <button type="button" class="btn btn-primary" onclick="updateSongData()">Update</button>
+                    <button type="button" id="cancelUpdate" class="btn btn-danger">Cancel</button>
+                </div>`;
+            $("#buttons").html(content);
+            $("#cancelUpdate").click(()=>{
+                $("#update-form").hide();
+            })
+            // Show current file names
+            if (song.musicFile) {
+                $("#currentMusic").text(`Current audio: ${song.musicFile}`);
+            }
+            if (song.imageFile) {
+                $("#currentImage").text(`Current image: ${song.imageFile}`);
+            }
         },
+        error: function(xhr, status, error) {
+            console.error("Error fetching song:", error);
+            alert("Error loading song data");
+        }
     })
 }
 
-$("#cancelUpdate").click(()=>{
-    $("#update-form").hide();
-})
+
+function updateSongData() {
+    const songId = $("#songId").val();
+
+    // Create FormData object
+    const formData = new FormData();
+
+    // Add basic fields
+    formData.append('name', $("#name").val());
+    formData.append('description', $("#description").val());
+
+    // Add files only if new ones are selected
+    const musicFile = $("#musicFile")[0].files[0];
+    const imageFile = $("#imageFile")[0].files[0];
+
+    if (musicFile) {
+        formData.append('musicFile', musicFile);
+    } else {
+        // If no new file selected, send the current filename
+        formData.append('musicFile', new File([], $("#update-form").data("current-music")));
+    }
+
+    if (imageFile) {
+        formData.append('imageFile', imageFile);
+    } else {
+        // If no new file selected, send the current filename
+        formData.append('imageFile', new File([], $("#update-form").data("current-image")));
+    }
+
+    // Add other fields (singers, genres) if they exist
+    if ($("#selectedSingers").val()) {
+        formData.append('singers', $("#selectedSingers").val());
+    }
+    if ($("#selectedGenres").val()) {
+        formData.append('genres', $("#selectedGenres").val());
+    }
+
+    $.ajax({
+        url: `${API_BASE_URL}/api/songs/${songId}`,
+        type: 'PUT',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            console.log("Update successful:", response);
+            $("#update-form").hide();
+            location.reload(); // Refresh the page to show updated data
+        },
+        error: function(xhr, status, error) {
+            console.error("Error updating song:", error);
+            alert("Error updating song. Please try again.");
+        }
+    });
+}
+
+
+
+
+
 
 function deleteSong(id){
     console.log("Successs")

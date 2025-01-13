@@ -124,12 +124,56 @@ public class SongController {
         return singersSet;
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Song> updateSong(@RequestBody Song song, @PathVariable Long id) {
-        song.setId(id);
-        iSongService.save(song);
-        return new ResponseEntity<>(HttpStatus.OK);
+//    @PutMapping("/{id}")
+//    public ResponseEntity<Song> updateSong(@RequestBody Song song, @PathVariable Long id) {
+//        song.setId(id);
+//        iSongService.save(song);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
+@PutMapping("/{id}")
+public ResponseEntity<Song> updateSong(
+        @PathVariable Long id,
+        @RequestParam String name,
+        @RequestParam String description,
+        @RequestParam(required = false) MultipartFile musicFile,
+        @RequestParam(required = false) MultipartFile imageFile) {
+
+    Optional<Song> songOptional = iSongService.findById(id);
+    if (songOptional.isEmpty()) {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    Song song = songOptional.get();
+    song.setName(name);
+    song.setDescription(description);
+
+    // Handle music file update
+    if (musicFile != null && !musicFile.isEmpty()) {
+        String musicFileName = musicFile.getOriginalFilename();
+        try {
+            FileCopyUtils.copy(musicFile.getBytes(), new File(audioPath + musicFileName));
+            song.setMusicFile(musicFileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    // Handle image file update
+    if (imageFile != null && !imageFile.isEmpty()) {
+        String imageFileName = imageFile.getOriginalFilename();
+        try {
+            FileCopyUtils.copy(imageFile.getBytes(), new File(imagePath + imageFileName));
+            song.setImageFile(imageFileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    iSongService.save(song);
+    return new ResponseEntity<>(song, HttpStatus.OK);
+}
 
     @Autowired
     private ICommentService iCommentService;
