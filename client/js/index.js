@@ -18,6 +18,7 @@ let userId = localStorage.getItem("user-id");
 let token = localStorage.getItem("token");
 const API_BASE_URL = 'http://localhost:8080';
 
+// Get latest songs
 function initializeNewSongs() {
     $.ajax({
         url: `http://localhost:8080/api/homepage/new-songs`,

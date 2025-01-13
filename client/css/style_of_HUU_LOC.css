@@ -335,7 +335,6 @@
     display: flex;
     align-items: center;
     gap: 20px;
-    justify-content: space-evenly;
 }
 
 .music-card:hover {
@@ -353,6 +352,7 @@
 .music-card-content {
     flex: 1;
     min-width: 0;
+    text-align: left;
 }
 
 .music-card h3 {

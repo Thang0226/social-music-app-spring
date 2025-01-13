@@ -15,3 +15,46 @@ function showAllSinger() {
     })
 }
 showAllSinger();
+
+// function searchSinger(keyword) {
+//     if (!keyword) {
+//         keyword = $("#searchInput").val().trim();
+//     }
+//     if (!keyword) {
+//         alert("Vui lòng nhập từ khóa tìm kiếm!");
+//         return;
+//     }
+//
+//     $("#sectionTitle").text(`Kết quả tìm kiếm cho: "${keyword}"`);
+//
+//     $.ajax({
+//         url: `${apiUrl}/search`,
+//         method: "GET",
+//         data: { keyword },
+//         success: displaySinger,
+//         error: () => {
+//             $("#singerList").html("<p class='text-center'>Không tìm thấy bài hát.</p>");
+//         }
+//     });
+// }
+// $(document).ready(function () {
+//     const keyword = getQueryParam("keyword");
+//
+//     if (keyword) {
+//         $("#searchInput").val(keyword);
+//         searchSinger(keyword);
+//     } else {
+//         getAllSongs();
+//     }
+// });
+//
+//
+// $(".btn-search").click(function () {
+//     searchSinger();
+// });
+//
+//
+// function getQueryParam(param) {
+//     const urlParams = new URLSearchParams(window.location.search);
+//     return urlParams.get(param);
+// }
