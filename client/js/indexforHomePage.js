@@ -1,11 +1,13 @@
-/* ----------------NHIEM VU 40: HIỂN THỊ BÀI HÁT CÓ LƯỢT VIEW NHIỀU NHẤT ------------------------ */
-function getTopPlayedSongs() {
+const API_BASE_URL = 'http://localhost:8080';
+
+/* ----------------NHIEM VU 40: HIỂN THỊ BÀI HÁT MỚI NHẤT ------------------------ */
+function getNewSongs() {
     $.ajax({
         headers: {
             'accept': 'application/json',
             'content-type': 'application/json',
         },
-        url: 'http://localhost:8080/api/homepage/top-played-songs',
+        url: 'http://localhost:8080/api/homepage/new-songs',
         type: 'GET',
         success: function (data) {
             let content = "";
@@ -17,13 +19,13 @@ function getTopPlayedSongs() {
                         <p>${song.artist}</p>
                     </div>`;
             });
-            $("#top-played-songs").html(content);
+            $("#new-songs").html(content);
         }
     });
 }
 
-/* ---------------- NHIỆM VỤ 41: HIỂN THỊ BÀI HÁT MỚI NHẤT VỪA ĐƯỢC THÊM VÀO <da co> <done>------------------------ */
-function getNewSongs() {
+/* ---------------- NHIỆM VỤ 41: HIỂN THỊ BÀI HÁT CÓ LƯỢT VIEW NHIỀU NHẤT------------------------ */
+function getTopPlayedSongs() {
     $.ajax({
         headers: {
             'accept': 'application/json',
@@ -33,13 +35,13 @@ function getNewSongs() {
         type: 'GET',
         success: function (data) {
             let content = "";
-            for(let i=0; i < 6; i++) {
+            for (let i = 0; i < 6 && i < data.length; i++) {
                 content += `
           <div class="song-card col-2">
             <div class="card">
 
 
-              <img src="${data[i].imageFile}" 
+              <img src="${API_BASE_URL}/images/${data[i].imageFile}" 
                    alt="${data[i].name}" class="card-img-top">     
 
               <div class="card-body text-center">
@@ -51,31 +53,14 @@ function getNewSongs() {
               </div>
             </div>
           </div>`;
-            };
-            $("#new-songs-container").html(content);
+            }
+            $("#top-played-songs").html(content);
         },
         error: function (xhr, status, error) {
             console.error("Lỗi:", error);
         }
     });
 }
-
-
-
-
-
-
-// Hàm play bài hát
-function playSong(musicFile) {
-    // Logic play nhạc, ví dụ:
-    console.log(`Playing song: ${musicFile}`);
-    alert(`Playing: ${musicFile}`);
-}
-
-
-
-
-
 
 
 /* ----------------NHIEM VU 43: HIỂN THỊ BÀI HÁT CÓ LƯỢT LIKE NHIỀU NHẤT<da co> ------------------------ */
@@ -87,11 +72,11 @@ function getTopLikedSongs() {
         },
         url: 'http://localhost:8080/api/homepage/top-liked-songs',
         type: 'GET',
-        success: function(data) {
+        success: function (data) {
 
             let content = "";
 
-            for (let i = 0; i < 8; i++) {
+            for (let i = 0; i < 8 && i < data.length; i++) {
                 let singers = "";
                 for (let j = 0; j < data[i].singers.length; j++) {
                     singers += `<a href="singer.html" onclick="storeSingerId(${data[i].singers[j].id})"> ${data[i].singers[j].singerName}</a>`
@@ -102,28 +87,29 @@ function getTopLikedSongs() {
                 }
                 content += `
                     <div class="music-card">
-                        <img src="${data[i].imageUrl || '/api/placeholder/80/80'}" alt="${data[i].name}">
-                        <div class="music-card-content">
+                        <img src="${API_BASE_URL}/images/${data[i].imageFile}" alt="${data[i].name}">
+                        <div class="row">
+                        <div class="music-card-content col-9">
                             <h3>${data[i].name}</h3>
                             <p>${singers}</p>
                             <div class="like-count">
-                                <i class="fas fa-heart"></i>
+                                <i class="bi bi-heart"></i>
                                 <span>${data[i].likeCount} likes</span>
                             </div>
+                        </div>
+                        <div class="col-3"> 
+                        <button class="btn btn-primary btn-sm " onclick="playSong('${data[i].musicFile}')">Play</button>
+                        </div>
                         </div>
                     </div>`;
             }
             $("#top-liked-songs").html(content);
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
             console.error("Error fetching songs:", error);
         }
     });
 }
-
-
-
-
 
 
 /* ----------------NHIỆM VỤ 39: HIỂN THỊ PLAYLIST ĐANG ĐƯỢC NGHE NHIỀU NHẤT ------------------------ */
@@ -166,7 +152,7 @@ function getNewPlaylists() {
         type: 'GET',
         success: function (data) {
             let content = "";
-            for (let i = 0; i < 4 && i < data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
                 content += `
                     <div class="col-md-3">
                         <div class="playlist-card">                                         
@@ -193,30 +179,31 @@ function getTopLikedPlaylists() {
         },
         url: 'http://localhost:8080/api/homepage/top-liked-playlists',
         type: 'GET',
-        success: function(data) {
+        success: function (data) {
             let content = "";
-            for (let i = 0; i < data.length; i++) {
+            for (let i = 0; i< 8 && i < data.length; i++) {
                 content += `
-                    <div class="music-card">
-                        <img src="${data[i].imageUrl || '/api/placeholder/80/80'}" alt="${data[i].name}">
-                        <div class="music-card-content">
+                    <div class="music-card row">
+                        <div class="music-card-content col-9">
                             <h3>${data[i].name}</h3>
                             <p>${data[i].listeningCount} views</p>
                             <div class="like-count">
-                                <i class="fas fa-heart"></i>
+                                <i class="bi bi-heart"></i>
                                 <span>${data[i].likeCount} likes</span>
                             </div>
+                        </div>
+                        <div class="col-3">
+                        <button class="btn btn-primary btn-sm " onclick="playSong('${data[i].musicFile}')">Play</button>
                         </div>
                     </div>`;
             }
             $("#top-liked-playlists").html(content);
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
             console.error("Error fetching playlists:", error);
         }
     });
 }
-
 
 
 $(document).ready(function () {
