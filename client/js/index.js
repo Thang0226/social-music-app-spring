@@ -13,10 +13,12 @@ function storeSingerId(singerId) {
 function storePlaylistId(playlistId) {
     localStorage.setItem("playlist-id", playlistId)
 }
-
+let songId = localStorage.getItem("song-id");
 let userId = localStorage.getItem("user-id");
 let token = localStorage.getItem("token");
+const API_BASE_URL = 'http://localhost:8080';
 
+// Get latest songs
 function initializeNewSongs() {
     $.ajax({
         url: `http://localhost:8080/api/homepage/new-songs`,
@@ -39,7 +41,7 @@ function initializeNewSongs() {
                           <div class="image-container">
                             <div
                               class="image"
-                              style="background-image: url(${API_BASE_URL}/images/${songs[i].imageFile})">
+                              style="background-image: url('${API_BASE_URL}/images/${songs[i].imageFile}');">
                               <div class="play-button"
                               onclick="showMainPlayer('${API_BASE_URL}/audios/${songs[i].musicFile}'); 
                               getSongInfoForMPC(${songs[i].id})">
@@ -49,7 +51,7 @@ function initializeNewSongs() {
                           </div>
                           <div class="text">
                             <h3 class="font-weight-light">
-                              <a href="song.html" onclick="storeSongId(${songs[i].id}); storeUserId(userId)">
+                              <a href="song.html" onclick="storeSongId(${songs[i].id}); storeUserId(${userId})">
                                 ${songs[i].name}
                               </a>
                             </h3>
@@ -108,10 +110,12 @@ function showMainPlayer(audioSrc) {
     let mainPlayerContainer = document.getElementById('main-player-container');
     let mainPlayer = document.getElementById('mep_1');
     let songDetails = document.getElementById('song-details');
-    mainPlayerContainer.classList.remove('none');
+    mainPlayerContainer.classList.remove('d-none');
     mainPlayerContainer.classList.add('d-flex');
     mainPlayer.classList.add('d-flex');
     songDetails.classList.add('d-flex');
+
+    getSongInfoForMPC(songId);
 
     // Update the audio source
     let mainAudio = mainPlayer.querySelector('audio');
@@ -138,7 +142,7 @@ function getSongInfoForMPC(songId) {
                 style="max-width: 80px; max-height: 80px; width: 100%; height: auto;">
                 <div class="podcaster">
                     <span class="d-block" style="font-weight: bold">
-                        <a href="song.html" onclick="storeSongId(${data.id}); storeUserId(userId)"> ${data.name}</a>                       
+                        <a href="song.html" onclick="storeSongId(${data.id}); storeUserId(${userId})"> ${data.name}</a>                       
                     </span>
                     <span>
                         ${singers}
@@ -159,7 +163,8 @@ function getTopPlayedSongs() {
             for (let i = 0; i < 10; i++) {
                 content +=`
                 <li>
-                    <a href="playlist.html" class="d-flex align-items-center">
+                    <a href="song.html" class="d-flex align-items-center" 
+                    onclick="storeSongId(${data[i].id}); storeUserId(${userId})">
                         <img src="${API_BASE_URL}/images/${data[i].imageFile}" 
                         alt="${data[i].name}" class="img-fluid mr-2" 
                         style="max-width: 50px; max-height: 50px; width: 100%; height: auto;">
@@ -178,5 +183,3 @@ function getTopPlayedSongs() {
     })
 }
 getTopPlayedSongs();
-
-gerSongInfoForMPC(songId);

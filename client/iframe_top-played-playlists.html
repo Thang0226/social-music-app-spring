@@ -44,17 +44,6 @@
             }
         }
 
-        .section-title::before,
-        .section-title::after {
-            content: '';
-            position: absolute;
-            width: 40px;
-            height: 3px;
-            background: #1e88e5;
-            top: 50%;
-            animation: expandWidth 1s ease-out forwards;
-        }
-
         .section-title::before {
             left: -50px;
         }
@@ -267,6 +256,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <script>
+    function playList(id) {
+        localStorage.setItem("playlist-id", id);
+        window.parent.location.href = "playlist-view.html";
+    }
+
     function getTopPlayedPlaylists() {
         $.ajax({
             headers: {
@@ -298,7 +292,7 @@
                                             </div>
                                         </div>
                                         <div class="button-group">
-                                            <button class="btn btn-play">
+                                            <button class="btn btn-play" onclick="playList(${playlist.id})">
                                                 <i class="fas fa-play"></i>
                                                 Play
                                             </button>
@@ -355,7 +349,6 @@
 
     $(document).ready(function() {
         getTopPlayedPlaylists();
-        getNewPlaylists();
     });
 </script>
 </body>

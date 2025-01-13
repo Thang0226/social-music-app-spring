@@ -307,10 +307,8 @@ $(document).ready(function () {
     fetchPlaylist();
 });
 // getTopPlayedSongs();
-getNewSongs();
+// getNewSongs();
 getTopLikedSongs();
-getTopPlayedPlaylists();
-getNewPlaylists();
 getTopLikedPlaylists();
 
 
