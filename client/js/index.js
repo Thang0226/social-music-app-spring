@@ -90,10 +90,10 @@ $(document).ready(function () {
                 data.forEach(playlist => {
                     const listPlaylist = `
             <li>
-              <a href="#" class="d-flex align-items-center">
+              <a href="playlist.js" class="d-flex align-items-center">
 <!--                <img src="${playlist.image}" alt="${playlist.name}" class="img-fluid mr-2">-->
                 <div class="podcaster">
-                  <span class="d-block">${playlist.name}</span>
+                  <span class="d-block" style="font-weight: bold">${playlist.name}</span>
                   <span class="small">${playlist.listeningCount} lượt nghe</span>
                 </div>
               </a>
