@@ -6,9 +6,11 @@ import com.codegym.model.DTO.comment.PlaylistCommentDTO;
 import com.codegym.model.DTO.comment.SingerCommentDTO;
 import com.codegym.model.DTO.comment.SongCommentDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,4 +24,10 @@ public interface ICommentRepository extends JpaRepository<Comment, Long> {
 
     @Query(nativeQuery = true, value = "call find_comment_by_singer_id(:singerId)")
     List<SingerCommentDTO> findCommentsBySingerId(@Param("singerId") Long singerId);
+
+    // Delete song also delete comments
+    @Modifying
+    @Transactional
+    @Query(nativeQuery = true, value = "DELETE FROM Comment c WHERE c.song_id = :songId")
+    void deleteCommentsBySongId(@Param("songId") Long songId);
 }

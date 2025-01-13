@@ -4,10 +4,11 @@ package com.codegym.controller;
 import com.codegym.model.*;
 import com.codegym.model.DTO.song.UserSongDTO;
 import com.codegym.service.ISongService;
+import com.codegym.service.comment.ICommentService;
 import com.codegym.service.genre.IGenreService;
+import com.codegym.service.playlist.IPlaylistService;
 import com.codegym.service.singer.ISingerService;
 import com.codegym.service.user.IUserService;
-import com.codegym.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -16,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
 import java.io.IOException;
@@ -131,12 +131,20 @@ public class SongController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @Autowired
+    private ICommentService iCommentService;
+    @Autowired
+    private IPlaylistService iPlaylistService;
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Song> deleteSong(@PathVariable Long id) {
         Optional<Song> songOptional = iSongService.findById(id);
         if (songOptional.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        // Delete song also delete comments
+        iCommentService.deleteCommentsBySongId(id);
+
         iSongService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

@@ -72,11 +72,70 @@
     </header>
 
 
-    <!--   ALL SONGS -->
+
     <div class="site-section">
         <div class="container">
+            <div class="row mb-5" >
+                <!--  FORM -->
+                <form id="update-form" class="col-lg-9" action="#"  method="post" class="bg-white" enctype="multipart/form-data">
+                    <h1>Update song information</h1>
+                    <!-- NAME -->
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <label for="name" class="text-black">Name </label>
+                            <input type="text" class="form-control" id="name" name="name" >
+                        </div>
+                    </div>
+                    <!-- AUDIO -->
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <label for="musicFile" class="text-black mt-3">Audio</label>
+                            <input type="file" class="form-control" id="musicFile" name="musicFile" placeholder=""  accept="audio/*">
+                        </div>
+                    </div>
+                    <!-- IMAGE -->
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <label for="imageFile" class="text-black mt-3">Image </label>
+                            <input type="file" class="form-control" id="imageFile" name="imageFile"  accept="image/*">
+                        </div>
+                    </div>
+                    <!-- DESCRIPTION -->
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <label for="description" class="text-black mt-3">Description</label>
+                            <textarea name="description" id="description" cols="30" rows="10" class="form-control" ></textarea>
+                        </div>
+                    </div>
+                    <!-- SINGER -->
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <label for="singers" class="text-black">Singers </label>
+                            <select class="form-control" id="singers" name="singers"></select>
+                            <label for="selectedSingers" class="text-black mt-3 fst-italic">
+                                Selected Singer(s)</label>
+                            <input type="text" class="form-control" id="selectedSingers"
+                                   name="selectedSingers" readonly>
+                        </div>
+                    </div>
+                    <!-- GENRE -->
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <label for="genres" class="text-black mt-3">Genres</label>
+                            <select class="form-control" id="genres" name="genres"></select>
+                            <label for="selectedGenres" class="text-black mt-3 fst-italic">Selected
+                                Genre(s)</label>
+                            <input type="text" class="form-control" id="selectedGenres"
+                                   name="selectedGenres" readonly>
+                        </div>
+                    </div>
+                    <div id="buttons" class="form-group row"></div>
+                </form>
+            </div>
             <div class="row">
+
                 <div class="col-lg-9" id="newCreatedSong">
+
                     <!--   SONG ITEM -->
                     <div class="d-block d-md-flex podcast-entry bg-white mb-5 aos-init aos-animate" data-aos="fade-up">
                         <div class="image" style="background-image: url('images/img_2.jpg');"></div>
@@ -152,6 +211,9 @@
                             <button id="delete" class="btn btn-danger h-25 d-flex align-items-center" onclick="deleteSong()"><i class="bi bi-trash"></i></button>
                         </div>
                     </div>
+
+
+
                 </div>
             </div>
         </div>
@@ -159,30 +221,9 @@
 
 </div>
 
-
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/jquery-migrate-3.0.1.min.js"></script>
-<script src="js/jquery-ui.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/jquery.stellar.min.js"></script>
-<script src="js/jquery.countdown.min.js"></script>
-<script src="js/jquery.magnific-popup.min.js"></script>
-<script src="js/aos.js"></script>
-<script src="js/mediaelement-and-player.min.js"></script>
-
-
-
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <!-- MY-SONG.JS -->
 <script src="js/my-song.js"></script>
-
-
-
-
-
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         let mediaElements = document.querySelectorAll('video, audio'), total = mediaElements.length;
@@ -201,9 +242,19 @@
         }
     });
 </script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.43/moment-timezone-with-data.min.js"></script>
 <script src="js/MediaElementInit.js"></script>
+<script src="js/jquery-migrate-3.0.1.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.stellar.min.js"></script>
+<script src="js/jquery.countdown.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/aos.js"></script>
+<script src="js/mediaelement-and-player.min.js"></script>
 </body>
 </html>
