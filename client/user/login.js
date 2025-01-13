@@ -46,5 +46,5 @@ function update() {
 
 function homepage() {
     event.preventDefault();
-    window.location.href = "../index.html";
+    window.location.href = "../homepage.html";
 }
