@@ -3,26 +3,28 @@ const API_BASE_URL = 'http://localhost:8080';
 let song_id = localStorage.getItem("song-id");
 let song = {};
 
-$(document).ready(function(){
+$(document).ready(function () {
     $.ajax({
         url: `http://localhost:8080/api/songs/${song_id}`,
         method: 'GET',
-        success: function(result){
+        success: function (result) {
             console.log(result);
             song = result;
             let singerList = song.singers;
-            let listLength = singerList.length;
+            let singerListLength = singerList.length;
+            let genreList = song.singers;
+            let genreListLength = genreList.length;
             let singers = "";
-            for (let i = 0; i < listLength; i++) {
+            for (let i = 0; i < singerListLength; i++) {
                 singers += `<a href="singer.html" onclick="storeSingerId(${song.singers[i].id})"> ${song.singers[i].singerName}</a>`
-                if (i < listLength - 1) {
+                if (i < singerListLength - 1) {
                     singers += `, `
                 }
             }
             let genres = "";
-            for (let i = 0; i < listLength; i++) {
+            for (let i = 0; i < genreListLength; i++) {
                 genres += `<span> ${song.genres[i].name}</span>`
-                if (listLength > listLength - i) {
+                if (genreListLength > genreListLength - i) {
                     genres += `, `
                 }
             }
@@ -114,6 +116,7 @@ function loadMore() {
     currentPage++;
     getSongComment(songId, true);
 }
+
 getSongComment(songId, false);
 
 function postComment() {
@@ -148,11 +151,11 @@ function postComment() {
 }
 
 function storeSingerId(singerId) {
-    localStorage.setItem("singer-id",singerId)
+    localStorage.setItem("singer-id", singerId)
 }
 
 // like/unlike song
-function smashThatLikeButton(){
+function smashThatLikeButton() {
     liked = !liked; // Toggle the liked state
     if (liked) {
         heartIcon.classList.remove('bi-heart');
@@ -170,12 +173,12 @@ function smashThatLikeButton(){
 function likeSong(songId) {
     event.preventDefault()
     $.ajax({
-        headers:{
+        headers: {
             'content-type': 'application/json'
         },
         url: `${API_BASE_URL}/api/songs/like-song/${songId}`,
         type: 'PUT',
-        success : function (result) {
+        success: function (result) {
             console.log(result);
             $("#like-count").html(
                 `${parseInt(result, 10).toLocaleString('vi-VN')}`
@@ -187,12 +190,12 @@ function likeSong(songId) {
 function unlikeSong(songId) {
     event.preventDefault()
     $.ajax({
-        headers:{
+        headers: {
             'content-type': 'application/json'
         },
         url: `${API_BASE_URL}/api/songs/unlike-song/${songId}`,
         type: 'PUT',
-        success : function (result) {
+        success: function (result) {
             console.log(result);
             $("#like-count").html(
                 `${parseInt(result, 10).toLocaleString('vi-VN')}`
@@ -204,42 +207,42 @@ function unlikeSong(songId) {
 
 $(document).ready(function () {
     const playlistContainer = $(".featured-user .list-unstyled");
-
+})
     // Hàm gọi API để lấy danh sách playlist
-    function fetchPlaylist() {
-        $.ajax({
-            url: "http://localhost:8080/api/playlist", // URL của API
-            method: "GET",
-            dataType: "json",
-            success: function (data) {
-                // Xóa nội dung cũ
-                playlistContainer.empty();
+function fetchPlaylist() {
+    $.ajax({
+        url: "http://localhost:8080/api/playlist", // URL của API
+        method: "GET",
+        dataType: "json",
+        success: function (data) {
+            // Xóa nội dung cũ
+            playlistContainer.empty();
 
-                // Lặp qua danh sách và thêm vào HTML
-                data.forEach(playlist => {
-                    const listPlaylist = `
-            <li>
-              <a href="#" class="d-flex align-items-center">
+            // Lặp qua danh sách và thêm vào HTML
+            data.forEach(playlist => {
+                const listPlaylist = `
+        <li>
+          <a href="#" class="d-flex align-items-center">
 <!--                <img src="${playlist.image}" alt="${playlist.name}" class="img-fluid mr-2">-->
-                <div class="podcaster">
-                  <span class="d-block">${playlist.name}</span>
-                  <span class="small">${playlist.listeningCount} lượt nghe</span>
-                </div>
-              </a>
-            </li>
-          `;
-                    playlistContainer.append(listPlaylist);
-                });
-            },
-            error: function (xhr, status, error) {
-                console.error("Error fetching playlist:", error);
-                playlistContainer.html("<p>Unable to load playlist. Please try again later.</p>");
-            }
-        });
-    }
+            <div class="podcaster">
+              <span class="d-block">${playlist.name}</span>
+              <span class="small">${playlist.listeningCount} lượt nghe</span>
+            </div>
+          </a>
+        </li>
+      `;
+                playlistContainer.append(listPlaylist);
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error("Error fetching playlist:", error);
+            playlistContainer.html("<p>Unable to load playlist. Please try again later.</p>");
+        }
+    });
+}
 
-    // Gọi hàm fetchPlaylist khi trang tải
-    fetchPlaylist();
+// Gọi hàm fetchPlaylist khi trang tải
+fetchPlaylist();
 
 function get3PopularSongOfSinger(singerID) {
     $.ajax({
@@ -254,65 +257,33 @@ function get3PopularSongOfSinger(singerID) {
             console.log(song);
             let content = "";
             content += `<h3 class="mb-4">
-                            <a href="singer.html" onclick="storeSingerId(${song[0].singers[0].id})">
-                            ${song[0].singers[0].singerName} popular song</a>
-                        </h3>
-                        <ul class="list-unstyled">`;
+                        <a href="singer.html" onclick="storeSingerId(${song[0].singers[0].id})">
+                        ${song[0].singers[0].singerName} popular song</a>
+                    </h3>
+                    <ul class="list-unstyled">`;
             for (let i = 0; i < song.length; i++) {
+                if (i > 2) return;
                 if (song[i].id !== parseInt(songId)) {
                     content += `                
-                    <li>
-                        <a href="song.html" class="d-flex align-items-center" onclick="storeSongId(${song[i].id})">
-                            <img src="${API_BASE_URL}/images/${song[i].imageFile}" alt=" No Image" class="img-fluid mr-2">
-                            <div class="podcaster">
-                                <span class="d-block">${song[i].name}</span>
-                                <span class="small">
-                                    <i class="bi bi-eye"></i> <span id="listening-count">
-                                       ${parseInt(song[i].listeningCount, 10).toLocaleString('vi-VN')}</span>
-                                </span>
-                            </div>
-                        </a>
-                    </li>`
+                <li>
+                    <a href="song.html" class="d-flex align-items-center" onclick="storeSongId(${song[i].id})">
+                        <img src="${API_BASE_URL}/images/${song[i].imageFile}" alt=" No Image" class="img-fluid mr-2">
+                        <div class="podcaster">
+                            <span class="d-block">${song[i].name}</span>
+                            <span class="small">
+                                <i class="bi bi-eye"></i> <span id="listening-count">
+                                   ${parseInt(song[i].listeningCount, 10).toLocaleString('vi-VN')}</span>
+                            </span>
+                        </div>
+                    </a>
+                </li>`
                 }
             }
             content += `</ul>`
-            $('#singer-popular-songs').html(content);
+            $('#singer-popular-songs').append(content);
         }
     })
 }
-
-// MediaElement
-function initializeMediaPlayers() {
-    let mediaElements = document.querySelectorAll('video, audio'), total = mediaElements.length;
-
-    for (let i = 0; i < total; i++) {
-        new MediaElementPlayer(mediaElements[i], {
-            features: ['playpause', 'current', 'progress', 'duration', 'volume'],
-            pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@7.0.7/build/',
-            shimScriptAccess: 'always',
-            success: function (mediaElement) {
-                let target = document.body.querySelectorAll('.player'), targetTotal = target.length;
-                for (let j = 0; j < targetTotal; j++) {
-                    target[j].style.visibility = 'visible';
-                }
-                // Increase view count after 30 seconds
-                mediaElement.addEventListener('timeupdate', function () {
-                    if (mediaElement.currentTime >= 30) {
-                        // Call your function to increase the view count
-                        increaseViewCount(songId);
-                        // Remove the event listener after it triggers once
-                        mediaElement.removeEventListener('timeupdate', arguments.callee);
-                    }
-                });
-            }
-        });
-    }
-}
-
-// Initialize players on DOMContentLoaded
-document.addEventListener('DOMContentLoaded', function () {
-    initializeMediaPlayers();
-});
 
 function increaseViewCount(songId) {
     $.ajax({
@@ -326,4 +297,3 @@ function increaseViewCount(songId) {
         }
     })
 }
-
