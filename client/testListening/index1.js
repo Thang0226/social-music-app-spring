@@ -82,7 +82,7 @@ function getAllSongs() {
         }
     });
 }
-
+getAllSongs();
 
 function getLatestSongs() {
     $.ajax({
@@ -93,7 +93,6 @@ function getLatestSongs() {
         }
     });
 }
-
 
 function getMostPlayedSongs() {
     $.ajax({
