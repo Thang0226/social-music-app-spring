@@ -40,7 +40,7 @@ $(document).ready(function(){
                         <div class="d-block d-md-flex podcast-entry bg-white mb-3" data-aos="fade-up">
                           <div class="image" style="background-image: url('${API_BASE_URL}/images/${songs[i].imageFile}')">
                           </div>
-                          <div class="text w-100">
+                          <div class="text">
                             <h3 class="font-weight-light">
                               <a href="song.html" onclick="storeSongId(${songs[i].id}); storeUserId(userId)">
                                 ${songs[i].name}

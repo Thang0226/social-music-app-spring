@@ -39,10 +39,9 @@ function getTopPlayedSongs() {
                 content += `
           <div class="song-card col-2">
             <div class="card">
-
-
-              <img src="${API_BASE_URL}/images/${data[i].imageFile}" 
-                   alt="${data[i].name}" class="card-img-top">     
+     
+              <img src="${API_BASE_URL}/images/${data[i].imageFile}"
+                   alt="${data[i].name}" class="card-img-top">
 
               <div class="card-body text-center">
                 <h5 class="card-title">${data[i].name}</h5>
@@ -62,6 +61,43 @@ function getTopPlayedSongs() {
     });
 }
 
+/* ---------------- NHIỆM VỤ 41: HIỂN THỊ BÀI HÁT MỚI NHẤT <da fix thanh bai hat duoc nghe nhieu nhat> VỪA ĐƯỢC THÊM VÀO <da co> <done>------------------------ */
+// function getNewSongs() {   //bản chất là để hien thi bai hát dược nghe nhiều nhất
+//     $.ajax({
+//         headers: {
+//             'accept': 'application/json',
+//             'content-type': 'application/json',
+//         },
+//         url: 'http://localhost:8080/api/homepage/top-played-songs',
+//         type: 'GET',
+//         success: function (data) {
+//             let content = "";
+//             for(let i=0; i < 6; i++) {
+//                 content += `
+//           <div class="song-card col-2">
+//             <div class="card">
+//
+//
+//               <img src="${data[i].imageFile}"
+//                    alt="${data[i].name}" class="card-img-top">
+//
+//               <div class="card-body text-center">
+//                 <h5 class="card-title">${data[i].name}</h5>
+//                 <p class="card-text">
+//                   ${data[i].singers.map(s => s.singerName).join(', ')}
+//                 </p>
+//                 <button class="btn btn-primary btn-sm " onclick="playSong('${data[i].musicFile}')">Play</button>
+//               </div>
+//             </div>
+//           </div>`;
+//             };
+//             $("#new-songs-container").html(content);
+//         },
+//         error: function (xhr, status, error) {
+//             console.error("Lỗi:", error);
+//         }
+//     });
+// }
 
 /* ----------------NHIEM VU 43: HIỂN THỊ BÀI HÁT CÓ LƯỢT LIKE NHIỀU NHẤT<da co> ------------------------ */
 function getTopLikedSongs() {
@@ -205,6 +241,34 @@ function getTopLikedPlaylists() {
     });
 }
 
+
+
+$(document).ready(function() {
+    $(".nonloop-block-13").owlCarousel({
+        items: 3,               // Hiển thị 3 mục mỗi lần
+        loop: true,             // Lặp lại slider
+        margin: 20,             // Khoảng cách giữa các mục
+        nav: true,              // Hiển thị nút điều hướng
+        autoplay: true,         // Tự động cuộn
+        autoplayTimeout: 3000,  // Thời gian chờ trước khi chuyển (ms)
+        responsive: {
+            0: {
+                items: 1            // Hiển thị 1 mục trên màn hình nhỏ
+            },
+            600: {
+                items: 2            // Hiển thị 2 mục trên màn hình trung bình
+            },
+            1000: {
+                items: 3            // Hiển thị 3 mục trên màn hình lớn
+            }
+        }
+    });
+});
+
+
+
+
+
 $(document).ready(function () {
     const playlistContainer = $(".featured-user .list-unstyled");
 
@@ -245,7 +309,8 @@ $(document).ready(function () {
     fetchPlaylist();
 });
 
-getTopPlayedSongs();
+// getTopPlayedSongs();
+
 getNewSongs();
 getTopLikedSongs();
 getTopPlayedPlaylists();
