@@ -1,6 +1,39 @@
 const apiUrl = "http://localhost:8080/api/songListen";
 const audioPlayer = document.getElementById('audioPlayer');
 
+// Lấy từ khóa tìm kiếm từ URL
+const urlParams = new URLSearchParams(window.location.search);
+const keyword = urlParams.get('keyword');
+
+// Gán từ khóa vào ô tìm kiếm
+if (keyword) {
+    $("#searchInput").val(keyword);
+    fetchSearchResults(keyword);
+}
+
+// Hàm chuyển hướng tìm kiếm sang trang mới
+function searchSongs() {
+    const keyword = $("#searchInput").val();
+    if (keyword) {
+        window.location.href = `search_results.html?keyword=${encodeURIComponent(keyword)}`;
+    }
+}
+
+// Gọi API tìm kiếm bài hát
+function fetchSearchResults(keyword) {
+    $.ajax({
+        url: `${apiUrl}/search`,
+        method: "GET",
+        data: { keyword },
+        success: function (data) {
+            displaySongs(data);
+        },
+        error: function () {
+            alert("Không tìm thấy bài hát.");
+        }
+    });
+}
+
 function displaySongs(data) {
     const songList = $("#songList");
     songList.empty();
@@ -34,6 +67,10 @@ function playSong(musicFile) {
 
 function searchSongs() {
     const keyword = $("#searchInput").val();
+    if (keyword) {
+        // Chuyển trang và truyền từ khóa tìm kiếm qua URL
+        window.location.href = `search_results.html?keyword=${encodeURIComponent(keyword)}`;
+    }
     $.ajax({
         url: `${apiUrl}/search`,
         method: "GET",

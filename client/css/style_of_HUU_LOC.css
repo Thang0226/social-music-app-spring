@@ -62,7 +62,7 @@
 
 /* Latest Songs Section Styling */
 .site-section {
-    padding: 80px 0;
+    padding: 30px 0;
     background-color: #f8f9fa;
 }
 
@@ -70,7 +70,6 @@
     font-size: 2.5rem;
     margin-bottom: 1.5rem;
     position: relative;
-    display: inline-block;
 }
 
 .site-section h2::after {
@@ -197,78 +196,79 @@
 /*    letter-spacing: 2px;*/
 /*}*/
 
-/*.playlist-card {*/
-/*    background: #fff;*/
-/*    border-radius: 12px;*/
-/*    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); !* Hiệu ứng đổ bóng *!*/
-/*    padding: 20px;*/
-/*    transition: transform 0.3s ease, box-shadow 0.3s ease;*/
-/*}*/
+.playlist-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 30px;
+}
 
-/*.playlist-card:hover {*/
-/*    transform: translateY(-10px);*/
-/*    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); !* Hiệu ứng khi hover *!*/
-/*}*/
+.playlist-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Hiệu ứng khi hover */
+}
 
-/*.playlist-card img {*/
-/*    border-radius: 8px;*/
-/*    width: 100%;*/
-/*    object-fit: cover;*/
-/*}*/
+.playlist-card img {
+    border-radius: 8px;
+    width: 100%;
+    object-fit: cover;
+}
 
-/*.playlist-card h3 {*/
-/*    font-size: 1.5rem;*/
-/*    color: #222;*/
-/*    margin-bottom: 10px;*/
-/*}*/
+.playlist-card h3 {
+    font-size: 1.5rem;
+    color: #222;
+    margin-bottom: 10px;
+}
 
-/*.playlist-card p {*/
-/*    font-size: 0.9rem;*/
-/*    color: #666;*/
-/*    margin-bottom: 15px;*/
-/*}*/
+.playlist-card p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 15px;
+}
 
-/*.playlist-card .btn {*/
-/*    font-size: 0.8rem;*/
-/*    padding: 8px 16px;*/
-/*    border-radius: 20px;*/
-/*}*/
+.playlist-card .btn {
+    font-size: 0.8rem;
+    padding: 8px 16px;
+    border-radius: 20px;
+}
 
-/*.playlist-card .btn-primary {*/
-/*    background: #ff6b6b; !* Màu chủ đạo cho nút *!*/
-/*    border: none;*/
-/*    color: #fff;*/
-/*    transition: background 0.3s ease;*/
-/*}*/
+.playlist-card .btn-primary {
+    background: #ff6b6b; /* Màu chủ đạo cho nút */
+    border: none;
+    color: #fff;
+    transition: background 0.3s ease;
+}
 
-/*.playlist-card .btn-primary:hover {*/
-/*    background: #e63946;*/
-/*}*/
+.playlist-card .btn-primary:hover {
+    background: #e63946;
+}
 
-/*.playlist-card .btn-outline-primary {*/
-/*    border: 1px solid #ff6b6b;*/
-/*    color: #ff6b6b;*/
-/*    background: transparent;*/
-/*    transition: background 0.3s ease, color 0.3s ease;*/
-/*}*/
+.playlist-card .btn-outline-primary {
+    border: 1px solid #ff6b6b;
+    color: #ff6b6b;
+    background: transparent;
+    transition: background 0.3s ease, color 0.3s ease;
+}
 
-/*.playlist-card .btn-outline-primary:hover {*/
-/*    background: #ff6b6b;*/
-/*    color: #fff;*/
-/*}*/
+.playlist-card .btn-outline-primary:hover {
+    background: #ff6b6b;
+    color: #fff;
+}
 
-/*.d-flex {*/
-/*    gap: 10px; !* Khoảng cách giữa các nút *!*/
-/*}*/
+.d-flex {
+    gap: 10px; /* Khoảng cách giữa các nút */
+}
 
-/*@media (max-width: 768px) {*/
-/*    .playlist-card {*/
-/*        margin-bottom: 30px;*/
-/*    }*/
-/*    .site-section h2 {*/
-/*        font-size: 2rem;*/
-/*    }*/
-/*}*/
+@media (max-width: 768px) {
+    .playlist-card {
+        margin-bottom: 30px;
+    }
+    .site-section h2 {
+        font-size: 2rem;
+    }
+}
 
 
 /* Most Liked Section Styles */
@@ -287,7 +287,7 @@
 
 
 .site-section {
-    padding: 50px 0;
+    padding: 30px 0;
     background-color: #f9f9f9;
 }
 

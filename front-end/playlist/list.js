@@ -49,8 +49,8 @@
 //     }
 // }
 
-    // Sample function to load playlist
-    function loadPlaylists() {
+// Sample function to load playlist
+function loadPlaylists() {
     $.ajax({
         method: "GET",
         url: "http://localhost:8080/api/playlist",
@@ -81,59 +81,59 @@
     });
 }
 
-    function deletePlaylist(id) {
+function deletePlaylist(id) {
     if (confirm("Bạn có chắc muốn xóa playlist này?")) {
-    $.ajax({
-    method: "DELETE",
-    url: `http://localhost:8080/api/playlist/${id}`,
-    success: function () {
-    alert("Xóa playlist thành công!");
-    loadPlaylists(); // Reload playlists
-},
-    error: function () {
-    alert("Không thể xóa playlist.");
-}
-});
-}
+        $.ajax({
+            method: "DELETE",
+            url: `http://localhost:8080/api/playlist/${id}`,
+            success: function () {
+                alert("Xóa playlist thành công!");
+                loadPlaylists(); // Reload playlists
+            },
+            error: function () {
+                alert("Không thể xóa playlist.");
+            }
+        });
+    }
 }
 
-    $(document).ready(function () {
+$(document).ready(function () {
     loadPlaylists();
 
     // Show Add Playlist Form
     $("#addPlaylistBtn").click(function () {
-    $("#formContainer").show();
-});
+        $("#formContainer").show();
+    });
 
     // Cancel form and hide
     $("#cancelBtn").click(function () {
-    $("#formContainer").hide();
-});
+        $("#formContainer").hide();
+    });
 
     // Add Playlist Form Submit
     $("#addPlaylistForm").submit(function (e) {
-    e.preventDefault();
+        e.preventDefault();
 
-    const playlistData = {
-    name: $("#name").val(),
-    likeCount: $("#likeCount").val(),
-    listeningCount: $("#listeningCount").val(),
-    userId: $("#userId").val()
-};
+        const playlistData = {
+            name: $("#name").val(),
+            likeCount: $("#likeCount").val(),
+            listeningCount: $("#listeningCount").val(),
+            userId: $("#userId").val()
+        };
 
-    $.ajax({
-    method: "POST",
-    url: "http://localhost:8080/api/playlist",
-    contentType: "application/json",
-    data: JSON.stringify(playlistData),
-    success: function () {
-    $("#successMessage").text("Thêm playlist thành công!");
-    loadPlaylists(); // Reload playlists
-    $("#formContainer").hide();
-},
-    error: function () {
-    $("#errorMessage").text("Đã có lỗi xảy ra khi thêm playlist.");
-}
-});
-});
+        $.ajax({
+            method: "POST",
+            url: "http://localhost:8080/api/playlist",
+            contentType: "application/json",
+            data: JSON.stringify(playlistData),
+            success: function () {
+                $("#successMessage").text("Thêm playlist thành công!");
+                loadPlaylists(); // Reload playlists
+                $("#formContainer").hide();
+            },
+            error: function () {
+                $("#errorMessage").text("Đã có lỗi xảy ra khi thêm playlist.");
+            }
+        });
+    });
 });
