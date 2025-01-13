@@ -33,7 +33,6 @@ $(document).ready(function(){
                     if (j < songs[i].singers.length - 1) {
                         singers += `, `
                     }
-
                 }
                 let localDate = moment(songs[i].uploadTime).tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY");
                 content += `
@@ -66,9 +65,9 @@ $(document).ready(function(){
                             </div>
                         </div>
                     `;
-
             }
             $("#new-songs").html(content);
+
             initializeMediaPlayers();
         }
     });
@@ -91,10 +90,10 @@ $(document).ready(function () {
                 data.forEach(playlist => {
                     const listPlaylist = `
             <li>
-              <a href="#" class="d-flex align-items-center">
+              <a href="playlist.html" class="d-flex align-items-center">
 <!--                <img src="${playlist.image}" alt="${playlist.name}" class="img-fluid mr-2">-->
                 <div class="podcaster">
-                  <span class="d-block">${playlist.name}</span>
+                  <span class="d-block" style="font-weight: bold">${playlist.name}</span>
                   <span class="small">${playlist.listeningCount} lượt nghe</span>
                 </div>
               </a>
