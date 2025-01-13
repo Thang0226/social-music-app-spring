@@ -38,7 +38,16 @@ $(document).ready(function(){
                 let localDate = moment(songs[i].uploadTime).tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY");
                 content += `
                         <div class="d-block d-md-flex podcast-entry bg-white mb-3" data-aos="fade-up">
-                          <div class="image" style="background-image: url('${API_BASE_URL}/images/${songs[i].imageFile}')">
+                          <div class="image-container">
+                            <div
+                              class="image"
+                              style="background-image: url('${API_BASE_URL}/images/${songs[i].imageFile}');">
+                              <div class="play-button"
+                              onclick="showMainPlayer('${API_BASE_URL}/audios/${songs[i].musicFile}'); 
+                              gerSongInfoForMPC(${songs[i].id})">
+                                <i class="bi bi-play-circle"></i>
+                              </div>
+                            </div>
                           </div>
                           <div class="text w-100">
                             <h3 class="font-weight-light">
@@ -48,27 +57,16 @@ $(document).ready(function(){
                             </h3>
                             <div class="text-white mb-3">
                               <span class="text-black-opacity-05">
-                                <span>By ${singers} <span class="sep">&bullet;
-                                </span> ${localDate} <span class="sep">&bullet;
-                                <span> <i class="bi bi-eye"></i> <span id="listening-count">
-                                    ${parseInt(songs[i].listeningCount, 10).toLocaleString('vi-VN')}</span>
+                                <span>By ${singers} <span class="sep">&bullet;</span> ${localDate} <span class="sep">&bullet;</span>
+                                  <span> <i class="bi bi-eye"></i> <span id="listening-count">
+                                      ${parseInt(songs[i].listeningCount, 10).toLocaleString('vi-VN')}</span>
+                                  </span>
                                 </span>
                               </span>
-                            </div>
-                        
-                            <div id="song-player">
-                              <div class="player">
-                                <audio id="player2" preload="none" controls style="max-width: 100%">
-                                  <source src="${API_BASE_URL}/audios/${songs[i].musicFile}" type="audio/mp3">
-                                </audio>
-                              </div>
-                            </div>
-                            </div>
+                            </div>                     
+                          </div>
                         </div>
                     `;
-
-
-
             }
             $("#new-songs").html(content);
             initializeMediaPlayers();
@@ -76,6 +74,52 @@ $(document).ready(function(){
     });
 })
 
+function showMainPlayer(audioSrc) {
+    // Unhide the main player
+    let mainPlayerContainer = document.getElementById('main-player-container');
+    let mainPlayer = document.getElementById('mep_1');
+    let songDetails = document.getElementById('song-details');
+    mainPlayerContainer.classList.remove('none');
+    mainPlayerContainer.classList.add('d-flex');
+    mainPlayer.classList.add('d-flex');
+    songDetails.classList.add('d-flex');
+
+    // Update the audio source
+    let mainAudio = mainPlayer.querySelector('audio');
+    mainAudio.src = audioSrc;
+    mainAudio.play();
+}
+
+function gerSongInfoForMPC(songId) {
+    $.ajax({
+        url: `http://localhost:8080/api/songs/${songId}`,
+        method: 'GET',
+        success: function (data) {
+            let singers = "";
+            for (let j = 0; j < data.singers.length; j++) {
+                singers += `<a href="singer.html" onclick="storeSingerId(${data.singers[j].id})"> ${data.singers[j].singerName}</a>`
+                if (j < data.singers.length - 1) {
+                    singers += `, `
+                }
+            }
+            let content = "";
+            content +=`           
+                <img src="${API_BASE_URL}/images/${data.imageFile}" 
+                alt="${data.name}" class="img-fluid mr-2" 
+                style="max-width: 80px; max-height: 80px; width: 100%; height: auto;">
+                <div class="podcaster">
+                    <span class="d-block" style="font-weight: bold">
+                        <a href="song.html" onclick="storeSongId(${data.id}); storeUserId(userId)"> ${data.name}</a>                       
+                    </span>
+                    <span>
+                        ${singers}
+                    </span>
+                </div>         
+            `
+            $("#song-details").html(content)
+        }
+    })
+}
 
 function getTopPlayedSongs() {
     $.ajax({
@@ -104,6 +148,5 @@ function getTopPlayedSongs() {
         }
     })
 }
-
 getTopPlayedSongs();
 
