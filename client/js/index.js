@@ -33,6 +33,7 @@ $(document).ready(function(){
                     if (j < songs[i].singers.length - 1) {
                         singers += `, `
                     }
+
                 }
                 let localDate = moment(songs[i].uploadTime).tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY");
                 content += `
@@ -65,9 +66,11 @@ $(document).ready(function(){
                             </div>
                         </div>
                     `;
+
+
+
             }
             $("#new-songs").html(content);
-
             initializeMediaPlayers();
         }
     });

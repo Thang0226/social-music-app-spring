@@ -88,17 +88,27 @@ function getTopLikedSongs() {
         url: 'http://localhost:8080/api/homepage/top-liked-songs',
         type: 'GET',
         success: function(data) {
+
             let content = "";
+
             for (let i = 0; i < 8; i++) {
+                let singers = "";
+                for (let j = 0; j < data[i].singers.length; j++) {
+                    singers += `<a href="singer.html" onclick="storeSingerId(${data[i].singers[j].id})"> ${data[i].singers[j].singerName}</a>`
+                    if (j < data[i].singers.length - 1) {
+                        singers += `, `
+                    }
+
+                }
                 content += `
                     <div class="music-card">
                         <img src="${data[i].imageUrl || '/api/placeholder/80/80'}" alt="${data[i].name}">
                         <div class="music-card-content">
                             <h3>${data[i].name}</h3>
-                            <p>${data[i].singer}</p>
+                            <p>${singers}</p>
                             <div class="like-count">
                                 <i class="fas fa-heart"></i>
-                                <span>${data[i].likeCount}</span>
+                                <span>${data[i].likeCount} likes</span>
                             </div>
                         </div>
                     </div>`;
@@ -161,10 +171,10 @@ function getTopLikedPlaylists() {
                         <img src="${data[i].imageUrl || '/api/placeholder/80/80'}" alt="${data[i].name}">
                         <div class="music-card-content">
                             <h3>${data[i].name}</h3>
-                            <p>${data[i].singer}</p>
+                            <p>${data[i].listeningCount} views</p>
                             <div class="like-count">
                                 <i class="fas fa-heart"></i>
-                                <span>${data[i].likeCount}</span>
+                                <span>${data[i].likeCount} likes</span>
                             </div>
                         </div>
                     </div>`;
