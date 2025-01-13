@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,700,900">
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelementplayer.min.css">
+
+
+    <link rel="stylesheet" href="css/aos.css">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>My Songs</title>
+</head>
+<body>
+<div class="site-wrap">
+    <!--    Responsive nav-->
+    <div class="site-mobile-menu">
+        <div class="site-mobile-menu-header">
+            <div class="site-mobile-menu-close mt-3">
+                <span class="icon-close2 js-menu-toggle"></span>
+            </div>
+        </div>
+        <div class="site-mobile-menu-body"></div>
+    </div>
+    <!--    Navbar menu -->
+    <header class="site-navbar py-4" role="banner">
+        <div class="container">
+            <div class="row align-items-center">
+
+
+                <div class="col-3">
+                    <h1 class="site-logo"><a href="index.html" class="h2">Podcast<span class="text-primary">.</span>
+                    </a></h1>
+                </div>
+                <div class="col-9">
+                    <nav class="site-navigation position-relative text-right text-md-right" role="navigation">
+
+
+                        <div class="d-block d-lg-none ml-md-0 mr-auto"><a href="#"
+                                                                          class="site-menu-toggle js-menu-toggle text-black"><span
+                                class="icon-menu h3"></span></a></div>
+
+                        <ul class="site-menu js-clone-nav d-none d-lg-block">
+                            <li class="active">
+                                <a href="index.html">Home</a>
+                            </li>
+                            <li class="has-children">
+                                <a href="#">About Songs</a>
+                                <ul class="dropdown arrow-top">
+                                    <li><a href="song-add.html">Add new song</a></li>
+                                    <li><a href="song-update.html">Update song information</a></li>
+                                    <li><a href="#">Menu Three</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="my-song.html" onclick="storeUserId(5)">My Songs</a></li>
+                            <li><a href="user/login.html">Login / Register</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <!--   ALL SONGS -->
+    <div class="site-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9" id="newCreatedSong">
+                    <!--   SONG ITEM -->
+                    <div class="d-block d-md-flex podcast-entry bg-white mb-5 aos-init aos-animate" data-aos="fade-up">
+                        <div class="image" style="background-image: url('images/img_2.jpg');"></div>
+                        <div class="text">
+
+                            <h3 class="font-weight-light"><a href="single-post.html">Episode 07: How To Create Web Page
+                                Using Bootstrap 4</a></h3>
+                            <div class="text-white mb-3"><span class="text-black-opacity-05"><small>By Mike Smith <span
+                                    class="sep">/</span> 16 September 2017 <span
+                                    class="sep">/</span> 1:30:20</small></span></div>
+
+                            <div class="player" style="visibility: visible;">
+                                <span class="mejs__offscreen">Audio Player</span>
+                                <div id="mep_1" class="mejs__container mejs__container-keyboard-inactive mejs__audio"
+                                     tabindex="0" role="application" aria-label="Audio Player"
+                                     style="width: 586px; height: 40px; min-width: 241px;">
+                                    <div class="mejs__inner">
+                                        <div class="mejs__mediaelement">
+                                            <mediaelementwrapper id="player2">
+                                                <audio id="player2_html5" preload="none"
+                                                       style="max-width: 100%; width: 100%; height: 100%;"
+                                                       src="http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3">
+                                                    <source src="http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3"
+                                                            type="audio/mp3">
+                                                </audio>
+                                            </mediaelementwrapper>
+                                        </div>
+                                        <div class="mejs__layers">
+                                            <div class="mejs__poster mejs__layer"
+                                                 style="display: none; width: 100%; height: 100%;"></div>
+                                        </div>
+                                        <div class="mejs__controls">
+                                            <div class="mejs__button mejs__playpause-button mejs__play">
+                                                <button type="button" aria-controls="mep_1" title="Play"
+                                                        aria-label="Play" tabindex="0"></button>
+                                            </div>
+                                            <div class="mejs__time mejs__currenttime-container" role="timer"
+                                                 aria-live="off"><span class="mejs__currenttime">00:00</span></div>
+                                            <div class="mejs__time-rail"><span
+                                                    class="mejs__time-total mejs__time-slider" role="slider"
+                                                    tabindex="0" aria-label="Time Slider" aria-valuemin="0"
+                                                    aria-valuemax="NaN" aria-valuenow="0" aria-valuetext="00:00"><span
+                                                    class="mejs__time-buffering" style="display: none;"></span><span
+                                                    class="mejs__time-loaded"></span><span
+                                                    class="mejs__time-current"></span><span
+                                                    class="mejs__time-hovered no-hover"></span><span
+                                                    class="mejs__time-handle"><span
+                                                    class="mejs__time-handle-content"></span></span><span
+                                                    class="mejs__time-float" style="display: none; left: 0px;"><span
+                                                    class="mejs__time-float-current">00:00</span><span
+                                                    class="mejs__time-float-corner"></span></span></span></div>
+                                            <div class="mejs__time mejs__duration-container"><span
+                                                    class="mejs__duration">00:00</span></div>
+                                            <div class="mejs__button mejs__volume-button mejs__mute">
+                                                <button type="button" aria-controls="mep_1" title="Mute"
+                                                        aria-label="Mute" tabindex="0"></button>
+                                            </div>
+                                            <a class="mejs__horizontal-volume-slider" href="javascript:void(0);"
+                                               aria-label="Volume Slider" aria-valuemin="0" aria-valuemax="100"
+                                               role="slider"><span class="mejs__offscreen">Use Up/Down Arrow keys to increase or decrease volume.</span>
+                                                <div class="mejs__horizontal-volume-total">
+                                                    <div class="mejs__horizontal-volume-current"
+                                                         style="left: 0px; width: 100%;"></div>
+                                                    <div class="mejs__horizontal-volume-handle"
+                                                         style="left: 100%;"></div>
+                                                </div>
+                                            </a></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/jquery-migrate-3.0.1.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.stellar.min.js"></script>
+<script src="js/jquery.countdown.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/aos.js"></script>
+<script src="js/mediaelement-and-player.min.js"></script>
+
+
+
+
+<!-- MY-SONG.JS -->
+<script src="js/my-song.js"></script>
+
+
+
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let mediaElements = document.querySelectorAll('video, audio'), total = mediaElements.length;
+
+        for (let i = 0; i < total; i++) {
+            new MediaElementPlayer(mediaElements[i], {
+                pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@7.0.7/build/',
+                shimScriptAccess: 'always',
+                success: function () {
+                    let target = document.body.querySelectorAll('.player'), targetTotal = target.length;
+                    for (let j = 0; j < targetTotal; j++) {
+                        target[j].style.visibility = 'visible';
+                    }
+                }
+            });
+        }
+    });
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</body>
+</html>
