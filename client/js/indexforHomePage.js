@@ -240,6 +240,7 @@ function getTopLikedPlaylists() {
 }
 
 
+
 $(document).ready(function() {
     $(".nonloop-block-13").owlCarousel({
         items: 3,               // Hiển thị 3 mục mỗi lần
@@ -261,6 +262,7 @@ $(document).ready(function() {
         }
     });
 });
+
 
 
 
@@ -310,3 +312,17 @@ getTopLikedSongs();
 getTopPlayedPlaylists();
 getNewPlaylists();
 getTopLikedPlaylists();
+
+
+
+
+
+function playList(id) {
+    localStorage.setItem("playlist-id", id);
+    window.location.href = "playlist-view.html";
+}
+
+function playSong(id) {
+    localStorage.setItem("song-id", id);
+    window.location.href = "song.html";
+}
