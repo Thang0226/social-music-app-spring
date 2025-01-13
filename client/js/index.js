@@ -33,8 +33,10 @@ $(document).ready(function(){
                     if (j < songs[i].singers.length - 1) {
                         singers += `, `
                     }
-                    let localDate = moment(songs[i].uploadTime).tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY");
-                    content += `
+
+                }
+                let localDate = moment(songs[i].uploadTime).tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY");
+                content += `
                         <div class="d-block d-md-flex podcast-entry bg-white mb-3" data-aos="fade-up">
                           <div class="image" style="background-image: url('${API_BASE_URL}/images/${songs[i].imageFile}')">
                           </div>
@@ -64,10 +66,9 @@ $(document).ready(function(){
                             </div>
                         </div>
                     `;
-                }
-                $("#new-songs").html(content);
-            }
 
+            }
+            $("#new-songs").html(content);
             initializeMediaPlayers();
         }
     });
