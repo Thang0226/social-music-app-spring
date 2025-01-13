@@ -33,7 +33,7 @@ $(document).ready(function(){
             $("#song-details").html(
                 `
                 <div class="d-flex align-items-center justify-content-center mb-2 gap-2">
-                    <img src="${API_BASE_URL}/images/${song.imageFile}" alt="No Image" 
+                    <img src="${API_BASE_URL}/images/${song.imageFile}" alt="${song.name}" 
                     class="img-thumbnail rounded-circle"
                     style="max-width: 150px; max-height: 150px; width: 100%; height: auto;">
                     <h1>
@@ -222,7 +222,7 @@ function get3PopularSongOfSinger(singerID) {
             let content = "";
             content += `<h3 class="mb-4">
                         <a href="singer.html" onclick="storeSingerId(${song[0].singers[0].id})">
-                        ${song[0].singers[0].singerName} popular song</a>
+                        ${song[0].singers[0].singerName}</a><span> popular song</span>
                     </h3>
                     <ul class="list-unstyled">`;
             for (let i = 0; i < song.length; i++) {
