@@ -21,6 +21,14 @@ function initializeMediaPlayers() {
                         mediaElement.removeEventListener('timeupdate', arguments.callee);
                     }
                 });
+                // Play next track when current audio ended
+                mediaElement.addEventListener('ended', function() {
+                    song_ind = (song_ind + 1) % songs.length;
+                    $("#song_name").html(`Song playing: ${songs[song_ind].name}`);
+                    mediaElement.setSrc(`${API_BASE_URL}/audios/${songs[song_ind].musicFile}`);
+                    mediaElement.load();
+                    mediaElement.play();
+                });
             }
         });
     }

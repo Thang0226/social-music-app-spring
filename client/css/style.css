@@ -1001,3 +1001,32 @@ a {
 @media (max-width: 991.98px) {
   .hero h1 {
     font-size: 40px !important; } }
+
+/* Chỉ áp dụng cho `.site-logo` và các con của nó */
+.site-logo {
+  font-family: 'Poppins', sans-serif; /* Thay đổi font chữ */
+  font-size: 2.5rem; /* Kích thước chữ */
+  text-align: center; /* Căn giữa */
+  background: linear-gradient(90deg, #ff8a00, #e52e71); /* Hiệu ứng gradient */
+  -webkit-background-clip: text; /* Hiển thị chỉ gradient trên chữ */
+  -webkit-text-fill-color: transparent; /* Làm chữ trong suốt */
+  margin: 0; /* Loại bỏ khoảng cách mặc định */
+}
+
+.site-logo a {
+  text-decoration: none; /* Loại bỏ gạch dưới */
+  color: inherit; /* Giữ màu từ gradient */
+  transition: all 0.3s ease; /* Hiệu ứng chuyển đổi */
+}
+
+.site-logo a:hover {
+  color: #e52e71; /* Đổi màu khi hover */
+  text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2); /* Hiệu ứng đổ bóng */
+}
+
+/* Responsive cho màn hình nhỏ */
+@media screen and (max-width: 768px) {
+  .site-logo {
+    font-size: 1.8rem; /* Giảm kích thước chữ trên màn hình nhỏ */
+  }
+}
