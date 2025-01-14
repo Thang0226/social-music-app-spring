@@ -439,7 +439,7 @@ a {
     min-height: 600px;
     height: calc(100vh); }
   .site-blocks-cover.inner-page-cover, .site-blocks-cover.inner-page-cover .row {
-    min-height: 350px;
+    min-height: 250px;
     height: calc(20vh); }
   .site-blocks-cover h2, .site-blocks-cover h3, .site-blocks-cover h4, .site-blocks-cover h5 {
     color: #fff; }
@@ -994,7 +994,9 @@ a {
     color: #ccc; }
 
 .play-wrap {
-  margin-top: 0; }
+  margin-top: 0;
+  height: 50px;
+}
 
 @media (max-width: 991.98px) {
   .hero h1 {
