@@ -97,26 +97,14 @@
             <button type="submit" class="btn btn-primary">Tìm kiếm</button>
         </form>
     </div>
-    <table>
-        <thead>
-        <tr>
-            <th>STT</th>
-            <th>Tên Bài Hát</th>
-        </tr>
-        </thead>
-        <tbody id="song">
-        <!-- Dữ liệu danh sách bài hát sẽ được thêm tại đây -->
-        <tr th:each="song : ${songs}">
-            <td th:text="${song.id}"></td>
-            <td th:text="${song.name}"></td>
-        </tr>
-        </tbody>
-    </table>
-<!--    singer popular songs-->
+    <!--    singer popular songs-->
     <div class="container">
-        <div id="featured-song-container" class="col-12 mt-5 mb-5 bg-light rounded-4">
-            <h1>Featured Songs</h1>
-            <div id="featured-song"></div>
+        <div id="featured-song-container" class="col-12 mt-5 mb-5 bg-light rounded-4 row">
+            <h1 class="text-center "col-md-12 col-lg-12">Featured Songs</h1>
+            <div class="col-md-12 col-lg-12">
+                <div id="featured-song" class="row"></div>
+            </div>
+
         </div>
 
 
@@ -322,7 +310,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.43/moment-timezone-with-data.min.js"></script>
 <script src="js/comment.js"></script>
-<script src="js/singer.js"></script>
 <script src="js/index.js"></script>
+<script src="js/singer.js"></script>
+
 </body>
 </html>
