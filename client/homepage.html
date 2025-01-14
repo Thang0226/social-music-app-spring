@@ -562,22 +562,7 @@
 <script src="js/mediaelement-and-player.min.js"></script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var mediaElements = document.querySelectorAll('video, audio'), total = mediaElements.length;
 
-        for (var i = 0; i < total; i++) {
-            new MediaElementPlayer(mediaElements[i], {
-                pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/',
-                shimScriptAccess: 'always',
-                success: function () {
-                    var target = document.body.querySelectorAll('.player'), targetTotal = target.length;
-                    for (var j = 0; j < targetTotal; j++) {
-                        target[j].style.visibility = 'visible';
-                    }
-                }
-            });
-        }
-    });
 
     function searchSongs() {
         const keyword = document.querySelector('.search-bar input').value.trim();
@@ -594,7 +579,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.43/moment-timezone-with-data.min.js"></script>
 <script src="js/main.js"></script>
 <script src="js/indexforHomePage.js"></script>
+
 <script src="js/index.js"></script>
+            <script src="js/MediaElementInit.js"></script>
 
 </body>
 </html>
