@@ -36,6 +36,38 @@
 
   </style>
   <style>
+
+    /* Chỉ áp dụng cho `.site-logo` và các con của nó */
+    .site-logo {
+      font-family: 'Poppins', sans-serif; /* Thay đổi font chữ */
+      font-size: 2.5rem; /* Kích thước chữ */
+      text-align: center; /* Căn giữa */
+      background: linear-gradient(90deg, #ff8a00, #e52e71); /* Hiệu ứng gradient */
+      -webkit-background-clip: text; /* Hiển thị chỉ gradient trên chữ */
+      -webkit-text-fill-color: transparent; /* Làm chữ trong suốt */
+      margin: 0; /* Loại bỏ khoảng cách mặc định */
+    }
+
+    .site-logo a {
+      text-decoration: none; /* Loại bỏ gạch dưới */
+      color: inherit; /* Giữ màu từ gradient */
+      transition: all 0.3s ease; /* Hiệu ứng chuyển đổi */
+    }
+
+    .site-logo a:hover {
+      color: #e52e71; /* Đổi màu khi hover */
+      text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2); /* Hiệu ứng đổ bóng */
+    }
+
+    /* Responsive cho màn hình nhỏ */
+    @media screen and (max-width: 768px) {
+      .site-logo {
+        font-size: 1.8rem; /* Giảm kích thước chữ trên màn hình nhỏ */
+      }
+    }
+
+  </style>
+  <style>
     .form-control[type="file"] {
       padding: 0;
     }
@@ -174,13 +206,15 @@
 
   <header class="site-navbar py-4" role="banner">
 
-    <div cFlass="container">
+    <div class="container">
       <div class="row align-items-center">
 
-
         <div class="col-3">
-          <h1 class="site-logo"><a href="index.html" class="h2">Podcast<span class="text-primary">.</span> </a></h1>
+          <h1 class="site-logo">
+            <a href="homepage.html" class="h2">CodegymMP3</a>
+          </h1>
         </div>
+
         <div class="col-9">
           <nav class="site-navigation position-relative text-right text-md-right" role="navigation">
 
@@ -190,24 +224,17 @@
 
             <ul class="site-menu js-clone-nav d-none d-lg-block">
               <li class="active">
-                <a href="index.html">Home</a>
+                <a href="homepage.html">Home</a>
               </li>
               <li class="has-children">
                 <a href="#">About Songs</a>
                 <ul class="dropdown arrow-top">
                   <li><a href="song-add.html">Add new song</a></li>
                   <li><a href="song-update.html">Update song information</a></li>
-                  <li><a href="#">...</a></li>
+                  <li><a href="#">Menu Three</a></li>
                 </ul>
               </li>
-              <li class="has-children">
-                <a href="#">Singer</a>
-                <ul class="dropdown arrow-top">
-                  <li><a href="listsinger.html">List Singer</a></li>
-                  <li><a href="addsinger.html">Add new singer</a></li>
-                  <li><a href="searchsongbysingerId.html">List Song</a></li>
-                </ul>
-              </li>
+              <li><a href="about.html">About</a></li>
               <li><a href="my-song.html">My Songs</a></li>
               <li><a href="user/login.html">Login / Register</a></li>
             </ul>
