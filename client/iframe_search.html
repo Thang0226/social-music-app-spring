@@ -38,15 +38,14 @@
             color: white;
             font-size: 16px;
             line-height: 40px;
-            width: 0px;
+            width: 0;
             transition: width 0.4s ease;
         }
 
         .searchBox:hover .searchInput {
-            width: 240px;
+            width: 500px;
             padding: 0 6px;
         }
-
         .searchButton {
             color: white;
             width: 40px;
@@ -57,12 +56,14 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            transition: all 0.4s ease;
+
         }
 
         .searchBox:hover .searchButton {
-            background: white;
+            background: #f3f3f4;
             color: #2f3640;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            border: 0 solid;
         }
 
         /* Responsive for smaller screens */
@@ -78,7 +79,7 @@
 <body>
 <!-- Search Box -->
 <div class="searchBox">
-    <input type="text" class="searchInput" placeholder="Search for songs, playlists, or artists...">
+    <input type="search" class="searchInput" placeholder="Search for songs, playlists, or artists...">
     <button class="searchButton" onclick="searchSongs()">
         <i class="material-icons">search</i>
     </button>
