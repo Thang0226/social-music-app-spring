@@ -138,6 +138,7 @@ getSingerInfo(singerId);
 function getSingerPopularSongs(singerId) {
     $.ajax({
         headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
             'accept': 'application/json',
             'content-type': 'application/json',
         },

@@ -381,6 +381,9 @@
     let singerId = localStorage.getItem("singer-id");
     $(function() {
         $.ajax({
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            },
             url: `http://localhost:8080/api/songs/findAllSongBySinger/${singerId}`,
             method: 'GET',
             success: function (data) {

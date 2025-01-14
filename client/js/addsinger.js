@@ -12,6 +12,9 @@ function createSinger() {
 
     // Gửi dữ liệu đến API
     $.ajax({
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
         url: `${API_BASE_URL}/api/singers`,
         method: 'POST',
         contentType: 'application/json',

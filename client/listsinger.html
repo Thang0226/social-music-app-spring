@@ -418,6 +418,9 @@
 
   function loadAllSingers() {
     $.ajax({
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
       method: "GET",
       url: "http://localhost:8080/api/singers", // Gọi API để lấy toàn bộ danh sách ca sĩ
       success: function (data) {
