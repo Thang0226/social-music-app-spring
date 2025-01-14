@@ -1,43 +1,40 @@
 // Load danh sách bài hát trong playlist
-function loadSongs(playlistId) {
+function getSongsInPlaylist(id) {
     $.ajax({
         method: "GET",
-        url: `http://localhost:8080/api/playlists/${id}`,
+        url: `http://localhost:8080/api/playlist/${id}`,
         success: function (data) {
-            const playlistName = data.playlistName; // Lấy tên playlist từ API
+            const playlistName = data.playlist;
             $("#playlistName").text(playlistName);
 
             let songHtml = "";
-            data.songs.forEach((song, index) => {
+            data.songs.forEach((songs, index) => {
                 songHtml += `
                     <tr>
-                        <td>${index.id}</td>
-                        <td>${song.name}</td>
-                        <td>${song.singers}</td>
-                        <td>${song.genres}</td>
-                        <td>${song.listeningCount}</td>
+                        <td>${index + 1}</td> <!-- Dùng index + 1 để hiển thị thứ tự -->
+                        <td>${songs.name}</td>
+                        <td>${songs.likeCount}</td>
+                        <td>${songs.listeningCount}</td>
+                        <td>${songs.description}</td>
                         <td class="action-icons">
-                            <i class="fas fa-play" title="Phát"></i>
-                            <i class="fas fa-edit" title="Chỉnh sửa"></i>
-                            <i class="fas fa-trash" title="Xóa" onclick="deleteSong(${song.id}, ${playlistId})"></i>
+                            <button class="play-song-btn">▶️</button>
+                            <button class="delete-song-btn" onclick="deleteSong(${songs.id}, ${id})">❌</button>
                         </td>
                     </tr>`;
             });
-
             $("#songList").html(songHtml);
         },
-        error: function () {
-            alert("Không thể tải danh sách bài hát.");
-        }
     });
 }
+// Gọi API và hiển thị bài hát khi trang load (ví dụ với playlist ID là 1)
+getSongsInPlaylist(id);
 
 // Xóa bài hát
-function deleteSong(songId, playlistId) {
+function deleteSong(songsId, playlistId) {
     if (confirm("Bạn có chắc muốn xóa bài hát này?")) {
         $.ajax({
             method: "DELETE",
-            url: `http://localhost:8080/api/songs/${songId}`,
+            url: `http://localhost:8080/api/playlist/songs/${songsId}`, // Sửa URL đúng với API
             success: function () {
                 alert("Xóa bài hát thành công!");
                 loadSongs(playlistId); // Tải lại danh sách bài hát sau khi xóa
@@ -49,14 +46,3 @@ function deleteSong(songId, playlistId) {
     }
 }
 
-// Khi trang sẵn sàng, tải danh sách bài hát
-$(document).ready(function () {
-    const urlParams = new URLSearchParams(window.location.search);
-    const playlistId = urlParams.get("playlistId"); // Lấy playlistId từ URL
-
-    if (playlistId) {
-        loadSongs(playlistId);
-    } else {
-        alert("Playlist không hợp lệ.");
-    }
-});

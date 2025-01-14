@@ -47,7 +47,7 @@
             type: 'GET',
             success: function (data) {
                 let content = "";
-                for (let i = 0; i < 20; i++) {
+                for (let i = 0; i < 20 && i < data.length; i++) {
                     content += `
               <div class="song-card">
                 <div class="card">

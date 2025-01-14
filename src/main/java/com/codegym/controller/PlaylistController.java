@@ -1,6 +1,7 @@
 package com.codegym.controller;
 
 import com.codegym.model.*;
+import com.codegym.model.DTO.playlist.PlaylistDTO;
 import com.codegym.service.ISongService;
 import com.codegym.service.playlist.IPlaylistService;
 import com.codegym.service.user.IUserService;
@@ -40,11 +41,35 @@ public class PlaylistController {
     public ResponseEntity<?> getSongsByPlaylist(@PathVariable Long id) {
         // Tìm playlist theo ID
         Playlist playlist = playlistService.findById(id).orElseThrow(() -> new RuntimeException("Playlist không tồn tại"));
+        // return playlistDTO with arranged songs
+        ArrayList<Song> songList = new ArrayList<>(playlist.getSongs());
+        arrange(songList);
+        PlaylistDTO playlistDTO = new PlaylistDTO(playlist.getId(), playlist.getName(), playlist.getLikeCount(), playlist.getListeningCount(), songList, playlist.getCreateTime(), playlist.getUser());
         Map<String, Object> response = new HashMap<>();
-        response.put("playlist", playlist.getName());
+        response.put("playlist", playlistDTO);
         response.put("songs", playlist.getSongs());
         return ResponseEntity.ok(response);
     }
+
+    private void arrange(ArrayList<Song> songs) {
+        int length = songs.size();
+        for (int i = 0; i < length - 1; i++) {
+            Song max = songs.get(i);
+            int index = -1;
+            for (int j = i + 1; j < length; j++) {
+                if (songs.get(j).getListeningCount() > max.getListeningCount()) {
+                    max = songs.get(j);
+                    index = j;
+                }
+            }
+            if (index != -1) {
+                Song temp = songs.get(i);
+                songs.set(i, max);
+                songs.set(index, temp);
+            }
+        }
+    }
+
 
     // API: Xóa một bài hát khỏi playlist
     @DeleteMapping("/songs/{id}")
@@ -61,14 +86,15 @@ public class PlaylistController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Playlist> deletePlaylist(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePlaylist(@PathVariable Long id) {
         Optional<Playlist> playlistOptional = playlistService.findById(id);
         if (!playlistOptional.isPresent()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);  // Trả về 404 nếu playlist không tồn tại
         }
-        playlistService.deleteById(id);
-        return new ResponseEntity<>(playlistOptional.get(), HttpStatus.NO_CONTENT);
+        playlistService.deleteById(id);  // Thực hiện xóa playlist
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);  // Trả về 204 nếu xóa thành công
     }
+
 
     @PutMapping("/like-playlist/{id}")
     public ResponseEntity<String> likePlaylist(@PathVariable Long id) {
@@ -107,9 +133,9 @@ public class PlaylistController {
     }
 
 
-    @PostMapping(path = "/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(path = "/save")
     public ResponseEntity<?> savePlaylist(@RequestParam String name,
-                                          @RequestParam("song") String[] songs,
+                                          @RequestParam("songs") String[] songs,
                                           @RequestParam(value="user_id") Long userId) {
         Optional<User> userOptional = userService.findById(userId);
         if (userOptional.isEmpty()) {
@@ -133,5 +159,4 @@ public class PlaylistController {
         }
         return songSet;
     }
-
 }
