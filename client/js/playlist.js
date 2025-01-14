@@ -25,9 +25,6 @@ function loadPlaylists() {
             });
             $("#playlist").html(playlistHtml);
         },
-        error: function () {
-            alert("Không thể tải danh sách playlist.");
-        }
     });
 }
 loadPlaylists()
@@ -51,10 +48,6 @@ function deletePlaylist(id) {
 function searchPlaylist(keyword) {
     if (!keyword) {
         keyword = $("#searchInput").val().trim();
-    }
-    if (!keyword) {
-        alert("Vui lòng nhập từ khóa tìm kiếm!");
-        return;
     }
 
     $("#sectionTitle").text(`Kết quả tìm kiếm cho: "${keyword}"`);
