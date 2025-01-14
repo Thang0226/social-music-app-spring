@@ -4,6 +4,7 @@ import com.codegym.model.Playlist;
 import com.codegym.repository.IPlaylistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -49,4 +50,5 @@ public class PlaylistService implements IPlaylistService {
     public List<Playlist> getTopPlayedPlaylists() {
         return playlistRepository.findTopPlayedPlaylists();
     }
+
 }
