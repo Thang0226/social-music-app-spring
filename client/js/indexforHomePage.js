@@ -115,7 +115,7 @@ function getTopLikedSongs() {
             for (let i = 0; i < 8 && i < data.length; i++) {
                 let singers = "";
                 for (let j = 0; j < data[i].singers.length; j++) {
-                    singers += `<a href="singer.html" onclick="storeSingerId(${data[i].singers[j].id})"> ${data[i].singers[j].singerName}</a>`
+                    singers += `<a href="listsongbysingername.html" onclick="storeSingerId(${data[i].singers[j].id})"> ${data[i].singers[j].singerName}</a>`
                     if (j < data[i].singers.length - 1) {
                         singers += `, `
                     }
