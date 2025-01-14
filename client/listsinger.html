@@ -205,7 +205,7 @@
                 <ul class="dropdown arrow-top">
                   <li><a href="listsinger.html">List Singer</a></li>
                   <li><a href="addsinger.html">Add new singer</a></li>
-                  <li><a href="searchsongbysingerId.html">Search Song By Singer Name</a></li>
+                  <li><a href="searchsongbysingerId.html">List Song</a></li>
                 </ul>
               </li>
               <li><a href="my-song.html">My Songs</a></li>
@@ -388,6 +388,7 @@
   });
 </script>
 <script>
+
   function loadAllSingers() {
     $.ajax({
       method: "GET",
@@ -399,7 +400,8 @@
           singerList += `
                     <tr>
                         <td>${index + 1}</td>
-                        <td>${singer.singerName}</td>
+                        <td><a href="listsongbysingername.html"" onclick="storeSingerId(${singer.id})">${singer.singerName}</a></td>
+
                     </tr>
                 `;
         });
@@ -410,6 +412,11 @@
         $("#result").html("<p class='text-danger'>Không thể tải danh sách ca sĩ.</p>");
       }
     });
+  }
+  function storeSingerId(singerId) {
+    // event.preventDefault()
+    console.log(singerId)
+    localStorage.setItem("singer-id",singerId)
   }
   // $('#search').on('input', function() {
   //   const query = $(this).val().trim(); // Lấy giá trị tìm kiếm và loại bỏ khoảng trắng
@@ -463,7 +470,7 @@
             $("#singerList").html(`
                         <tr>
                             <td>${data.id}</td>
-                            <td>${data.singerName}</td>
+                            <td><a href="listsongbysingername.html" onclick="storeSingerId(${data.id})">${data.singerName}</a></td>
                         </tr>
                     `);
             $("#result").html(""); // Xóa thông báo lỗi nếu có
