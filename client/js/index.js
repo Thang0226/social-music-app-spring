@@ -16,7 +16,7 @@ function storePlaylistId(playlistId) {
 let songId = localStorage.getItem("song-id");
 let userId = localStorage.getItem("user-id");
 let token = localStorage.getItem("token");
-const API_BASE_URL = 'http://localhost:8080';
+
 
 // Get latest songs
 function initializeNewSongs() {
@@ -27,7 +27,7 @@ function initializeNewSongs() {
             let songs = result;
             console.log(songs);
             let content = "";
-            for (let i = 0; i < 10 && i < songs.length; i++) {
+            for (let i = 0; i < songs.length; i++) {
                 let singers = "";
                 for (let j = 0; j < songs[i].singers.length; j++) {
                     singers += `<a href="singer.html" onclick="storeSingerId(${songs[i].singers[j].id})"> ${songs[i].singers[j].singerName}</a>`
@@ -37,32 +37,38 @@ function initializeNewSongs() {
                 }
                 let localDate = moment(songs[i].uploadTime).tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY");
                 content += `
-                        <div class="d-block d-md-flex podcast-entry bg-white mb-3" data-aos="fade-up">
+                        <div class="d-block d-flex podcast-entry bg-white mb-3 col-md-12 col-lg-6 m-auto gap-0 p-0"
+                         data-aos="fade-up" style="width: 49%">
                           <div class="image-container">
-                            <div
-                              class="image"
-                              style="background-image: url('${API_BASE_URL}/images/${songs[i].imageFile}')">
-                              <div class="play-button"
-                              onclick="showMainPlayer('${API_BASE_URL}/audios/${songs[i].musicFile}'); 
-                              getSongInfoForMPC(${songs[i].id})">
-                                <i class="bi bi-play-circle"></i>
+                              <div
+                                  class="image"
+                                  style="background-image: url('${API_BASE_URL}/images/${songs[i].imageFile}');">
+                                  <div class="play-button"
+                                  onclick="showMainPlayer('${API_BASE_URL}/audios/${songs[i].musicFile}'); 
+                                  getSongInfoForMPC(${songs[i].id})">
+                                    <i class="bi bi-play-circle"></i>
+                                  </div>
                               </div>
-                            </div>
                           </div>
-                          <div class="text">
-                            <h3 class="font-weight-light">
-                              <a href="song.html" onclick="storeSongId(${songs[i].id}); storeUserId(${userId})">
-                                ${songs[i].name}
-                              </a>
-                            </h3>
-                            <div class="text-white mb-3">
-                              <span class="text-black-opacity-05">
-                                <span>By ${singers} <span class="sep">&bullet;</span> ${localDate} <span class="sep">&bullet;</span>
-                                  <span> <i class="bi bi-eye"></i> <span id="listening-count">
-                                      ${parseInt(songs[i].listeningCount, 10).toLocaleString('vi-VN')}</span>
+                          <div class="w-100">                        
+                              <div class="text-white h-100 justify-content-center p-2">
+                                  <h5>
+                                      <a href="song.html" onclick="storeSongId(${songs[i].id}); storeUserId(${userId})"
+                                      class="">
+                                           ${songs[i].name}
+                                      </a>
+                                  </h5>                              
+                                  <span class="text-black-opacity-05">
+                                      <span>By ${singers} <br> ${localDate} 
+                                          <span class="sep">&bullet;</span>
+                                          <span> <i class="bi bi-headphones"></i> 
+                                              <span id="listening-count">
+                                               ${parseInt(songs[i].listeningCount, 10).toLocaleString('vi-VN')}</span>
+                                          </span>
+                                          <span class="sep">&bullet;</span>
+                                          <span><i class="bi bi-heart-fill" id="heart-icon"></i> ${songs[i].likeCount}</span>
+                                      </span>
                                   </span>
-                                </span>
-                              </span>
                             </div>                     
                           </div>
                         </div>
@@ -138,12 +144,14 @@ function getSongInfoForMPC(songId) {
             let content = "";
             content +=`           
                 <img src="${API_BASE_URL}/images/${data.imageFile}" 
-                alt="${data.name}" class="img-fluid mr-2" 
+                alt="${data.name}" class="img-fluid mr-2 p-1" 
                 style="max-width: 80px; max-height: 80px; width: 100%; height: auto;">
-                <div class="podcaster">
-                    <span class="d-block" style="font-weight: bold">
-                        <a href="song.html" onclick="storeSongId(${data.id}); storeUserId(${userId})"> ${data.name}</a>                       
-                    </span>
+                <div class="podcaster text-start">
+                    <span style="font-weight: bold">
+                        <a href="song.html" onclick="storeSongId(${data.id}); storeUserId(${userId})"> 
+                            ${data.name}
+                        </a>                       
+                    </span><br>
                     <span>
                         ${singers}
                     </span>

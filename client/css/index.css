@@ -34,3 +34,30 @@
 #main-player #mep_1 {
     display: none;
 }
+
+/*New songs*/
+#new-songs h5 {
+    margin: 0;
+}
+
+#new-songs a {
+    text-decoration: none;
+}
+#new-songs a:hover {
+    text-decoration: underline;
+}
+
+/*main-player-container*/
+#main-player-container a {
+    text-decoration: none;
+    color: black;
+}
+
+#main-player-container a:hover {
+    text-decoration: underline;
+}
+
+/*like heart*/
+.bi-heart-fill {
+    color: #ff4b5c;
+}
