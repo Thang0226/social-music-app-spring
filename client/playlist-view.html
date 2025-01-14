@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <title>Podcast &mdash; Colorlib Website Template</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,700,900">
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,700,900">
-    <link rel="stylesheet" href="fonts/icomoon/style.css">
-
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/comment.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
@@ -19,7 +18,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelementplayer.min.css">
     <link rel="stylesheet" href="css/aos.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/index.css">
+
 </head>
 <body>
 
@@ -34,6 +33,7 @@
         <div class="site-mobile-menu-body"></div>
     </div>
 
+
     <header class="site-navbar py-4" role="banner">
 
         <div class="container">
@@ -41,16 +41,14 @@
 
 
                 <div class="col-3">
-                    <h1 class="site-logo"><a href="index.html" class="h2">Podcast<span class="text-primary">.</span>
-                    </a></h1>
+                    <h1 class="site-logo"><a href="index.html" class="h2">Podcast<span class="text-primary">.</span> </a></h1>
                 </div>
                 <div class="col-9">
                     <nav class="site-navigation position-relative text-right text-md-right" role="navigation">
 
 
-                        <div class="d-block d-lg-none ml-md-0 mr-auto"><a href="#"
-                                                                          class="site-menu-toggle js-menu-toggle text-black"><span
-                                class="icon-menu h3"></span></a></div>
+
+                        <div class="d-block d-lg-none ml-md-0 mr-auto"><a href="#" class="site-menu-toggle js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
 
                         <ul class="site-menu js-clone-nav d-none d-lg-block">
                             <li class="active">
@@ -64,8 +62,16 @@
                                     <li><a href="#">Menu Three</a></li>
                                 </ul>
                             </li>
+                            <li class="has-children">
+                                <a href="#">About Playlist</a>
+                                <ul class="dropdown arrow-top">
+                                    <li><a href="song-add.html">Add new Playlist</a></li>
+                                    <li><a href="playlist-list.html">List</a></li>
+                                    <li><a href="#">Menu Three</a></li>
+                                </ul>
+                            </li>
                             <li><a href="about.html">About</a></li>
-                            <li><a href="my-song.html">My Songs</a></li>
+                            <li><a href="contact.html">Contact</a></li>
                             <li><a href="user/login.html">Login / Register</a></li>
                         </ul>
                     </nav>
@@ -77,85 +83,48 @@
         </div>
 
     </header>
+
     <div class="site-blocks-cover inner-page-cover bg-light mb-5">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-12 text-center" id="singer-info">
-                    <h1 class="mb-3"></h1>
+                <div class="col-12 text-center">
+                    <a href="#">Mike Smith </a><span class="mx-2">&bullet;</span> Jun 25, 2020 <span class="mx-2">&bullet;</span> 1:30:20
+                    <h1 class="mb-3">Tell Your Story to the World</h1>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="search-container">
-        <form action="/api/songs/findAllSongBySinger" method="GET" class="d-flex mb-3">
-            <input
-                    type="text"
-                    name="id"
-                    placeholder="Tìm kiếm bài ..."
-                    class="form-control me-2"
-                    required>
-            <button type="submit" class="btn btn-primary">Tìm kiếm</button>
-        </form>
-    </div>
-    <table>
-        <thead>
-        <tr>
-            <th>STT</th>
-            <th>Tên Bài Hát</th>
-        </tr>
-        </thead>
-        <tbody id="song">
-        <!-- Dữ liệu danh sách bài hát sẽ được thêm tại đây -->
-        <tr th:each="song : ${songs}">
-            <td th:text="${song.id}"></td>
-            <td th:text="${song.name}"></td>
-        </tr>
-        </tbody>
-    </table>
-<!--    singer popular songs-->
-    <div class="container">
-        <div id="featured-song-container" class="col-12 mt-5 mb-5 bg-light rounded-4">
-            <h1>Featured Songs</h1>
-            <div id="featured-song"></div>
-        </div>
-
-
-        <div class="row justify-content-between ">
-            <div class="col-lg-3 ml-auto">
-                <div class="featured-user  mb-5 mb-lg-0 bg-light">
-                    <h3 class="mb-4">Popular Singer</h3>
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="#" class="d-flex align-items-center">
-                                <img src="images/person_1.jpg" alt="Image" class="img-fluid mr-2">
-                                <div class="podcaster">
-                                    <span class="d-block">Claire Stanford</span>
-                                    <span class="small">32,420 podcasts</span>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-7 pb-5 mr-auto">
-                <div id="comments">
-                </div>
-                <div class="mb-3 text-center">
-                    <button class="btn btn-secondary py-1" id="load-more" onclick="loadMore()">Load more comment
+                <!--    like button-->
+                <div id="like" class="text-center mt-1 mb-1">
+                    <button class="btn-heart" id="like-button">
+                        <i class="bi bi-heart" id="heart-icon"></i>
                     </button>
+                    <span id="like-count"></span><span> Người thích</span>
                 </div>
-                <div id="post-comments" class="p-3 bg-light border rounded-4">
-                    <h5>Leave a Comment</h5>
-                    <div class="form-group">
-                        <label for="comment-box" class="form-label">Your Comment</label>
-                        <textarea id="comment-box" class="form-control" rows="3"
-                                  placeholder="Enter your comment here"></textarea>
-                    </div>
-                    <button class="btn btn-secondary py-1" onclick="postComment()">Post Comment</button>
-                </div>
-
             </div>
         </div>
+    </div>
+
+    <div class="container play-wrap">
+        <div class="player mb-5">
+            <audio id="player2" preload="none" controls style="max-width: 100%">
+                <source src="http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3" type="audio/mp3">
+            </audio>
+        </div>
+    </div>
+    <div class="playlist-table">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>STT</th>
+                <th>Tên Bài Hát</th>
+                <th>Lượt Thích</th>
+                <th>Số Lượt Nghe</th>
+                <th>Mô Tả</th>
+                <th>Hành Động</th>
+            </tr>
+            </thead>
+            <tbody id="songList">
+            <!-- Data will be dynamically added here via AJAX -->
+            </tbody>
+        </table>
     </div>
 
     <div class="site-section bg-light block-13">
@@ -173,8 +142,7 @@
                     </div>
                     <div class="">
                         <h3 class="font-weight-light h5">Megan Smith</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, iusto. Aliquam illo, cum sed
-                            ea? Ducimus quos, ea?</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, iusto. Aliquam illo, cum sed ea? Ducimus quos, ea?</p>
                     </div>
                 </div>
 
@@ -184,8 +152,7 @@
                     </div>
                     <div class="">
                         <h3 class="font-weight-light h5">Brooke Cagle</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, iusto. Aliquam illo, cum sed
-                            ea? Ducimus quos, ea?</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, iusto. Aliquam illo, cum sed ea? Ducimus quos, ea?</p>
                     </div>
                 </div>
 
@@ -195,8 +162,7 @@
                     </div>
                     <div class="">
                         <h3 class="font-weight-light h5">Philip Martin</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, iusto. Aliquam illo, cum sed
-                            ea? Ducimus quos, ea?</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, iusto. Aliquam illo, cum sed ea? Ducimus quos, ea?</p>
                     </div>
                 </div>
 
@@ -206,8 +172,7 @@
                     </div>
                     <div class="">
                         <h3 class="font-weight-light h5">Steven Ericson</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, iusto. Aliquam illo, cum sed
-                            ea? Ducimus quos, ea?</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, iusto. Aliquam illo, cum sed ea? Ducimus quos, ea?</p>
                     </div>
                 </div>
 
@@ -217,8 +182,7 @@
                     </div>
                     <div class="">
                         <h3 class="font-weight-light h5">Nathan Dumlao</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, iusto. Aliquam illo, cum sed
-                            ea? Ducimus quos, ea?</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, iusto. Aliquam illo, cum sed ea? Ducimus quos, ea?</p>
                     </div>
                 </div>
 
@@ -228,11 +192,31 @@
                     </div>
                     <div class="">
                         <h3 class="font-weight-light h5">Brook Smith</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, iusto. Aliquam illo, cum sed
-                            ea? Ducimus quos, ea?</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, iusto. Aliquam illo, cum sed ea? Ducimus quos, ea?</p>
                     </div>
                 </div>
 
+            </div>
+        </div>
+    </div>
+
+
+    <div class="site-blocks-cover overlay inner-page-cover" style="background-image: url(images/hero_bg_1.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
+        <div class="container">
+            <div class="row align-items-center justify-content-center text-center">
+
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <h2>Subscribe</h2>
+                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit nihil saepe libero sit odio obcaecati veniam.</p>
+                    <form action="#" method="post" class="site-block-subscribe">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control border-secondary text-white bg-transparent" placeholder="Enter Email" aria-label="Enter Email" aria-describedby="button-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button" id="button-addon2">Send</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -242,8 +226,7 @@
             <div class="row">
                 <div class="col-lg-4">
                     <h3>About Us</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium animi, odio beatae
-                        aspernatur natus recusandae quasi magni eum voluptatem nam!</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium animi, odio beatae aspernatur natus recusandae quasi magni eum voluptatem nam!</p>
                 </div>
                 <div class="col-lg-3 mx-auto">
                     <h3>Navigation</h3>
@@ -252,7 +235,7 @@
                         <li><a href="#">Services</a></li>
                         <li><a href="#">About Us</a></li>
                         <li><a href="#">Blog</a></li>
-                        <li><a href="#">My Songs</a></li>
+                        <li><a href="#">Contact</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-4">
@@ -269,11 +252,7 @@
                 <div class="col-md-12">
                     <p>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;<script data-cfasync="false"
-                                                src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-                        <script>document.write(new Date().getFullYear());</script>
-                        All rights reserved | This template is made with <i class="icon-heart-o" aria-hidden="true"></i>
-                        by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        Copyright &copy;<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </p>
                 </div>
@@ -295,9 +274,8 @@
 
 <script src="js/mediaelement-and-player.min.js"></script>
 
-
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         var mediaElements = document.querySelectorAll('video, audio'), total = mediaElements.length;
 
         for (var i = 0; i < total; i++) {
@@ -315,14 +293,12 @@
     });
 </script>
 <script src="js/main.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.43/moment-timezone-with-data.min.js"></script>
-<script src="js/comment.js"></script>
-<script src="js/singer.js"></script>
-<script src="js/index.js"></script>
+<!--<script src="js/comment.js"></script>-->
+<!--<script src="../front-end/playlist/view.js"></script>-->
+<script src="js/playlist-view.js"></script>
 </body>
 </html>
