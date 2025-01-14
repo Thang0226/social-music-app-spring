@@ -45,7 +45,7 @@ $(document).ready(function () {
                 ${singers}<span class="mx-2">&bullet;</span> ${localTime} <span class="mx-2">&bullet;</span><br>
                 <span>${song.description}</span><br>
                 ${genres}<br>
-                <span><i class="bi bi-eye"></i> <span id="listening-count">
+                <span> <i class="bi bi-headphones"></i> </i> <span id="listening-count">
                     ${parseInt(song.listeningCount, 10).toLocaleString('vi-VN')}</span>
                 </span>
                 `
@@ -237,7 +237,7 @@ function get3PopularSongOfSinger(singerID) {
                         <div class="podcaster">
                             <span class="d-block">${song[i].name}</span>
                             <span class="small">
-                                <i class="bi bi-eye"></i> <span id="listening-count">
+                                <i class="bi bi-headphones"></i> <span id="listening-count">
                                    ${parseInt(song[i].listeningCount, 10).toLocaleString('vi-VN')}</span>
                             </span>
                         </div>

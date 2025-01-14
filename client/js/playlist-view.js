@@ -27,6 +27,7 @@ function getSongsInPlaylist(id) {
     });
 }
 // Gọi API và hiển thị bài hát khi trang load (ví dụ với playlist ID là 1)
+var id = 4;
 getSongsInPlaylist(id);
 
 // Xóa bài hát
