@@ -3,9 +3,13 @@ let user_id = localStorage.getItem("user-id");
 console.log("Hello");
 $(function () {
     $("#update-form").hide();
+
     $.ajax({
         url: `http://localhost:8080/api/songs/by-user/${user_id}`,
         method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
         success: function(result){
             console.log(result);
 
@@ -74,6 +78,9 @@ function getSongInfoForMPC(songId) {
     $.ajax({
         url: `http://localhost:8080/api/songs/${songId}`,
         method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
         success: function (data) {
             let singers = "";
             for (let j = 0; j < data.singers.length; j++) {
@@ -114,7 +121,9 @@ function updateSong(id) {
         url: `http://localhost:8080/api/songs/${id}`,
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+
         },
         success: function (song){
             console.log(song);
@@ -200,6 +209,9 @@ function updateSongData() {
         data: formData,
         processData: false,
         contentType: false,
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
         success: function(response) {
             console.log("Update successful:", response);
             $("#update-form").hide();
@@ -217,6 +229,9 @@ function deleteSong(id){
     $.ajax({
         type: "DELETE",
         url: `http://localhost:8080/api/songs/${id}`,
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
         success: function(){
             location.reload();
             console.log("Deleted")
