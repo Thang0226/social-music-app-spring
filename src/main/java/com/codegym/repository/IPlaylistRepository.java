@@ -22,4 +22,11 @@ public interface IPlaylistRepository extends JpaRepository<Playlist, Long> {
 
     @Query("SELECT p FROM Playlist p JOIN p.songs s WHERE s.id = :songId")
     List<Playlist> findPlaylistsBySongId(@Param("songId") Long songId);
+
+    @Query("SELECT p FROM Playlist p WHERE LOWER(p.name) LIKE LOWER(CONCAT('%', :keyword, '%'))")
+    List<Playlist> searchByKeyword(@Param("keyword") String keyword);
+
+
+    List<Playlist> findByNameContainingIgnoreCase(String keyword);
+
 }

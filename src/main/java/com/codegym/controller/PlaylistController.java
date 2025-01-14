@@ -109,9 +109,9 @@ public class PlaylistController {
     }
 
 
-    @PostMapping(path = "/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(path = "/save")
     public ResponseEntity<?> savePlaylist(@RequestParam String name,
-                                          @RequestParam("song") String[] songs,
+                                          @RequestParam("songs") String[] songs,
                                           @RequestParam(value="user_id") Long userId) {
         Optional<User> userOptional = userService.findById(userId);
         if (userOptional.isEmpty()) {
@@ -135,5 +135,15 @@ public class PlaylistController {
         }
         return songSet;
     }
+    @GetMapping("/search")
+    public ResponseEntity<?> searchPlaylists(@RequestParam String keyword) {
+        try {
+            List<Playlist> playlists = playlistService.searchByKeyword(keyword);
+            return ResponseEntity.ok(playlists);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Lỗi khi tìm kiếm playlist");
+        }
+    }
+
 
 }

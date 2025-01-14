@@ -17,17 +17,20 @@ function getSongsInPlaylist(id) {
                         <td>${songs.listeningCount}</td>
                         <td>${songs.description}</td>
                         <td class="action-icons">
-                            <button class="play-song-btn">▶️</button>
+                            <button class="play-song-btn" onclick="">▶️</button>
                             <button class="delete-song-btn" onclick="deleteSong(${songs.id}, ${id})">❌</button>
                         </td>
                     </tr>`;
             });
             $("#songList").html(songHtml);
         },
+        error: function () {
+            alert("Không thể tải danh sách playlist.");
+        }
     });
 }
 // Gọi API và hiển thị bài hát khi trang load (ví dụ với playlist ID là 1)
-var id = 4;
+let id = localStorage.getItem('playlist-id');
 getSongsInPlaylist(id);
 
 // Xóa bài hát

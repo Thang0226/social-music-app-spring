@@ -68,7 +68,7 @@ function createPlaylist() {
         processData: false,  // Don't process the files
         contentType: false,  // Set content type to false as jQuery will tell the server it's a query string request
         success: function(response) {
-            alert('Song has been created!');
+            alert('Playlist has been created!');
         },
         error: function(error) {
             alert('Failed: ' + error);

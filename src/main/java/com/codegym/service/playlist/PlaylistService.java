@@ -51,4 +51,19 @@ public class PlaylistService implements IPlaylistService {
         return playlistRepository.findTopPlayedPlaylists();
     }
 
+    @Override
+    public List<Playlist> searchByKeyword(String keyword) {
+        if (keyword == null || keyword.trim().isEmpty()) {
+            return playlistRepository.findAll(); // Hoặc trả về danh sách rỗng
+        }
+        return playlistRepository.findByNameContainingIgnoreCase(keyword);
+    }
+
+
+
+
+
+
+
+
 }

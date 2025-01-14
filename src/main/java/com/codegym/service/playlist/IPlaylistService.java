@@ -11,4 +11,6 @@ public interface IPlaylistService extends IGenerateService<Playlist> {
     List<Playlist> getTopLikedPlaylists();
 
     List<Playlist> getTopPlayedPlaylists();
+
+    List<Playlist> searchByKeyword(String keyword);
 }
