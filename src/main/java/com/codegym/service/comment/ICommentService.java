@@ -14,4 +14,6 @@ public interface ICommentService extends IGenerateService<Comment> {
     Page<PlaylistCommentDTO> findCommentsByPlaylistId(Long playlistID, Pageable pageable);
 
     Page<SingerCommentDTO> findCommentsBySingerId(Long singerId, Pageable pageable);
+
+    void deleteCommentsBySongId(Long songId);
 }

@@ -17,12 +17,12 @@ import java.time.LocalDateTime;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/api")
+@RequestMapping("/api/comments")
 public class CommentController {
     @Autowired
     private ICommentService commentService;
 
-    @PostMapping("/comments")
+    @PostMapping("")
     public ResponseEntity<String> createComment(@RequestBody Comment comment) {
         comment.setCommentTime(LocalDateTime.now());
         commentService.save(comment);
