@@ -8,67 +8,178 @@
     <link rel="stylesheet" href="https://themewagon.github.io/podcast/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
-
+        /* Navbar */
         .navbar {
             background-color: #fff;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
+        /* Logo */
         .navbar-brand {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem; /* Giảm kích thước chữ của logo */
             font-weight: bold;
-            color: #007bff !important;
+            background: linear-gradient(90deg, #ff8a00, #e52e71);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            transition: all 0.3s ease;
         }
 
+        .navbar-brand:hover {
+            color: #e52e71;
+            text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Menu Items */
         .nav-link {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem; /* Giảm kích thước chữ của các mục menu */
             color: #333 !important;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
 
+        .nav-link:hover,
         .nav-link.active {
             font-weight: bold !important;
             color: #007bff !important;
+            text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
+        /* Responsive cho màn hình nhỏ */
+        @media screen and (max-width: 768px) {
+            .navbar-brand {
+                font-size: 1.5rem; /* Giảm kích thước logo trên mobile */
+            }
 
-        .btn-listen, .btn-play {
+            .nav-link {
+                font-size: 0.9rem; /* Giảm kích thước chữ menu trên mobile */
+            }
+        }
+
+        /* Button Styles */
+        .btn-listen,
+        .btn-play {
             background-color: #007bff;
             color: #fff;
             border: none;
-            padding: 8px 16px;
+            padding: 10px 20px;
             border-radius: 25px;
             font-size: 14px;
-            transition: background-color 0.3s;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: background-color 0.3s, transform 0.2s;
         }
 
-        .btn-listen:hover, .btn-play:hover {
+        .btn-listen:hover,
+        .btn-play:hover {
             background-color: #0056b3;
+            transform: scale(1.05);
         }
 
-
-        .song-card {
-            background-color: #fff;
+        /* Banner */
+        .simple-banner {
+            background: linear-gradient(135deg, #ff8a00, #e52e71);
+            color: #fff;
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .simple-banner h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .simple-banner p {
+            font-size: 1.1rem;
+        }
+
+        .simple-banner .btn-listen {
+            background-color: #fff;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .simple-banner .btn-listen:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        /* Song Card */
+        .song-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .song-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
 
         .song-card img {
             width: 100%;
-            height: 180px;
+            height: 160px;
             object-fit: cover;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
         }
 
-        .song-info {
-            padding: 15px;
-            text-align: center;
+        /* Section Title */
+        #sectionTitle {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        #sectionTitle::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: #007bff;
+            margin: 10px auto 0;
+            border-radius: 3px;
+        }
+
+        /* Search Input */
+        .form-control {
+            border-radius: 25px;
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            border-color: #007bff;
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+            .navbar-brand {
+                font-size: 1.8rem;
+            }
+
+            .simple-banner h2 {
+                font-size: 2rem;
+            }
+
+            .btn-listen,
+            .btn-play {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+
+            .song-card img {
+                height: 140px;
+            }
         }
     </style>
+
 </head>
 <body>
 
@@ -80,10 +191,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link active" href="#" onclick="setActive(this); getAllSongs()">Tất cả bài hát</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" onclick="setActive(this); getLatestSongs()">Mới nhất</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" onclick="setActive(this); getMostPlayedSongs()">Nghe nhiều nhất</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" onclick="setActive(this); getMostLikedSongs()">Yêu thích nhất</a></li>
+                <li class="nav-item"><a class="nav-link active" href="#" onclick="setActive(this); getAllSongs()">Tất cả
+                    bài hát</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" onclick="setActive(this); getLatestSongs()">Mới
+                    nhất</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" onclick="setActive(this); getMostPlayedSongs()">Nghe
+                    nhiều nhất</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" onclick="setActive(this); getMostLikedSongs()">Yêu
+                    thích nhất</a></li>
             </ul>
             <form class="d-flex ms-3">
                 <input id="searchInput" class="form-control me-2" type="search" placeholder="Tìm kiếm bài hát">
@@ -105,14 +220,6 @@
 
     </div>
 </section>
-
-
-<div class="fixed-bottom bg-light p-2">
-    <audio id="audioPlayer" controls style="width: 100%;">
-        Trình duyệt không hỗ trợ phát nhạc.
-    </audio>
-</div>
-
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://themewagon.github.io/podcast/js/bootstrap.bundle.min.js"></script>

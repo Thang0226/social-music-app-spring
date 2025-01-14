@@ -2,9 +2,9 @@ const apiUrl = "http://localhost:8080/api/songListen";
 const audioPlayer = document.getElementById('audioPlayer');
 
 
-function playSong(musicFile) {
-    audioPlayer.src = musicFile;
-    audioPlayer.play();
+function playSong(id) {
+    localStorage.setItem("song-id", id);
+    window.location.href = "song.html";
 }
 
 function displaySongs(data) {
@@ -20,11 +20,11 @@ function displaySongs(data) {
         const songCard = `
             <div class="col-md-4 mb-4">
                 <div class="card">
-                    <img src="${song.imageFile}" class="card-img-top" alt="${song.name}">
+                    <img src="http://localhost:8080/images/${song.imageFile}" class="card-img-top" alt="${song.name}">
                     <div class="card-body">
                         <h5 class="card-title">${song.name}</h5>
                         <p class="card-text">${song.description}</p>
-                        <button class="btn btn-primary" onclick="playSong('${song.musicFile}')">
+                        <button class="btn btn-primary" onclick="playSong('${song.id}')">
                             <i class="fas fa-play"></i> Nghe ngay
                         </button>
                     </div>
