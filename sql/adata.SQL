@@ -1,4 +1,6 @@
-
+# create database music;
+#
+# use music;
 
 
 INSERT INTO role (id, name) VALUES
