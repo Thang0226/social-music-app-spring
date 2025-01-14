@@ -30,7 +30,7 @@ function initializeNewSongs() {
             for (let i = 0; i < songs.length; i++) {
                 let singers = "";
                 for (let j = 0; j < songs[i].singers.length; j++) {
-                    singers += `<a href="singer.html" onclick="storeSingerId(${songs[i].singers[j].id})"> ${songs[i].singers[j].singerName}</a>`
+                    singers += `<a href="listsongbysingername.html" onclick="storeSingerId(${songs[i].singers[j].id})"> ${songs[i].singers[j].singerName}</a>`
                     if (j < songs[i].singers.length - 1) {
                         singers += `, `
                     }
@@ -75,41 +75,26 @@ function initializeNewSongs() {
                     `;
             }
             $("#new-songs").html(content);
-            initializeMediaPlayers();
+
         }
     });
 }
-
 initializeNewSongs();
 
-// MediaElement
-function initializeMediaPlayers() {
-    let mediaElements = document.querySelectorAll('video, audio'), total = mediaElements.length;
 
-    for (let i = 0; i < total; i++) {
-        new MediaElementPlayer(mediaElements[i], {
-            features: ['playpause', 'current', 'progress', 'duration', 'volume'],
-            pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@7.0.7/build/',
-            shimScriptAccess: 'always',
-            success: function (mediaElement) {
-                let target = document.body.querySelectorAll('.player'), targetTotal = target.length;
-                for (let j = 0; j < targetTotal; j++) {
-                    target[j].style.visibility = 'visible';
-                }
-                // Increase view count after 30 seconds
-                mediaElement.addEventListener('timeupdate', function () {
-                    if (mediaElement.currentTime >= 30) {
-                        // Call your function to increase the view count
-                        increaseViewCount(songId);
-                        // Remove the event listener after it triggers once
-                        mediaElement.removeEventListener('timeupdate', arguments.callee);
-                    }
-                });
-            }
-        });
-    }
+function increaseViewCount(songId) {
+    $.ajax({
+        headers: {
+            'content-type': 'application/json'
+        },
+        url: `${API_BASE_URL}/api/songs/update-listening-count/${songId}`,
+        type: 'PUT',
+        success: function (result) {
+            console.log(result)
+
+        }
+    })
 }
-
 
 function showMainPlayer(audioSrc) {
     // Unhide the main player
@@ -145,7 +130,7 @@ function getSongInfoForMPC(songId) {
             content +=`           
                 <img src="${API_BASE_URL}/images/${data.imageFile}" 
                 alt="${data.name}" class="img-fluid mr-2 p-1" 
-                style="max-width: 80px; max-height: 80px; width: 100%; height: auto;">
+                style="max-width: 80px; max-height: 80px; width: 100%; height: 80px;">
                 <div class="podcaster text-start">
                     <span style="font-weight: bold">
                         <a href="song.html" onclick="storeSongId(${data.id}); storeUserId(${userId})"> 
