@@ -1,34 +1,100 @@
-// Load danh sách bài hát trong playlist
-function getSongsInPlaylist(id) {
+const API_BASE_URL = 'http://localhost:8080';
+
+// Gọi API và hiển thị bài hát khi trang load (ví dụ với playlist ID là 1)
+let id = localStorage.getItem("playlist-id");
+let songs;
+getInformation(id);
+
+function getInformation(id) {
     $.ajax({
         method: "GET",
         url: `http://localhost:8080/api/playlist/${id}`,
         success: function (data) {
-            const playlistName = data.playlist;
-            $("#playlistName").text(playlistName);
+            let playlist = data.playlist;
+            songs = data.playlist.songs;
+            let localTime = moment(playlist.createTime).tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY");
+            $("#playlist-details").html(
+                `
+                <div class="align-items-center justify-content-center mb-2">
+                    <h1>
+                        ${playlist.name}
+                    </h1>
+                    </span>Added on ${localTime} <span class="mx-2">&bullet;</span>
+                    <span><i class="bi bi-eye"></i> <span id="listening-count">
+                    ${parseInt(playlist.listeningCount, 10).toLocaleString('vi-VN')}</span>
+                </span>
+                </div>
+                `
+            );
+
+            $("#like-count").text(playlist.likeCount);
+
+
 
             let songHtml = "";
-            data.songs.forEach((songs, index) => {
+            songs.forEach((song, index) => {
                 songHtml += `
                     <tr>
                         <td>${index + 1}</td> <!-- Dùng index + 1 để hiển thị thứ tự -->
-                        <td>${songs.name}</td>
-                        <td>${songs.likeCount}</td>
-                        <td>${songs.listeningCount}</td>
-                        <td>${songs.description}</td>
+                        <td>${song.name}</td>
+                        <td>${song.likeCount}</td>
+                        <td>${song.listeningCount}</td>
+                        <td>${song.description}</td>
                         <td class="action-icons">
                             <button class="play-song-btn">▶️</button>
-                            <button class="delete-song-btn" onclick="deleteSong(${songs.id}, ${id})">❌</button>
+                            <button class="delete-song-btn" onclick="deleteSong(${song.id}, ${id})">❌</button>
                         </td>
                     </tr>`;
             });
             $("#songList").html(songHtml);
-        },
+
+            // song player
+            $("#song-player").html(
+                `<div class="player mb-3">
+                <audio id="player2" preload="none" controls style="width: 100%">
+                <source src="${API_BASE_URL}/audios/${songs[0].musicFile}" type="audio/mp3">
+                </audio>
+                </div>`
+            );
+
+            initializeMediaPlayers();
+        }
     });
 }
-// Gọi API và hiển thị bài hát khi trang load (ví dụ với playlist ID là 1)
-var id = 4;
-getSongsInPlaylist(id);
+
+function listPlaylist(id) {
+    event.preventDefault()
+    $.ajax({
+        headers: {
+            'content-type': 'application/json'
+        },
+        url: `${API_BASE_URL}/api/playlist/like-playlist/${id}`,
+        type: 'PUT',
+        success: function (result) {
+            console.log(result);
+            $("#like-count").html(
+                `${parseInt(result, 10).toLocaleString('vi-VN')}`
+            );
+        }
+    })
+}
+
+function unlikePlaylist(id) {
+    event.preventDefault()
+    $.ajax({
+        headers: {
+            'content-type': 'application/json'
+        },
+        url: `${API_BASE_URL}/api/playlist/unlike-playlist/${id}`,
+        type: 'PUT',
+        success: function (result) {
+            console.log(result);
+            $("#like-count").html(
+                `${parseInt(result, 10).toLocaleString('vi-VN')}`
+            );
+        }
+    })
+}
 
 // Xóa bài hát
 function deleteSong(songsId, playlistId) {

@@ -197,7 +197,7 @@
                 <ul class="dropdown arrow-top">
                   <li><a href="song-add.html">Add new song</a></li>
                   <li><a href="song-update.html">Update song information</a></li>
-                  <li><a href="#">Menu Three</a></li>
+                  <li><a href="#">...</a></li>
                 </ul>
               </li>
               <li class="has-children">
@@ -205,7 +205,7 @@
                 <ul class="dropdown arrow-top">
                   <li><a href="listsinger.html">List Singer</a></li>
                   <li><a href="addsinger.html">Add new singer</a></li>
-
+                  <li><a href="searchsongbysingerId.html">Search Song By Singer Name</a></li>
                 </ul>
               </li>
               <li><a href="my-song.html">My Songs</a></li>
@@ -236,9 +236,12 @@
   </div>
 <!--  <a href="/social-music-app-spring/client/addsinger.html" class="btn btn-success">Tạo Ca Sĩ Mới</a>-->
   <!-- Thanh tìm kiếm -->
+  <!-- Thanh tìm kiếm -->
+  <!-- Thanh tìm kiếm -->
   <div class="search-container">
-    <form action="/api/singers/findByName" method="GET" class="d-flex mb-3">
+    <form id="formSearch" method="GET" class="d-flex mb-3">
       <input
+              id="search"
               type="text"
               name="singerName"
               placeholder="Tìm kiếm ca sĩ..."
@@ -246,22 +249,38 @@
               required>
       <button type="submit" class="btn btn-primary">Tìm kiếm</button>
     </form>
+    <div id="result"></div> <!-- Kết quả tìm kiếm sẽ hiển thị tại đây -->
   </div>
-  <table>
+
+  <!-- Bảng danh sách ca sĩ -->
+  <table class="table">
     <thead>
     <tr>
       <th>STT</th>
       <th>Tên Ca Sĩ</th>
     </tr>
     </thead>
-    <tbody id="singer">
-    <!-- Dữ liệu danh sách playlist sẽ được thêm tại đây -->
-    <tr th:each="singer : ${singers}">
-      <td th:text="${singer.id}"></td>
-      <td th:text="${singer.singerName}"></td>
-    </tr>
+    <tbody id="singerList">
+    <!-- Kết quả AJAX sẽ được hiển thị tại đây -->
     </tbody>
   </table>
+
+
+<!--  <table>-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--      <th>STT</th>-->
+<!--      <th>Tên Ca Sĩ</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody id="singer">-->
+<!--    &lt;!&ndash; Dữ liệu danh sách playlist sẽ được thêm tại đây &ndash;&gt;-->
+<!--    <tr th:each="singer : ${singers}">-->
+<!--      <td th:text="${singer.id}"></td>-->
+<!--      <td th:text="${singer.singerName}"></td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--  </table>-->
 
 
 
@@ -368,6 +387,107 @@
     }
   });
 </script>
+<script>
+  function loadAllSingers() {
+    $.ajax({
+      method: "GET",
+      url: "http://localhost:8080/api/singers", // Gọi API để lấy toàn bộ danh sách ca sĩ
+      success: function (data) {
+        // Kiểm tra và hiển thị dữ liệu
+        let singerList = '';
+        data.forEach((singer, index) => {
+          singerList += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${singer.singerName}</td>
+                    </tr>
+                `;
+        });
+        $("#singerList").html(singerList); // Đổ dữ liệu vào bảng
+      },
+      error: function (xhr, status, error) {
+        console.error("Error loading singers:", error);
+        $("#result").html("<p class='text-danger'>Không thể tải danh sách ca sĩ.</p>");
+      }
+    });
+  }
+  // $('#search').on('input', function() {
+  //   const query = $(this).val().trim(); // Lấy giá trị tìm kiếm và loại bỏ khoảng trắng
+  //
+  //   // Kiểm tra nếu có từ khóa
+  //   if (query.length > 0) {
+  //     $.ajax({
+  //       url: `http://localhost:8080/api/singers/findByName/${encodeURIComponent(query)}`, // URL API
+  //       type: 'GET',
+  //       success: function(data) {
+  //         if (data && data.length > 0) {
+  //           renderResults(data); // Hiển thị danh sách kết quả
+  //         } else {
+  //           $('#results').html('<p class="text-danger">Không tìm thấy ca sĩ nào phù hợp!</p>');
+  //         }
+  //       },
+  //       error: function() {
+  //         $('#results').html('<p class="text-danger">Không thể tìm thấy ca sĩ. Vui lòng thử lại!</p>');
+  //       }
+  //     });
+  //   } else {
+  //     // Nếu không có từ khóa, xóa kết quả tìm kiếm
+  //     $('#results').empty();
+  //   }
+  // });
+  //
+  // // Hàm render kết quả tìm kiếm
+  // function renderResults(data) {
+  //   let html = '';
+  //   data.forEach((singer, index) => {
+  //     html += `
+  //           <tr>
+  //               <td>${index + 1}</td>
+  //               <td>${singer.singerName}</td>
+  //           </tr>
+  //       `;
+  //   });
+  //   $('#results').html(html);
+  // }
+  $("#formSearch").submit((e) => {
+    e.preventDefault(); // Ngăn form reload trang
+    let singerName = $("#search").val().trim(); // Lấy giá trị input
+
+    if (singerName.length > 0) {
+      $.ajax({
+        method: "GET",
+        url: `http://localhost:8080/api/singers/findByName/${singerName}`, // Gọi API
+        success: function (data) {
+          // Kiểm tra dữ liệu trả về
+          if (data) {
+            $("#singerList").html(`
+                        <tr>
+                            <td>${data.id}</td>
+                            <td>${data.singerName}</td>
+                        </tr>
+                    `);
+            $("#result").html(""); // Xóa thông báo lỗi nếu có
+          } else {
+            $("#singerList").empty(); // Xóa dữ liệu bảng nếu không tìm thấy
+            $("#result").html("<p class='text-danger'>Ca sĩ không tồn tại.</p>");
+          }
+        },
+        error: function (xhr, status, error) {
+          $("#singerList").empty(); // Xóa dữ liệu bảng khi lỗi
+          if (xhr.status === 404) {
+            $("#result").html("<p class='text-danger'>Ca sĩ không tồn tại.</p>");
+          } else {
+            $("#result").html("<p class='text-danger'>Đã xảy ra lỗi khi tìm kiếm.</p>");
+          }
+        }
+      });
+    } else {
+      alert("Vui lòng nhập từ khóa tìm kiếm."); // Cảnh báo khi input rỗng
+    }
+  });
+  loadAllSingers();
+</script>
+
 
 
 <script src="js/main.js"></script>

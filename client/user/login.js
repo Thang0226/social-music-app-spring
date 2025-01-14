@@ -19,7 +19,7 @@ $(document).ready(function() {
                 // Redirect or handle success
                 localStorage.setItem('token', jwtResponse.token);
                 localStorage.setItem('user-id', jwtResponse.id);
-                window.location.href = '/social-music-app-spring/client/index.html';
+                window.location.href = '/social-music-app-spring/client/homepage.html';
             },
             error: function(xhr) {
                 alert('Login failed: ' + xhr.responseText);
