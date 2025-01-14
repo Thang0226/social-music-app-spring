@@ -14,7 +14,9 @@ $(document).ready(function() {
         $.ajax({
             url: 'http://localhost:8080/api/music/signup',
             method: 'POST',
-            contentType: 'application/json',
+            headers: {
+                'Content-Type': 'application/json',
+            },
             data: JSON.stringify(signupData),
             success: function(response) {
                 alert('Signup successful!');

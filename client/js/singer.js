@@ -68,6 +68,7 @@ function postComment() {
     $.ajax({
         headers: {
             'content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },
         url: 'http://localhost:8080/api/comments',
         type: 'POST',

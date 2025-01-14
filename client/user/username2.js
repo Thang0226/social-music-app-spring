@@ -3,6 +3,9 @@ function showChangeForm() {
     let username = $('#username').val();
     $.ajax({
         url: 'http://localhost:8080/api/music/username4password',
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
         method: 'POST',
         contentType: 'text/plain',
         data: username,

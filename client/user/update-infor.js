@@ -1,6 +1,9 @@
 $(function() {
     $.ajax({
         url: 'http://localhost:8080/api/music/update',
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
         method: 'POST',
         contentType: 'text/plain',
         data: localStorage.getItem('username'),
@@ -27,6 +30,9 @@ function updateInfor() {
     };
     $.ajax({
         url: 'http://localhost:8080/api/music/update',
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
         method: 'PUT',
         contentType: 'application/json',
         data: JSON.stringify(infor),

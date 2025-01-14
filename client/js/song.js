@@ -143,6 +143,7 @@ function postComment() {
     $.ajax({
         headers: {
             'content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },
         url: `${API_BASE_URL}/api/comments`,
         type: 'POST',
@@ -180,7 +181,8 @@ function likeSong(songId) {
     event.preventDefault()
     $.ajax({
         headers: {
-            'content-type': 'application/json'
+            'content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },
         url: `${API_BASE_URL}/api/songs/like-song/${songId}`,
         type: 'PUT',
@@ -197,7 +199,8 @@ function unlikeSong(songId) {
     event.preventDefault()
     $.ajax({
         headers: {
-            'content-type': 'application/json'
+            'content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },
         url: `${API_BASE_URL}/api/songs/unlike-song/${songId}`,
         type: 'PUT',

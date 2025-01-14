@@ -13,6 +13,9 @@ function updatePassword() {
     };
     $.ajax({
         url: 'http://localhost:8080/api/music/update4password',
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
         method: 'PUT',
         contentType: 'application/json',
         data: JSON.stringify(infor),
