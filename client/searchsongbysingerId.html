@@ -1,0 +1,497 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--    <title>Search Music &mdash; Hung Master</title>-->
+<!--    <meta charset="utf-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+
+<!--    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,700,900">-->
+<!--    <link rel="stylesheet" href="fonts/icomoon/style.css">-->
+
+<!--    <link rel="stylesheet" href="css/bootstrap.min.css">-->
+<!--    <link rel="stylesheet" href="css/magnific-popup.css">-->
+<!--    <link rel="stylesheet" href="css/jquery-ui.css">-->
+<!--    <link rel="stylesheet" href="css/owl.carousel.min.css">-->
+<!--    <link rel="stylesheet" href="css/owl.theme.default.min.css">-->
+
+<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelementplayer.min.css">-->
+
+
+<!--    <link rel="stylesheet" href="css/aos.css">-->
+
+<!--    <link rel="stylesheet" href="css/style.css">-->
+<!--    <style>-->
+<!--        .search-container {-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+
+<!--        .search-container .form-control {-->
+<!--            width: 300px;-->
+<!--        }-->
+
+<!--        .search-container .btn {-->
+<!--            margin-left: 10px;-->
+<!--        }-->
+
+
+<!--    </style>-->
+<!--    <style>-->
+<!--        .form-control[type="file"] {-->
+<!--            padding: 0;-->
+<!--        }-->
+
+<!--        .form-control[type="file"]::file-selector-button {-->
+<!--            height: 100%;-->
+<!--            padding: 10px 20px;-->
+<!--            margin: 0 10px 0 0;-->
+<!--            border: none;-->
+<!--            background: #e9ecef;-->
+<!--            border-right: 1px solid #dee2e6;-->
+<!--            cursor: pointer;-->
+<!--        }-->
+<!--    </style>-->
+<!--    <style>-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            margin: 0;-->
+<!--            padding: 20px;-->
+<!--            background-color: #f4f4f9;-->
+<!--        }-->
+
+<!--        table {-->
+<!--            width: 100%;-->
+<!--            max-width: 1200px;-->
+<!--            margin: 0 auto 20px;-->
+<!--            border-collapse: collapse;-->
+<!--            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);-->
+<!--            background-color: #fff;-->
+<!--            border-radius: 8px;-->
+<!--            overflow: hidden;-->
+<!--        }-->
+
+<!--        th, td {-->
+<!--            border: 1px solid #ddd;-->
+<!--            padding: 12px 15px;-->
+<!--            text-align: left;-->
+<!--        }-->
+
+<!--        th {-->
+<!--            background-color: #007bff;-->
+<!--            color: white;-->
+<!--            text-transform: uppercase;-->
+<!--            font-size: 14px;-->
+<!--            font-weight: bold;-->
+<!--        }-->
+
+<!--        td {-->
+<!--            font-size: 14px;-->
+<!--            color: #333;-->
+<!--            word-wrap: break-word;-->
+<!--        }-->
+
+<!--        tr:nth-child(even) {-->
+<!--            background-color: #f9f9f9;-->
+<!--        }-->
+
+<!--        tr:hover {-->
+<!--            background-color: #f1f1f1;-->
+<!--            transition: background-color 0.3s;-->
+<!--        }-->
+
+<!--        button {-->
+<!--            background-color: #007bff;-->
+<!--            color: white;-->
+<!--            font-size: 16px;-->
+<!--            cursor: pointer;-->
+<!--            border: none;-->
+<!--            padding: 10px 20px;-->
+<!--            margin: 10px auto;-->
+<!--            border-radius: 4px;-->
+<!--            display: block;-->
+<!--            text-align: center;-->
+<!--            max-width: 200px;-->
+<!--        }-->
+
+<!--        button:hover {-->
+<!--            background-color: #0056b3;-->
+<!--        }-->
+
+<!--        #formContainer {-->
+<!--            display: none;-->
+<!--            max-width: 600px;-->
+<!--            margin: 20px auto;-->
+<!--            padding: 20px;-->
+<!--            background-color: #fff;-->
+<!--            border-radius: 8px;-->
+<!--            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);-->
+<!--        }-->
+
+<!--        label {-->
+<!--            display: block;-->
+<!--            margin-bottom: 8px;-->
+<!--            font-weight: bold;-->
+<!--        }-->
+
+<!--        input {-->
+<!--            width: calc(100% - 22px);-->
+<!--            padding: 10px;-->
+<!--            margin-bottom: 15px;-->
+<!--            border: 1px solid #ccc;-->
+<!--            border-radius: 4px;-->
+<!--        }-->
+
+<!--        .success {-->
+<!--            color: green;-->
+<!--            font-weight: bold;-->
+<!--            margin-bottom: 10px;-->
+<!--            text-align: center;-->
+<!--        }-->
+
+<!--        .error {-->
+<!--            color: red;-->
+<!--            font-weight: bold;-->
+<!--            margin-bottom: 10px;-->
+<!--            text-align: center;-->
+<!--        }-->
+<!--    </style>-->
+
+
+
+<!--</head>-->
+<!--<body>-->
+
+<!--<div class="site-wrap">-->
+
+<!--    <div class="site-mobile-menu">-->
+<!--        <div class="site-mobile-menu-header">-->
+<!--            <div class="site-mobile-menu-close mt-3">-->
+<!--                <span class="icon-close2 js-menu-toggle"></span>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="site-mobile-menu-body"></div>-->
+<!--    </div>-->
+
+
+<!--    <header class="site-navbar py-4" role="banner">-->
+
+<!--        <div cFlass="container">-->
+<!--            <div class="row align-items-center">-->
+
+
+<!--                <div class="col-3">-->
+<!--                    <h1 class="site-logo"><a href="index.html" class="h2">Podcast<span class="text-primary">.</span> </a></h1>-->
+<!--                </div>-->
+<!--                <div class="col-9">-->
+<!--                    <nav class="site-navigation position-relative text-right text-md-right" role="navigation">-->
+
+
+
+<!--                        <div class="d-block d-lg-none ml-md-0 mr-auto"><a href="#" class="site-menu-toggle js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>-->
+
+<!--                        <ul class="site-menu js-clone-nav d-none d-lg-block">-->
+<!--                            <li class="active">-->
+<!--                                <a href="index.html">Home</a>-->
+<!--                            </li>-->
+<!--                            <li class="has-children">-->
+<!--                                <a href="#">About Songs</a>-->
+<!--                                <ul class="dropdown arrow-top">-->
+<!--                                    <li><a href="song-add.html">Add new song</a></li>-->
+<!--                                    <li><a href="song-update.html">Update song information</a></li>-->
+<!--                                    <li><a href="#">...</a></li>-->
+<!--                                </ul>-->
+<!--                            </li>-->
+<!--                            <li class="has-children">-->
+<!--                                <a href="#">Singer</a>-->
+<!--                                <ul class="dropdown arrow-top">-->
+<!--                                    <li><a href="listsinger.html">List Singer</a></li>-->
+<!--                                    <li><a href="addsinger.html">Add new singer</a></li>-->
+<!--                                    <li><a href="searchsongbysingerId.html">Search Song By Singer Name</a></li>-->
+<!--                                </ul>-->
+<!--                            </li>-->
+<!--                            <li><a href="my-song.html">My Songs</a></li>-->
+<!--                            <li><a href="user/login.html">Login / Register</a></li>-->
+<!--                        </ul>-->
+<!--                    </nav>-->
+
+
+<!--                </div>-->
+
+<!--            </div>-->
+<!--        </div>-->
+
+<!--    </header>-->
+
+
+<!--    <div class="site-blocks-cover overlay inner-page-cover" style="background-image: url(images/hero_bg_1.jpg);"-->
+<!--         data-aos="fade" data-stellar-background-ratio="0.5">-->
+<!--        <div class="container">-->
+<!--            <div class="row align-items-center justify-content-center text-center">-->
+
+<!--                <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">-->
+<!--                    <h1 class="text-white">List Songs</h1>-->
+<!--                    &lt;!&ndash;            <a href="#">Home</a><span class="mx-2 text-white">&bullet;</span> <span class="text-white">Login / Register</span>&ndash;&gt;-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash;  <a href="/social-music-app-spring/client/addsinger.html" class="btn btn-success">Tạo Ca Sĩ Mới</a>&ndash;&gt;-->
+<!--    &lt;!&ndash; Thanh tìm kiếm &ndash;&gt;-->
+<!--    &lt;!&ndash; Thanh tìm kiếm &ndash;&gt;-->
+<!--    &lt;!&ndash; Thanh tìm kiếm &ndash;&gt;-->
+<!--    <div class="search-container">-->
+<!--        <form id="formSearch" method="GET" class="d-flex mb-3">-->
+<!--            <input-->
+<!--                    id="search"-->
+<!--                    type="text"-->
+<!--                    name="name"-->
+<!--                    placeholder="Tìm kiếm bài hát bằng mã code ca sĩ..."-->
+<!--                    class="form-control me-2"-->
+<!--                    required>-->
+<!--            <button type="submit" class="btn btn-primary">Tìm kiếm</button>-->
+<!--        </form>-->
+<!--        <div id="result"></div> &lt;!&ndash; Kết quả tìm kiếm sẽ hiển thị tại đây &ndash;&gt;-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Bảng danh sách ca sĩ &ndash;&gt;-->
+<!--    <table class="table">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>STT</th>-->
+<!--            <th>Tên bài hát</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody id="songList">-->
+<!--        &lt;!&ndash; Kết quả AJAX sẽ được hiển thị tại đây &ndash;&gt;-->
+<!--        </tbody>-->
+<!--    </table>-->
+
+
+<!--    &lt;!&ndash;  <table>&ndash;&gt;-->
+<!--    &lt;!&ndash;    <thead>&ndash;&gt;-->
+<!--    &lt;!&ndash;    <tr>&ndash;&gt;-->
+<!--    &lt;!&ndash;      <th>STT</th>&ndash;&gt;-->
+<!--    &lt;!&ndash;      <th>Tên Ca Sĩ</th>&ndash;&gt;-->
+<!--    &lt;!&ndash;    </tr>&ndash;&gt;-->
+<!--    &lt;!&ndash;    </thead>&ndash;&gt;-->
+<!--    &lt;!&ndash;    <tbody id="singer">&ndash;&gt;-->
+<!--    &lt;!&ndash;    &lt;!&ndash; Dữ liệu danh sách playlist sẽ được thêm tại đây &ndash;&gt;&ndash;&gt;-->
+<!--    &lt;!&ndash;    <tr th:each="singer : ${singers}">&ndash;&gt;-->
+<!--    &lt;!&ndash;      <td th:text="${singer.id}"></td>&ndash;&gt;-->
+<!--    &lt;!&ndash;      <td th:text="${singer.singerName}"></td>&ndash;&gt;-->
+<!--    &lt;!&ndash;    </tr>&ndash;&gt;-->
+<!--    &lt;!&ndash;    </tbody>&ndash;&gt;-->
+<!--    &lt;!&ndash;  </table>&ndash;&gt;-->
+
+
+
+<!--    <div class="site-blocks-cover overlay inner-page-cover" style="background-image: url(images/hero_bg_1.jpg);"-->
+<!--         data-aos="fade" data-stellar-background-ratio="0.5">-->
+<!--        <div class="container">-->
+<!--            <div class="row align-items-center justify-content-center text-center">-->
+
+<!--                <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">-->
+<!--                    <h2>Subscribe</h2>-->
+<!--                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit nihil saepe libero sit odio-->
+<!--                        obcaecati veniam.</p>-->
+<!--                    <form action="#" method="post" class="site-block-subscribe">-->
+<!--                        <div class="input-group mb-3">-->
+<!--                            <input type="text" class="form-control border-secondary text-white bg-transparent"-->
+<!--                                   placeholder="Enter Email" aria-label="Enter Email" aria-describedby="button-addon2">-->
+<!--                            <div class="input-group-append">-->
+<!--                                <button class="btn btn-primary" type="button" id="button-addon2">Send</button>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+<!--    <footer class="site-footer">-->
+<!--        <div class="container">-->
+<!--            <div class="row">-->
+<!--                <div class="col-lg-4">-->
+<!--                    <h3>About Us</h3>-->
+<!--                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium animi, odio beatae-->
+<!--                        aspernatur natus recusandae quasi magni eum voluptatem nam!</p>-->
+<!--                </div>-->
+<!--                <div class="col-lg-3 mx-auto">-->
+<!--                    <h3>Navigation</h3>-->
+<!--                    <ul class="list-unstyled">-->
+<!--                        <li><a href="#">Podcasts</a></li>-->
+<!--                        <li><a href="#">Services</a></li>-->
+<!--                        <li><a href="#">About Us</a></li>-->
+<!--                        <li><a href="#">Blog</a></li>-->
+<!--                        <li><a href="#">My Songs</a></li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--                <div class="col-lg-4">-->
+<!--                    <h3>Subscribe</h3>-->
+<!--                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod, quibusdam!</p>-->
+<!--                    <form action="#" class="form-subscribe">-->
+<!--                        <input type="email" class="form-control mb-3" placeholder="Enter Email">-->
+<!--                        <input type="submit" class="btn btn-primary" value="Subscribe">-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="row pt-5 mt-5 text-center">-->
+<!--                <div class="col-md-12">-->
+<!--                    <p>-->
+<!--                        &lt;!&ndash; Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. &ndash;&gt;-->
+<!--                        Copyright &copy;<script data-cfasync="false"-->
+<!--                                                src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>-->
+<!--                        <script>document.write(new Date().getFullYear());</script>-->
+<!--                        All rights reserved | This template is made with <i class="icon-heart-o" aria-hidden="true"></i>-->
+<!--                        by <a href="https://colorlib.com" target="_blank">Colorlib</a>-->
+<!--                        &lt;!&ndash; Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. &ndash;&gt;-->
+<!--                    </p>-->
+<!--                </div>-->
+
+<!--            </div>-->
+<!--        </div>-->
+<!--    </footer>-->
+<!--</div>-->
+
+<!--<script src="js/jquery-3.3.1.min.js"></script>-->
+<!--<script src="js/jquery-migrate-3.0.1.min.js"></script>-->
+<!--<script src="js/jquery-ui.js"></script>-->
+<!--<script src="js/popper.min.js"></script>-->
+<!--<script src="js/bootstrap.min.js"></script>-->
+<!--<script src="js/owl.carousel.min.js"></script>-->
+<!--<script src="js/jquery.stellar.min.js"></script>-->
+<!--<script src="js/jquery.countdown.min.js"></script>-->
+<!--<script src="js/jquery.magnific-popup.min.js"></script>-->
+<!--<script src="js/aos.js"></script>-->
+
+<!--<script src="js/mediaelement-and-player.min.js"></script>-->
+
+<!--<script src="js/song-add.js"></script>-->
+
+<!--<script>-->
+<!--    document.addEventListener('DOMContentLoaded', function () {-->
+<!--        var mediaElements = document.querySelectorAll('video, audio'), total = mediaElements.length;-->
+
+<!--        for (var i = 0; i < total; i++) {-->
+<!--            new MediaElementPlayer(mediaElements[i], {-->
+<!--                pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/',-->
+<!--                shimScriptAccess: 'always',-->
+<!--                success: function () {-->
+<!--                    var target = document.body.querySelectorAll('.player'), targetTotal = target.length;-->
+<!--                    for (var j = 0; j < targetTotal; j++) {-->
+<!--                        target[j].style.visibility = 'visible';-->
+<!--                    }-->
+<!--                }-->
+<!--            });-->
+<!--        }-->
+<!--    });-->
+<!--</script>-->
+<!--<script>-->
+<!--    function loadAllSongs() {-->
+<!--        $.ajax({-->
+<!--            method: "GET",-->
+<!--            url: "http://localhost:8080/api/songs", // Gọi API để lấy toàn bộ danh sách ca sĩ-->
+<!--            success: function (data) {-->
+<!--                // Kiểm tra và hiển thị dữ liệu-->
+<!--                let singerList = '';-->
+<!--                data.forEach((singer, index) => {-->
+<!--                    singerList += `-->
+<!--                    <tr>-->
+<!--                        <td>${index + 1}</td>-->
+<!--                        <td>${singer.singerName}</td>-->
+<!--                    </tr>-->
+<!--                `;-->
+<!--                });-->
+<!--                $("#singerList").html(singerList); // Đổ dữ liệu vào bảng-->
+<!--            },-->
+<!--            error: function (xhr, status, error) {-->
+<!--                console.error("Error loading singers:", error);-->
+<!--                $("#result").html("<p class='text-danger'>Không thể tải danh sách ca sĩ.</p>");-->
+<!--            }-->
+<!--        });-->
+<!--    }-->
+<!--    // $('#search').on('input', function() {-->
+<!--    //   const query = $(this).val().trim(); // Lấy giá trị tìm kiếm và loại bỏ khoảng trắng-->
+<!--    //-->
+<!--    //   // Kiểm tra nếu có từ khóa-->
+<!--    //   if (query.length > 0) {-->
+<!--    //     $.ajax({-->
+<!--    //       url: `http://localhost:8080/api/singers/findByName/${encodeURIComponent(query)}`, // URL API-->
+<!--    //       type: 'GET',-->
+<!--    //       success: function(data) {-->
+<!--    //         if (data && data.length > 0) {-->
+<!--    //           renderResults(data); // Hiển thị danh sách kết quả-->
+<!--    //         } else {-->
+<!--    //           $('#results').html('<p class="text-danger">Không tìm thấy ca sĩ nào phù hợp!</p>');-->
+<!--    //         }-->
+<!--    //       },-->
+<!--    //       error: function() {-->
+<!--    //         $('#results').html('<p class="text-danger">Không thể tìm thấy ca sĩ. Vui lòng thử lại!</p>');-->
+<!--    //       }-->
+<!--    //     });-->
+<!--    //   } else {-->
+<!--    //     // Nếu không có từ khóa, xóa kết quả tìm kiếm-->
+<!--    //     $('#results').empty();-->
+<!--    //   }-->
+<!--    // });-->
+<!--    //-->
+<!--    // // Hàm render kết quả tìm kiếm-->
+<!--    // function renderResults(data) {-->
+<!--    //   let html = '';-->
+<!--    //   data.forEach((singer, index) => {-->
+<!--    //     html += `-->
+<!--    //           <tr>-->
+<!--    //               <td>${index + 1}</td>-->
+<!--    //               <td>${singer.singerName}</td>-->
+<!--    //           </tr>-->
+<!--    //       `;-->
+<!--    //   });-->
+<!--    //   $('#results').html(html);-->
+<!--    // }-->
+<!--    $("#formSearch").submit((e) => {-->
+<!--        e.preventDefault(); // Ngăn form reload trang-->
+<!--        let singerName = $("#search").val().trim(); // Lấy giá trị input-->
+
+<!--        if (singerName.length > 0) {-->
+<!--            $.ajax({-->
+<!--                method: "GET",-->
+<!--                url: `http://localhost:8080/api/singers/findByName/${singerName}`, // Gọi API-->
+<!--                success: function (data) {-->
+<!--                    // Kiểm tra dữ liệu trả về-->
+<!--                    if (data) {-->
+<!--                        $("#singerList").html(`-->
+<!--                        <tr>-->
+<!--                            <td>${data.id}</td>-->
+<!--                            <td>${data.singerName}</td>-->
+<!--                        </tr>-->
+<!--                    `);-->
+<!--                        $("#result").html(""); // Xóa thông báo lỗi nếu có-->
+<!--                    } else {-->
+<!--                        $("#singerList").empty(); // Xóa dữ liệu bảng nếu không tìm thấy-->
+<!--                        $("#result").html("<p class='text-danger'>Ca sĩ không tồn tại.</p>");-->
+<!--                    }-->
+<!--                },-->
+<!--                error: function (xhr, status, error) {-->
+<!--                    $("#singerList").empty(); // Xóa dữ liệu bảng khi lỗi-->
+<!--                    if (xhr.status === 404) {-->
+<!--                        $("#result").html("<p class='text-danger'>Ca sĩ không tồn tại.</p>");-->
+<!--                    } else {-->
+<!--                        $("#result").html("<p class='text-danger'>Đã xảy ra lỗi khi tìm kiếm.</p>");-->
+<!--                    }-->
+<!--                }-->
+<!--            });-->
+<!--        } else {-->
+<!--            alert("Vui lòng nhập từ khóa tìm kiếm."); // Cảnh báo khi input rỗng-->
+<!--        }-->
+<!--    });-->
+<!--    loadAllSingers();-->
+<!--</script>-->
+
+
+
+<!--<script src="js/main.js"></script>-->
+<!--<script src="js/singer1.js"></script>-->
+
+<!--</body>-->
+<!--</html>-->

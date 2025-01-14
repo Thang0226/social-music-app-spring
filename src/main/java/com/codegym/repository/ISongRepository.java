@@ -34,5 +34,5 @@ public interface ISongRepository extends JpaRepository<Song, Long> {
 
     Optional<Song> findByName(String name);
 
-    List<Song> findAllBySingers(Singer singer);
+//    List<Song> findAllSongsBySingers(String singerName);
 }
