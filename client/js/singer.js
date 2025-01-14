@@ -68,6 +68,7 @@ function postComment() {
     $.ajax({
         headers: {
             'content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },
         url: 'http://localhost:8080/api/comments',
         type: 'POST',
@@ -156,8 +157,9 @@ function getSingerPopularSongs(singerId) {
                 }
                 let localDate = moment(result[i].uploadTime).tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY");
                 content +=`
-                 <div class="d-block d-md-flex podcast-entry bg-white col-6 mb-3 m-auto rounded-4" 
-                 data-aos="fade-up" style="width: 49%">
+                    <div class="col-6 mb-1 p-1" >
+                        <div class ="d-block d-md-flex podcast-entry bg-white rounded-4"
+                 data-aos="fade-up" >
                   <div class="image-container">
                     <div
                       class="image"
@@ -185,7 +187,9 @@ function getSingerPopularSongs(singerId) {
                       </span>
                     </div>                     
                   </div>
-                </div>`;
+                </div>
+                    </div>
+                 `;
             }
             $('#featured-song').html(content);
         }

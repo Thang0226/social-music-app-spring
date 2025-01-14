@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>Podcast &mdash; Colorlib Website Template</title>
     <meta charset="utf-8">
@@ -76,10 +75,6 @@
                     <h1 class="site-logo">
                         <a href="homepage.html" class="h2">CodegymMP3</a>
                     </h1>
-
-                    <h1 class="site-logo"><a href="homepage.html" class="h2">CodegymMP3<span class="text-primary"></span>
-                    </a></h1>
-
                 </div>
 
                 <div class="col-9">
@@ -125,7 +120,7 @@
     </div>
     <div class="container">
         <div id="featured-song-container" class="col-12 mt-5 mb-5 bg-light rounded-4 row">
-            <h1 class="text-center "col-md-12 col-lg-12">Featured Songs</h1>
+            <h1 class="text-center col-md-12 col-lg-12">Featured Songs</h1>
             <div class="col-md-12 col-lg-12">
                 <div id="featured-song" class="row"></div>
             </div>
@@ -305,63 +300,7 @@
 <script src="js/aos.js"></script>
 
 <script src="js/mediaelement-and-player.min.js"></script>
-<script>
-    let singerId = localStorage.getItem("singer-id");
-    $(function() {
-        $.ajax({
-            url: `http://localhost:8080/api/songs/findAllSongBySinger/${singerId}`,
-            method: 'GET',
-            success: function (data) {
-                console.log(data);
-                let songList = '';
-                data.forEach((song)=>{
-                    songList += `
-                        <tr>
-                            <td>${song.id}</td>
-                            <td>${song.name}</td>
-                        </tr>
-                    `;
-                })
-                $("#songList").html(songList);
-            }
-        })
-    })
-    document.addEventListener('DOMContentLoaded', function () {
-        var mediaElements = document.querySelectorAll('video, audio'), total = mediaElements.length;
 
-        for (var i = 0; i < total; i++) {
-            new MediaElementPlayer(mediaElements[i], {
-                pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/',
-                shimScriptAccess: 'always',
-                success: function () {
-                    var target = document.body.querySelectorAll('.player'), targetTotal = target.length;
-                    for (var j = 0; j < targetTotal; j++) {
-                        target[j].style.visibility = 'visible';
-                    }
-                }
-            });
-        }
-    });
-</script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var mediaElements = document.querySelectorAll('video, audio'), total = mediaElements.length;
-
-        for (var i = 0; i < total; i++) {
-            new MediaElementPlayer(mediaElements[i], {
-                pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/',
-                shimScriptAccess: 'always',
-                success: function () {
-                    var target = document.body.querySelectorAll('.player'), targetTotal = target.length;
-                    for (var j = 0; j < targetTotal; j++) {
-                        target[j].style.visibility = 'visible';
-                    }
-                }
-            });
-        }
-    });
-</script>
 <script src="js/main.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
