@@ -86,6 +86,32 @@
             </div>
         </div>
     </div>
+    <div class="search-container">
+        <form action="/api/songs/findAllSongBySinger" method="GET" class="d-flex mb-3">
+            <input
+                    type="text"
+                    name="id"
+                    placeholder="Tìm kiếm bài ..."
+                    class="form-control me-2"
+                    required>
+            <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+        </form>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>STT</th>
+            <th>Tên Bài Hát</th>
+        </tr>
+        </thead>
+        <tbody id="song">
+        <!-- Dữ liệu danh sách bài hát sẽ được thêm tại đây -->
+        <tr th:each="song : ${songs}">
+            <td th:text="${song.id}"></td>
+            <td th:text="${song.name}"></td>
+        </tr>
+        </tbody>
+    </table>
 <!--    singer popular songs-->
     <div class="container">
         <div id="featured-song-container" class="col-12 mt-5 mb-5 bg-light rounded-4">
