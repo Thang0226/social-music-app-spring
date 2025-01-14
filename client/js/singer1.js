@@ -16,6 +16,10 @@ function showAllSinger() {
 }
 showAllSinger();
 
+
+
+
+
 // function searchSinger(keyword) {
 //     if (!keyword) {
 //         keyword = $("#searchInput").val().trim();

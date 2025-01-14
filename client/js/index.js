@@ -41,7 +41,7 @@ function initializeNewSongs() {
                           <div class="image-container">
                             <div
                               class="image"
-                              style="background-image: url('${API_BASE_URL}/images/${songs[i].imageFile}');">
+                              style="background-image: url('${API_BASE_URL}/images/${songs[i].imageFile}')">
                               <div class="play-button"
                               onclick="showMainPlayer('${API_BASE_URL}/audios/${songs[i].musicFile}'); 
                               getSongInfoForMPC(${songs[i].id})">
