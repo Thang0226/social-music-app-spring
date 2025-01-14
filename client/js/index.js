@@ -164,7 +164,7 @@ function getSongInfoForMPC(songId) {
 
 function getTopPlayedSongs() {
     $.ajax({
-        url: "http://localhost:8080/api/homepage/top-played-songs",
+        url: "http://localhost:8080/api/homepage/top-played-songs", // URL của API
         method: "GET",
         success: function (data) {
             let content = "";
