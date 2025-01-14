@@ -13,9 +13,8 @@ function loadPlaylists() {
                             <td>${playlist.listeningCount}</td>
                             <td>${playlist.songs ? playlist.songs.length : 0}</td>
                             <td class="action-icons">
-                                <i class="fas fa-play" title="Phát"></i>
-                                <i class="fas fa-edit" title="Chỉnh sửa"></i>
-                                <i class="fas fa-trash" title="Xóa" onclick="deletePlaylist(${playlist.id})"></i>
+                                <button class="play-song-btn" onclick="getSongsInPlaylist(${playlist.id})">▶️</button>
+                                <button class="delete-song-btn" onclick="deletePlaylist(${playlist.id})">❌</button>
                             </td>
                         </tr>`;
             });
@@ -27,3 +26,19 @@ function loadPlaylists() {
     });
 }
 loadPlaylists()
+
+function deletePlaylist(id) {
+    if (confirm("Bạn có chắc muốn xóa playlist này?")) {
+        $.ajax({
+            method: "DELETE",
+            url: `http://localhost:8080/api/playlist/${id}`,
+            success: function () {
+                alert("Xóa playlist thành công!");
+                loadPlaylists(); // Reload playlists
+            },
+            error: function (xhr) {
+                alert("Không thể xóa playlist.");
+            }
+        });
+    }
+}
