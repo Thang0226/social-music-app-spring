@@ -3,6 +3,8 @@ const API_BASE_URL = 'http://localhost:8080';
 // Gọi API và hiển thị bài hát khi trang load (ví dụ với playlist ID là 1)
 let id = localStorage.getItem("playlist-id");
 let songs;
+let song_ind = 0;
+localStorage.setItem('song-num', song_ind.toString());
 getInformation(id);
 
 function getInformation(id) {
@@ -15,7 +17,7 @@ function getInformation(id) {
             let localTime = moment(playlist.createTime).tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY");
             $("#playlist-details").html(
                 `
-                <div class="align-items-center justify-content-center mb-2">
+                <div class="align-items-center justify-content-center">
                     <h1>
                         ${playlist.name}
                     </h1>
@@ -50,9 +52,11 @@ function getInformation(id) {
 
             // song player
             $("#song-player").html(
-                `<div class="player mb-3">
+                `
+                <div style="color: #3ca59d" id="song_name">Song playing: ${songs[song_ind].name}</div>
+                <div class="player mb-3">
                 <audio id="player2" preload="none" controls style="width: 100%">
-                <source src="${API_BASE_URL}/audios/${songs[0].musicFile}" type="audio/mp3">
+                <source src="${API_BASE_URL}/audios/${songs[song_ind].musicFile}" type="audio/mp3">
                 </audio>
                 </div>`
             );
