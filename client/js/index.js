@@ -30,7 +30,7 @@ function initializeNewSongs() {
             for (let i = 0; i < songs.length; i++) {
                 let singers = "";
                 for (let j = 0; j < songs[i].singers.length; j++) {
-                    singers += `<a href="listsongbysingername.html" onclick="storeSingerId(${songs[i].singers[j].id})"> ${songs[i].singers[j].singerName}</a>`
+                    singers += `<a href="singer.html" onclick="storeSingerId(${songs[i].singers[j].id})"> ${songs[i].singers[j].singerName}</a>`
                     if (j < songs[i].singers.length - 1) {
                         singers += `, `
                     }
