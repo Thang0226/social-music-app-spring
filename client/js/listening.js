@@ -117,6 +117,10 @@ function getQueryParam(param) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(param);
 }
+function setActive(element) {
+    $('.nav-link').removeClass('active');  // Xóa active ở tất cả các tab
+    $(element).addClass('active');         // Thêm active vào tab được click
+}
 
 // $(document).ready(function () {
 //     getAllSongs();

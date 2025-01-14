@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MusicApp - Khám phá âm nhạc</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://themewagon.github.io/podcast/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+
+        .navbar {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: #007bff !important;
+        }
+
+        .nav-link {
+            color: #333 !important;
+        }
+
+        .nav-link.active {
+            font-weight: bold !important;
+            color: #007bff !important;
+        }
+
+
+        .btn-listen, .btn-play {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-listen:hover, .btn-play:hover {
+            background-color: #0056b3;
+        }
+
+
+        .song-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .song-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .song-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .song-info {
+            padding: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+        <a class="navbar-brand" href="#"><i class="fas fa-music"></i> CodeGymMP3</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link active" href="#" onclick="setActive(this); getAllSongs()">Tất cả bài hát</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" onclick="setActive(this); getLatestSongs()">Mới nhất</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" onclick="setActive(this); getMostPlayedSongs()">Nghe nhiều nhất</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" onclick="setActive(this); getMostLikedSongs()">Yêu thích nhất</a></li>
+            </ul>
+            <form class="d-flex ms-3">
+                <input id="searchInput" class="form-control me-2" type="search" placeholder="Tìm kiếm bài hát">
+                <button class="btn btn-listen" type="button" onclick="searchSongs()">Tìm kiếm</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<section class="simple-banner text-center py-5">
+    <h2>Khám phá kho nhạc khổng lồ</h2>
+    <p>Nghe nhạc miễn phí với chất lượng cao</p>
+    <button class="btn btn-listen mt-3" onclick="getLatestSongs()">Nghe nhạc ngay</button>
+</section>
+
+<section class="container my-5">
+    <h2 id="sectionTitle" class="text-center mb-4">Danh sách bài hát</h2>
+    <div id="songList" class="row g-4">
+
+    </div>
+</section>
+
+
+<div class="fixed-bottom bg-light p-2">
+    <audio id="audioPlayer" controls style="width: 100%;">
+        Trình duyệt không hỗ trợ phát nhạc.
+    </audio>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://themewagon.github.io/podcast/js/bootstrap.bundle.min.js"></script>
+<script src="js/listening.js"></script>
+</body>
+</html>
