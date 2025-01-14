@@ -3,100 +3,126 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Danh sách bài hát</title>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>Music Player</title>
+  <link rel="stylesheet" href="styles.css">
   <style>
     body {
-      font-family: 'Arial', sans-serif;
-      background-color: #f1f1f1;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .music-player {
+      width: 600px;
+      background-color: white;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .player-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      background-color: #000;
+      color: white;
+    }
+
+    .album-cover {
+      width: 150px;
+      height: 150px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .player-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+    }
+
+    .karaoke {
+      margin-top: 10px;
+      font-size: 14px;
+      color: gray;
+    }
+
+    .playlist {
+      padding: 20px;
+    }
+
+    .playlist ul {
+      list-style: none;
       margin: 0;
       padding: 0;
     }
 
-    .container {
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 15px;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    h1 {
-      text-align: center;
-      color: #333;
-      margin-bottom: 20px;
-    }
-
-    .song-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .song-table th, .song-table td {
-      text-align: left;
-      padding: 12px;
+    .playlist li {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
       border-bottom: 1px solid #ddd;
-    }
-
-    .song-table th {
-      background-color: #4CAF50;
-      color: white;
-    }
-
-    .song-table tbody tr:hover {
-      background-color: #f1f1f1;
-    }
-
-    .btn-back {
-      background-color: #007bff;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 4px;
       font-size: 14px;
-      cursor: pointer;
-      margin-bottom: 20px;
     }
 
-    .btn-back:hover {
-      background-color: #0056b3;
+    .song-index {
+      font-weight: bold;
     }
 
-    .action-icons i {
-      margin: 0 8px;
-      cursor: pointer;
-      font-size: 18px;
-      color: #444;
+    .song-title {
+      flex-grow: 1;
+      margin-left: 10px;
     }
 
-    .action-icons i:hover {
-      color: #4CAF50;
-    }
   </style>
-  <script src="view.js"></script>
 </head>
 <body>
-<div class="container">
-  <button class="btn-back" onclick="goBack()">Quay lại</button>
-  <h1>Bài hát trong Playlist: <span id="playlistName">[Tên Playlist]</span></h1>
-  <table class="song-table">
-    <thead>
-    <tr>
-      <th>#</th>
-      <th>Tên Bài Hát</th>
-      <th>Ca Sĩ</th>
-      <th>Thể Loại</th>
-      <th>Thời Lượng</th>
-      <th>Hành Động</th>
-    </tr>
-    </thead>
-    <tbody id="songList">
-    <!-- Dữ liệu bài hát sẽ được thêm ở đây -->
-    </tbody>
-  </table>
+<div class="music-player">
+  <div class="player-header">
+    <img src="cover.jpg" alt="Album Cover" class="album-cover">
+    <div class="player-controls">
+      <button class="play-btn">⏯</button>
+      <span class="current-time">00:11</span> / <span class="duration">00:37</span>
+    </div>
+    <div class="karaoke">(Chưa có lời karaoke)</div>
+  </div>
+  <div class="playlist">
+    <ul>
+      <li>
+        <span class="song-index">3.</span>
+        <span class="song-title">Đang Yên Đang Lành (Feat. Maiki)</span> -
+        <span class="song-artist">marzuz</span>
+      </li>
+      <li>
+        <span class="song-index">4.</span>
+        <span class="song-title">Ảo Ảnh</span> -
+        <span class="song-artist">marzuz</span>
+      </li>
+      <li>
+        <span class="song-index">5.</span>
+        <span class="song-title">Rêu Xanh Trên Mặt Nước</span> -
+        <span class="song-artist">marzuz</span>
+      </li>
+      <li>
+        <span class="song-index">6.</span>
+        <span class="song-title">Cảm Ơn?</span> -
+        <span class="song-artist">marzuz</span>
+      </li>
+      <li>
+        <span class="song-index">7.</span>
+        <span class="song-title">Thiên Thần Giáng Trần</span> -
+        <span class="song-artist">marzuz</span>
+      </li>
+    </ul>
+  </div>
 </div>
-
+<script src="script.js"></script>
 </body>
 </html>
