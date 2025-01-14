@@ -138,6 +138,7 @@ getSingerInfo(singerId);
 function getSingerPopularSongs(singerId) {
     $.ajax({
         headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
             'accept': 'application/json',
             'content-type': 'application/json',
         },
@@ -155,8 +156,9 @@ function getSingerPopularSongs(singerId) {
                     }
                 }
                 let localDate = moment(result[i].uploadTime).tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY");
-                content =`
-                 <div class="d-block d-md-flex podcast-entry bg-white mb-3 col-6 mt-3 mb-3 rounded-4" data-aos="fade-up">
+                content +=`
+                 <div class="d-block d-md-flex podcast-entry bg-white col-6 mb-3 m-auto rounded-4" 
+                 data-aos="fade-up" style="width: 49%">
                   <div class="image-container">
                     <div
                       class="image"
@@ -170,7 +172,7 @@ function getSingerPopularSongs(singerId) {
                   </div>
                   <div class="text w-100">
                     <h3 class="font-weight-light">
-                      <a href="song.html" onclick="storeSongId(${result[i].id}); storeUserId(userId)">
+                      <a href="song.html" onclick="storeSongId(${result[i].id}); storeUserId(${userId})">
                         ${result[i].name}
                       </a>
                     </h3>

@@ -72,9 +72,14 @@
             <div class="row align-items-center">
 
                 <div class="col-3">
+
                     <h1 class="site-logo">
                         <a href="homepage.html" class="h2">CodegymMP3</a>
                     </h1>
+
+                    <h1 class="site-logo"><a href="homepage.html" class="h2">CodegymMP3<span class="text-primary"></span>
+                    </a></h1>
+
                 </div>
 
                 <div class="col-9">
@@ -118,25 +123,14 @@
             </div>
         </div>
     </div>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>STT</th>
-            <th>Tên bài hát</th>
-        </tr>
-        </thead>
-        <tbody id="songList">
-        <!-- Kết quả AJAX sẽ được hiển thị tại đây -->
-        </tbody>
-    </table>
-<!--    singer popular songs-->
     <div class="container">
-        <div id="featured-song-container" class="col-12 mt-5 mb-5 bg-light rounded-4">
-            <h1>Featured Songs</h1>
-            <div id="featured-song"></div>
+        <div id="featured-song-container" class="col-12 mt-5 mb-5 bg-light rounded-4 row">
+            <h1 class="text-center "col-md-12 col-lg-12">Featured Songs</h1>
+            <div class="col-md-12 col-lg-12">
+                <div id="featured-song" class="row"></div>
+            </div>
         </div>
-
-
+                                                   
         <div class="row justify-content-between ">
             <div class="col-lg-3 ml-auto">
                 <div class="featured-user  mb-5 mb-lg-0 bg-light">
@@ -376,7 +370,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.43/moment-timezone-with-data.min.js"></script>
 <script src="js/comment.js"></script>
-<script src="js/singer.js"></script>
 <script src="js/index.js"></script>
+<script src="js/singer.js"></script>
+
 </body>
 </html>

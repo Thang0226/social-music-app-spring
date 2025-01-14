@@ -130,7 +130,7 @@ function getSongInfoForMPC(songId) {
             content +=`           
                 <img src="${API_BASE_URL}/images/${data.imageFile}" 
                 alt="${data.name}" class="img-fluid mr-2 p-1" 
-                style="max-width: 80px; max-height: 80px; width: 100%; height: auto;">
+                style="max-width: 80px; max-height: 80px; width: 100%; height: 80px;">
                 <div class="podcaster text-start">
                     <span style="font-weight: bold">
                         <a href="song.html" onclick="storeSongId(${data.id}); storeUserId(${userId})"> 

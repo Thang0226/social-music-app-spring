@@ -417,6 +417,7 @@
 <script>
     function loadAllSongs() {
         $.ajax({
+
             method: "GET",
             url: "http://localhost:8080/api/songs", // Gọi API để lấy toàn bộ danh sách ca sĩ
             success: function (data) {
